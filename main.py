@@ -79,15 +79,36 @@ def validate_square_matrix(matrix, size):
 
 
 def mac(pattern, filt):
-    pass
+    size = len(pattern)
+    total = 0.0
+
+    for i in range(size):
+        for j in range(size):
+            total += pattern[i][j] * filt[i][j]
+
+    return total
 
 
 def judge_scores(score_cross, score_x, epsilon=EPSILON):
-    pass
+    if abs(score_cross - score_x) < epsilon:
+        return "UNDECIDED"
+
+    if score_cross > score_x:
+        return "Cross"
+
+    return "X"
 
 
 def measure_average_ms(func, *args, repeat=MEASURE_REPEAT):
-    pass
+    total = 0.0
+
+    for _ in range(repeat):
+        start = time.perf_counter()
+        func(*args)
+        end = time.perf_counter()
+        total += (end - start) * 1000.0
+
+    return total / repeat
 
 
 def load_json_file(path):
