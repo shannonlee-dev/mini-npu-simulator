@@ -112,15 +112,52 @@ def measure_average_ms(func, *args, repeat=MEASURE_REPEAT):
 
 
 def load_json_file(path):
-    pass
+    with open(path, "r", encoding="utf-8") as file:
+        return json.load(file)
 
 
 def extract_size_from_pattern_key(pattern_key):
-    pass
+    parts = pattern_key.split("_")
+
+    if len(parts) < 3 or parts[0] != "size":
+        raise ValueError(f"패턴 키 형식 오류: {pattern_key}")
+
+    try:
+        return int(parts[1])
+    except ValueError as exc:
+        raise ValueError(f"패턴 크기 파싱 실패: {pattern_key}") from exc
 
 
 def load_filters_from_json(data):
-    pass
+    filters = data.get("filters", {})
+    filters_by_size = {}
+
+    for size_key, filter_info in filters.items():
+        size = int(size_key.split("_")[1])
+
+        cross_filter = None
+        x_filter = None
+
+        for raw_label, matrix in filter_info.items():
+            label = normalize_label(raw_label)
+
+            if label == "Cross":
+                cross_filter = matrix
+            elif label == "X":
+                x_filter = matrix
+
+        if cross_filter is None or x_filter is None:
+            raise ValueError(f"{size_key} 필터에 Cross 또는 X가 없습니다.")
+
+        validate_square_matrix(cross_filter, size)
+        validate_square_matrix(x_filter, size)
+
+        filters_by_size[size] = {
+            "Cross": cross_filter,
+            "X": x_filter,
+        }
+
+    return filters_by_size
 
 
 def analyze_single_pattern(pattern_key, pattern_info, filters_by_size):
