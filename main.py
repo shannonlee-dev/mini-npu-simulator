@@ -161,7 +161,32 @@ def load_filters_from_json(data):
 
 
 def analyze_single_pattern(pattern_key, pattern_info, filters_by_size):
-    pass
+    size = extract_size_from_pattern_key(pattern_key)
+    pattern = pattern_info.get("input")
+    expected = normalize_label(pattern_info.get("expected"))
+
+    if size not in filters_by_size:
+        raise ValueError(f"해당 크기의 필터가 없습니다: size_{size}")
+
+    validate_square_matrix(pattern, size)
+
+    cross_filter = filters_by_size[size]["Cross"]
+    x_filter = filters_by_size[size]["X"]
+
+    score_cross = mac(pattern, cross_filter)
+    score_x = mac(pattern, x_filter)
+    predicted = judge_scores(score_cross, score_x)
+    result = "PASS" if predicted == expected else "FAIL"
+
+    return {
+        "pattern_key": pattern_key,
+        "size": size,
+        "score_cross": score_cross,
+        "score_x": score_x,
+        "predicted": predicted,
+        "expected": expected,
+        "result": result,
+    }
 
 
 def print_performance_table():
