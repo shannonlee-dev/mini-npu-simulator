@@ -285,8 +285,8 @@ def run_json_mode():
         try:
             analysis = analyze_single_pattern(pattern_key, pattern_info, filters_by_size)
 
-            print(f"Cross 점수: {analysis['score_cross']}")
-            print(f"X 점수: {analysis['score_x']}")
+            print(f"Cross 점수: {analysis['score_cross']:.6f}")
+            print(f"X 점수: {analysis['score_x']:.6f}")
             print(
                 f"판정: {analysis['predicted']} | expected: {analysis['expected']} | {analysis['result']}"
             )
