@@ -6,6 +6,8 @@ MEASURE_REPEAT = 10
 STANDARD_LABELS = ("Cross", "X")
 
 
+# 출력 영역
+# 프로그램 제목과 모드 선택 메뉴를 보여준다.
 def print_title():
     print("=== Mini NPU Simulator ===")
     print()
@@ -14,6 +16,8 @@ def print_title():
     print("2. data.json 분석")
 
 
+# 공통 처리 영역
+# 입력 라벨을 표준 라벨로 정규화한다.
 def normalize_label(value):
     text = str(value).strip().lower()
 
@@ -25,6 +29,7 @@ def normalize_label(value):
     return str(value).strip()
 
 
+# 한 줄 입력을 숫자 행렬 한 줄로 변환한다.
 def parse_matrix_row(line, expected_size):
     parts = line.strip().split()
 
@@ -45,6 +50,7 @@ def parse_matrix_row(line, expected_size):
     return row
 
 
+# 콘솔에서 정사각 행렬을 입력받는다.
 def read_matrix_from_console(name, size):
     print(f"{name} ({size}줄 입력, 공백 구분)")
 
@@ -64,6 +70,7 @@ def read_matrix_from_console(name, size):
     return matrix
 
 
+# 행렬 크기와 구조가 올바른지 검사한다.
 def validate_square_matrix(matrix, size):
     if not isinstance(matrix, list):
         raise ValueError("행렬 데이터가 리스트가 아닙니다.")
@@ -78,6 +85,8 @@ def validate_square_matrix(matrix, size):
             raise ValueError(f"열 개수 불일치: 기대값={size}, 실제값={len(row)}")
 
 
+# 연산 영역
+# 패턴과 필터의 MAC 점수를 계산한다.
 def mac(pattern, filt):
     size = len(pattern)
     total = 0.0
@@ -89,6 +98,7 @@ def mac(pattern, filt):
     return total
 
 
+# 두 점수를 비교해 최종 라벨을 결정한다.
 def judge_scores(score_cross, score_x, epsilon=EPSILON):
     if abs(score_cross - score_x) < epsilon:
         return "UNDECIDED"
@@ -99,6 +109,7 @@ def judge_scores(score_cross, score_x, epsilon=EPSILON):
     return "X"
 
 
+# 함수 실행 시간을 여러 번 측정해 평균 ms를 계산한다.
 def measure_average_ms(func, *args, repeat=MEASURE_REPEAT):
     total = 0.0
 
@@ -111,11 +122,14 @@ def measure_average_ms(func, *args, repeat=MEASURE_REPEAT):
     return total / repeat
 
 
+# JSON 처리 영역
+# JSON 파일을 읽어 파이썬 객체로 변환한다.
 def load_json_file(path):
     with open(path, "r", encoding="utf-8") as file:
         return json.load(file)
 
 
+# 패턴 키에서 정사각 행렬 크기를 추출한다.
 def extract_size_from_pattern_key(pattern_key):
     parts = pattern_key.split("_")
 
@@ -128,6 +142,7 @@ def extract_size_from_pattern_key(pattern_key):
         raise ValueError(f"패턴 크기 파싱 실패: {pattern_key}") from exc
 
 
+# JSON의 필터 정보를 크기별 표준 라벨 구조로 정리한다.
 def load_filters_from_json(data):
     filters = data.get("filters", {})
     filters_by_size = {}
@@ -160,6 +175,7 @@ def load_filters_from_json(data):
     return filters_by_size
 
 
+# 패턴 1개를 분석해 점수와 PASS/FAIL 결과를 만든다.
 def analyze_single_pattern(pattern_key, pattern_info, filters_by_size):
     size = extract_size_from_pattern_key(pattern_key)
     pattern = pattern_info.get("input")
@@ -189,6 +205,8 @@ def analyze_single_pattern(pattern_key, pattern_info, filters_by_size):
     }
 
 
+# 성능 분석 영역
+# 기본 예제로 3x3 MAC 성능 표를 출력한다.
 def print_performance_table():
     size_3_cross = [
         [0, 1, 0],
@@ -217,6 +235,8 @@ def print_performance_table():
         print(f"{size}x{size:<7}{avg_ms:<20.6f}{size * size:<15}")
 
 
+# 모드 실행 영역
+# 사용자 입력 모드에서 3x3 필터와 패턴을 비교한다.
 def run_user_mode():
     print()
     print("#---------------------------------------")
@@ -254,6 +274,7 @@ def run_user_mode():
     print_performance_table()
 
 
+# JSON 분석 모드에서 전체 패턴을 일괄 판정한다.
 def run_json_mode():
     print()
     print("#---------------------------------------")
@@ -347,6 +368,8 @@ def run_json_mode():
             print(f"- {failure}")
 
 
+# 프로그램 시작 영역
+# 모드를 선택해 알맞은 실행 흐름으로 보낸다.
 def main():
     print_title()
     choice = input("선택: ").strip()
