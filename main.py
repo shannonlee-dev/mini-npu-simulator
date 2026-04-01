@@ -218,11 +218,133 @@ def print_performance_table():
 
 
 def run_user_mode():
-    pass
+    print()
+    print("#---------------------------------------")
+    print("# [1] 필터 입력")
+    print("#---------------------------------------")
+    filter_a = read_matrix_from_console("필터 A", 3)
+    filter_b = read_matrix_from_console("필터 B", 3)
+
+    print()
+    print("#---------------------------------------")
+    print("# [2] 패턴 입력")
+    print("#---------------------------------------")
+    pattern = read_matrix_from_console("패턴", 3)
+
+    score_a = mac(pattern, filter_a)
+    score_b = mac(pattern, filter_b)
+    avg_ms = measure_average_ms(mac, pattern, filter_a)
+
+    if abs(score_a - score_b) < EPSILON:
+        decision = "판정 불가"
+    elif score_a > score_b:
+        decision = "A"
+    else:
+        decision = "B"
+
+    print()
+    print("#---------------------------------------")
+    print("# [3] MAC 결과")
+    print("#---------------------------------------")
+    print(f"A 점수: {score_a}")
+    print(f"B 점수: {score_b}")
+    print(f"연산 시간(평균/10회): {avg_ms:.6f} ms")
+    print(f"판정: {decision}")
+
+    print_performance_table()
 
 
 def run_json_mode():
-    pass
+    print()
+    print("#---------------------------------------")
+    print("# [1] 필터 로드")
+    print("#---------------------------------------")
+
+    data = load_json_file("data.json")
+    filters_by_size = load_filters_from_json(data)
+
+    for size in sorted(filters_by_size.keys()):
+        print(f"✓ size_{size} 필터 로드 완료 (Cross, X)")
+
+    print()
+    print("#---------------------------------------")
+    print("# [2] 패턴 분석")
+    print("#---------------------------------------")
+
+    patterns = data.get("patterns", {})
+    total = 0
+    passed = 0
+    failed = 0
+    failures = []
+
+    for pattern_key, pattern_info in patterns.items():
+        total += 1
+
+        print(f"--- {pattern_key} ---")
+
+        try:
+            analysis = analyze_single_pattern(pattern_key, pattern_info, filters_by_size)
+
+            print(f"Cross 점수: {analysis['score_cross']}")
+            print(f"X 점수: {analysis['score_x']}")
+            print(
+                f"판정: {analysis['predicted']} | expected: {analysis['expected']} | {analysis['result']}"
+            )
+
+            if analysis["result"] == "PASS":
+                passed += 1
+            else:
+                failed += 1
+                failures.append(
+                    f"{pattern_key}: expected={analysis['expected']}, predicted={analysis['predicted']}"
+                )
+
+        except Exception as err:
+            failed += 1
+            print(f"판정 실패: FAIL | 사유: {err}")
+            failures.append(f"{pattern_key}: {err}")
+
+        print()
+
+    print("#---------------------------------------")
+    print("# [3] 성능 분석")
+    print("#---------------------------------------")
+    print(f"{'크기':<10}{'평균 시간(ms)':<20}{'연산 횟수(N^2)':<15}")
+    print("-" * 45)
+
+    size_3_cross = [
+        [0, 1, 0],
+        [1, 1, 1],
+        [0, 1, 0],
+    ]
+    size_3_x = [
+        [1, 0, 1],
+        [0, 1, 0],
+        [1, 0, 1],
+    ]
+
+    avg_ms_3 = measure_average_ms(mac, size_3_cross, size_3_x)
+    print(f"{'3x3':<10}{avg_ms_3:<20.6f}{9:<15}")
+
+    for size in sorted(filters_by_size.keys()):
+        cross_filter = filters_by_size[size]["Cross"]
+        x_filter = filters_by_size[size]["X"]
+        avg_ms = measure_average_ms(mac, cross_filter, x_filter)
+        print(f"{f'{size}x{size}':<10}{avg_ms:<20.6f}{size * size:<15}")
+
+    print()
+    print("#---------------------------------------")
+    print("# [4] 결과 요약")
+    print("#---------------------------------------")
+    print(f"총 테스트: {total}개")
+    print(f"통과: {passed}개")
+    print(f"실패: {failed}개")
+
+    if failures:
+        print()
+        print("실패 케이스:")
+        for failure in failures:
+            print(f"- {failure}")
 
 
 def main():
