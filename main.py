@@ -190,7 +190,31 @@ def analyze_single_pattern(pattern_key, pattern_info, filters_by_size):
 
 
 def print_performance_table():
-    pass
+    size_3_cross = [
+        [0, 1, 0],
+        [1, 1, 1],
+        [0, 1, 0],
+    ]
+    size_3_x = [
+        [1, 0, 1],
+        [0, 1, 0],
+        [1, 0, 1],
+    ]
+
+    examples = {
+        3: (size_3_cross, size_3_x),
+    }
+
+    print()
+    print("#---------------------------------------")
+    print("# [성능 분석] 평균/10회")
+    print("#---------------------------------------")
+    print(f"{'크기':<10}{'평균 시간(ms)':<20}{'연산 횟수(N^2)':<15}")
+    print("-" * 45)
+
+    for size, matrices in examples.items():
+        avg_ms = measure_average_ms(mac, matrices[0], matrices[1])
+        print(f"{size}x{size:<7}{avg_ms:<20.6f}{size * size:<15}")
 
 
 def run_user_mode():
