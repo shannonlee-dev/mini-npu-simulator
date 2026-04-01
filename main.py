@@ -26,15 +26,56 @@ def normalize_label(value):
 
 
 def parse_matrix_row(line, expected_size):
-    pass
+    parts = line.strip().split()
+
+    if len(parts) != expected_size:
+        raise ValueError(
+            f"입력 형식 오류: 각 줄에 {expected_size}개의 숫자를 공백으로 구분해 입력하세요."
+        )
+
+    row = []
+    for part in parts:
+        try:
+            row.append(float(part))
+        except ValueError as exc:
+            raise ValueError(
+                f"입력 형식 오류: 숫자만 입력하세요. 잘못된 값: {part}"
+            ) from exc
+
+    return row
 
 
 def read_matrix_from_console(name, size):
-    pass
+    print(f"{name} ({size}줄 입력, 공백 구분)")
+
+    matrix = []
+    row_index = 0
+
+    while row_index < size:
+        line = input().strip()
+
+        try:
+            row = parse_matrix_row(line, size)
+            matrix.append(row)
+            row_index += 1
+        except ValueError as err:
+            print(err)
+
+    return matrix
 
 
 def validate_square_matrix(matrix, size):
-    pass
+    if not isinstance(matrix, list):
+        raise ValueError("행렬 데이터가 리스트가 아닙니다.")
+
+    if len(matrix) != size:
+        raise ValueError(f"행 개수 불일치: 기대값={size}, 실제값={len(matrix)}")
+
+    for row in matrix:
+        if not isinstance(row, list):
+            raise ValueError("행렬의 각 행은 리스트여야 합니다.")
+        if len(row) != size:
+            raise ValueError(f"열 개수 불일치: 기대값={size}, 실제값={len(row)}")
 
 
 def mac(pattern, filt):
