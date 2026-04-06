@@ -224,6 +224,82 @@
       animation-delay: var(--delay, 0s);
     }
 
+    .cut.is-active .cut2-door {
+      animation: aiDoorPulse 4s ease-in-out infinite;
+    }
+
+    .cut.is-active .cut2-lane {
+      animation: cut2LaneGlow 2.8s ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .cut2-block {
+      animation: cut2BlockRun 4.4s linear infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .cut2-queue {
+      animation: cut2QueueGrow 3.4s ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .cut2-digest {
+      animation: cut2Digest 2.2s ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .cut2-pulse {
+      animation: cut2PulseIn 2.6s linear infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .hub-stall {
+      animation: hubStall 4.8s ease-in-out infinite;
+      transform-origin: 600px 368px;
+    }
+
+    .cut.is-active .cut3-flow {
+      animation: cut3Flow 3s linear infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .cut3-stack {
+      animation: cut2QueueGrow 2.4s ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .vector-portal-hot {
+      animation: vectorPortalHeat 4s ease-in-out infinite;
+    }
+
+    .cut.is-active .cpu-muted {
+      animation: none !important;
+      opacity: 0.24;
+      filter: saturate(0.55);
+    }
+
+    .cut.is-active .cpu-focus-vector {
+      animation: vectorPortalHeat 2.8s ease-in-out infinite;
+    }
+
+    .cut.is-active .cpu-focus-memory {
+      animation: portalPulse 3.1s ease-in-out infinite;
+    }
+
+    .cut.is-active .cpu-focus-branch {
+      animation: branchControlPulse 2.2s ease-in-out infinite;
+    }
+
+    .cut.is-active .ai-wave-row {
+      animation: aiWaveRow 3.8s linear infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .ai-wave-bar {
+      animation: aiWaveBar 4.2s ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
     .cut.is-active .gpu-lane {
       animation: laneGlow 2.4s ease-in-out infinite;
       animation-delay: var(--delay, 0s);
@@ -231,6 +307,31 @@
 
     .cut.is-active .fan-tile {
       animation: fanOut 3s linear infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .gpu-core {
+      animation: gpuCorePulse 3.2s ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .gpu-ribbon {
+      animation: gpuRibbonFlow 2.8s linear infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .gpu-shard {
+      animation: gpuShardBurst 3.2s ease-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .gpu-city-line {
+      animation: cityStream 2.2s ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .gpu-window {
+      animation: windowBlink 1.8s ease-in-out infinite;
       animation-delay: var(--delay, 0s);
     }
 
@@ -335,9 +436,103 @@
       100% { transform: translateX(-360px); opacity: 0.95; }
     }
 
+    @keyframes aiDoorPulse {
+      0%, 100% { opacity: 0.55; }
+      50% { opacity: 0.92; }
+    }
+
+    @keyframes cut2LaneGlow {
+      0%, 100% { opacity: 0.3; stroke-width: 18; }
+      50% { opacity: 0.82; stroke-width: 22; }
+    }
+
+    @keyframes cut2BlockRun {
+      0% { offset-distance: 0%; opacity: 0; }
+      8% { opacity: 0.95; }
+      78% { opacity: 0.95; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+
+    @keyframes cut2QueueGrow {
+      0%, 100% { opacity: 0.42; transform: translate(0, 0) scale(0.96); }
+      25% { opacity: 0.78; transform: translate(-2px, 1px) scale(1); }
+      50% { opacity: 1; transform: translate(2px, -2px) scale(1.06); }
+      75% { opacity: 0.88; transform: translate(-1px, 2px) scale(1.02); }
+    }
+
+    @keyframes cut2Digest {
+      0%, 100% { opacity: 0.16; transform: scale(0.92); }
+      40% { opacity: 0.9; transform: scale(1.16); }
+      58% { opacity: 0.52; transform: scale(1.02); }
+      76% { opacity: 0.98; transform: scale(1.2); }
+    }
+
+    @keyframes cut2PulseIn {
+      0% { offset-distance: 0%; opacity: 0; }
+      12% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+
+    @keyframes hubStall {
+      0% { transform: rotate(0deg); }
+      18% { transform: rotate(20deg); }
+      28% { transform: rotate(22deg); }
+      40% { transform: rotate(22deg); }
+      56% { transform: rotate(40deg); }
+      66% { transform: rotate(42deg); }
+      78% { transform: rotate(42deg); }
+      100% { transform: rotate(62deg); }
+    }
+
+    @keyframes cut3Flow {
+      0% { offset-distance: 0%; opacity: 0; }
+      8% { opacity: 1; }
+      100% { offset-distance: 100%; opacity: 1; }
+    }
+
+    @keyframes vectorPortalHeat {
+      0%, 100% { filter: drop-shadow(0 0 0 rgba(79, 209, 255, 0)); }
+      50% { filter: drop-shadow(0 0 12px rgba(79, 209, 255, 0.78)); }
+    }
+
+    @keyframes branchControlPulse {
+      0%, 100% { opacity: 0.44; transform: scale(1); }
+      30% { opacity: 1; transform: scale(1.08); }
+      54% { opacity: 0.62; transform: scale(0.98); }
+    }
+
+    @keyframes aiWaveRow {
+      0% { transform: translateX(84px); opacity: 0; }
+      12% { opacity: 1; }
+      100% { transform: translateX(-32px); opacity: 1; }
+    }
+
+    @keyframes aiWaveBar {
+      0%, 100% { transform: scaleX(0.92); opacity: 0.44; }
+      50% { transform: scaleX(1); opacity: 0.82; }
+    }
+
     @keyframes laneGlow {
       0%, 100% { transform: scaleX(1); opacity: 0.72; }
       50% { transform: scaleX(1.02); opacity: 1; }
+    }
+
+    @keyframes gpuCorePulse {
+      0%, 100% { opacity: 0.62; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    @keyframes gpuRibbonFlow {
+      0% { transform: translateX(0); opacity: 0; }
+      16% { opacity: 1; }
+      100% { transform: translateX(660px); opacity: 0; }
+    }
+
+    @keyframes gpuShardBurst {
+      0% { transform: translate(0, 0) scale(0.8); opacity: 0; }
+      12% { opacity: 1; }
+      100% { transform: translate(var(--dx), var(--dy)) scale(1); opacity: 0; }
     }
 
     @keyframes fanOut {
@@ -361,6 +556,16 @@
     @keyframes stallBlink {
       0%, 100% { opacity: 0.22; }
       50% { opacity: 0.95; }
+    }
+
+    @keyframes cityStream {
+      0%, 100% { opacity: 0.48; transform: scaleX(1); }
+      50% { opacity: 1; transform: scaleX(1.03); }
+    }
+
+    @keyframes windowBlink {
+      0%, 100% { opacity: 0.3; }
+      45% { opacity: 1; }
     }
 
     @keyframes systolicWave {
@@ -457,50 +662,44 @@
       <div class="cut__frame">
         <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="CPU 중앙 지휘실">
           <rect x="48" y="48" width="1104" height="624" rx="24" class="safe"></rect>
+          <rect x="126" y="116" width="948" height="488" rx="34" fill="rgba(255,255,255,0.018)" stroke="rgba(255,255,255,0.05)"></rect>
           <circle cx="600" cy="368" r="214" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)"></circle>
           <circle cx="600" cy="368" r="214" class="ring" fill="none" stroke="rgba(255,217,120,0.22)" stroke-width="2" stroke-dasharray="4 14"></circle>
           <circle cx="600" cy="368" r="158" class="ring" fill="none" stroke="rgba(79,209,255,0.22)" stroke-width="2" stroke-dasharray="6 18"></circle>
 
           <g class="beam" style="--delay:0s;"><line x1="600" y1="368" x2="600" y2="154" stroke="#ffd978" stroke-width="4" stroke-linecap="round"></line></g>
-          <g class="beam" style="--delay:0.5s;"><line x1="600" y1="368" x2="785" y2="261" stroke="#4fd1ff" stroke-width="4" stroke-linecap="round"></line></g>
-          <g class="beam" style="--delay:1s;"><line x1="600" y1="368" x2="785" y2="475" stroke="#98f5c2" stroke-width="4" stroke-linecap="round"></line></g>
-          <g class="beam" style="--delay:1.5s;"><line x1="600" y1="368" x2="600" y2="582" stroke="#ff6b57" stroke-width="4" stroke-linecap="round"></line></g>
-          <g class="beam" style="--delay:2s;"><line x1="600" y1="368" x2="415" y2="475" stroke="#f6a623" stroke-width="4" stroke-linecap="round"></line></g>
-          <g class="beam" style="--delay:2.5s;"><line x1="600" y1="368" x2="415" y2="261" stroke="#d497ff" stroke-width="4" stroke-linecap="round"></line></g>
+          <g class="beam" style="--delay:0.5s;"><line x1="600" y1="368" x2="804" y2="302" stroke="#4fd1ff" stroke-width="4" stroke-linecap="round"></line></g>
+          <g class="beam" style="--delay:1s;"><line x1="600" y1="368" x2="726" y2="541" stroke="#98f5c2" stroke-width="4" stroke-linecap="round"></line></g>
+          <g class="beam" style="--delay:1.5s;"><line x1="600" y1="368" x2="474" y2="541" stroke="#ff6b57" stroke-width="4" stroke-linecap="round"></line></g>
+          <g class="beam" style="--delay:2s;"><line x1="600" y1="368" x2="396" y2="302" stroke="#f6a623" stroke-width="4" stroke-linecap="round"></line></g>
 
           <g class="portal" style="--delay:0s;">
             <circle cx="600" cy="154" r="42" fill="rgba(255,217,120,0.12)" stroke="rgba(255,217,120,0.74)" stroke-width="2"></circle>
             <path d="M 578 152 H 622 M 600 130 V 174" stroke="#ffe8ac" stroke-width="4" stroke-linecap="round"></path>
-            <text x="600" y="206" fill="#fff1c8" font-size="18" text-anchor="middle">분기</text>
+            <text x="600" y="206" fill="#fff1c8" font-size="18" text-anchor="middle">분기 제어</text>
           </g>
           <g class="portal" style="--delay:0.5s;">
-            <circle cx="785" cy="261" r="42" fill="rgba(79,209,255,0.12)" stroke="rgba(79,209,255,0.74)" stroke-width="2"></circle>
-            <path d="M 767 243 L 803 261 L 767 279" fill="none" stroke="#dff8ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
-            <text x="785" y="313" fill="#dff8ff" font-size="18" text-anchor="middle">입출력</text>
+            <circle cx="804" cy="302" r="42" fill="rgba(79,209,255,0.12)" stroke="rgba(79,209,255,0.74)" stroke-width="2"></circle>
+            <path d="M 784 284 L 796 293 L 808 284 M 784 302 L 796 311 L 808 302 M 784 320 L 796 329 L 808 320" fill="none" stroke="#dff8ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <text x="804" y="354" fill="#dff8ff" font-size="18" text-anchor="middle">벡터 연산</text>
           </g>
           <g class="portal" style="--delay:1s;">
-            <circle cx="785" cy="475" r="42" fill="rgba(152,245,194,0.12)" stroke="rgba(152,245,194,0.74)" stroke-width="2"></circle>
-            <rect x="765" y="455" width="40" height="40" rx="10" fill="none" stroke="#ddffec" stroke-width="4"></rect>
-            <path d="M 777 467 H 793" stroke="#ddffec" stroke-width="4" stroke-linecap="round"></path>
-            <text x="785" y="527" fill="#ddffec" font-size="18" text-anchor="middle">메모리</text>
+            <circle cx="726" cy="541" r="42" fill="rgba(152,245,194,0.12)" stroke="rgba(152,245,194,0.74)" stroke-width="2"></circle>
+            <rect x="706" y="521" width="40" height="40" rx="10" fill="none" stroke="#ddffec" stroke-width="4"></rect>
+            <path d="M 718 533 H 734" stroke="#ddffec" stroke-width="4" stroke-linecap="round"></path>
+            <text x="726" y="596" fill="#ddffec" font-size="18" text-anchor="middle">메모리 접근</text>
           </g>
           <g class="portal" style="--delay:1.5s;">
-            <circle cx="600" cy="582" r="42" fill="rgba(255,107,87,0.14)" stroke="rgba(255,107,87,0.74)" stroke-width="2"></circle>
-            <path d="M 600 556 L 616 592 H 584 Z" fill="none" stroke="#ffd3cb" stroke-width="4" stroke-linejoin="round"></path>
-            <circle cx="600" cy="580" r="3.5" fill="#ffd3cb"></circle>
-            <text x="600" y="636" fill="#ffd3cb" font-size="18" text-anchor="middle">인터럽트</text>
+            <circle cx="474" cy="541" r="42" fill="rgba(255,107,87,0.14)" stroke="rgba(255,107,87,0.74)" stroke-width="2"></circle>
+            <path d="M 474 515 L 490 551 H 458 Z" fill="none" stroke="#ffd3cb" stroke-width="4" stroke-linejoin="round"></path>
+            <circle cx="474" cy="539" r="3.5" fill="#ffd3cb"></circle>
+            <text x="474" y="596" fill="#ffd3cb" font-size="18" text-anchor="middle">인터럽트 대응</text>
           </g>
           <g class="portal" style="--delay:2s;">
-            <circle cx="415" cy="475" r="42" fill="rgba(246,166,35,0.14)" stroke="rgba(246,166,35,0.76)" stroke-width="2"></circle>
-            <circle cx="415" cy="475" r="16" fill="none" stroke="#ffe0aa" stroke-width="4"></circle>
-            <path d="M 415 447 V 457 M 415 493 V 503 M 387 475 H 397 M 433 475 H 443" stroke="#ffe0aa" stroke-width="4" stroke-linecap="round"></path>
-            <text x="415" y="527" fill="#ffe8ba" font-size="18" text-anchor="middle">산술</text>
-          </g>
-          <g class="portal" style="--delay:2.5s;">
-            <circle cx="415" cy="261" r="42" fill="rgba(212,151,255,0.12)" stroke="rgba(212,151,255,0.76)" stroke-width="2"></circle>
-            <path d="M 397 285 V 251 C 397 237 409 227 423 227 C 437 227 449 237 449 251 V 285" fill="none" stroke="#f0d8ff" stroke-width="4" stroke-linecap="round"></path>
-            <rect x="407" y="259" width="16" height="18" rx="5" fill="#f0d8ff"></rect>
-            <text x="415" y="313" fill="#f0d8ff" font-size="18" text-anchor="middle">보안</text>
+            <circle cx="396" cy="302" r="42" fill="rgba(246,166,35,0.14)" stroke="rgba(246,166,35,0.76)" stroke-width="2"></circle>
+            <path d="M 376 284 H 416 M 376 320 H 416" stroke="#ffe0aa" stroke-width="4" stroke-linecap="round"></path>
+            <path d="M 384 277 L 376 284 L 384 291 M 408 313 L 416 320 L 408 327" fill="none" stroke="#ffe0aa" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <text x="396" y="354" fill="#ffe8ba" font-size="18" text-anchor="middle">입출력 처리</text>
           </g>
 
           <circle cx="600" cy="368" r="104" fill="rgba(255,217,120,0.12)"></circle>
@@ -513,103 +712,319 @@
             <g transform="rotate(120 600 368)"><rect x="592" y="244" width="16" height="42" rx="8" fill="#98f5c2"></rect></g>
             <g transform="rotate(180 600 368)"><rect x="592" y="244" width="16" height="42" rx="8" fill="#ff6b57"></rect></g>
             <g transform="rotate(240 600 368)"><rect x="592" y="244" width="16" height="42" rx="8" fill="#f6a623"></rect></g>
-            <g transform="rotate(300 600 368)"><rect x="592" y="244" width="16" height="42" rx="8" fill="#d497ff"></rect></g>
           </g>
         </svg>
         <div class="cut__overlay">
           <div class="cut__top">CUT 1</div>
           <div class="cut__title">중앙 지휘실</div>
-          <div class="cut__line">CPU는 한 가지 일만 하는 기계가 아니라, 서로 다른 사건을 받아내는 만능형 제어자다.</div>
+          <div class="cut__line">CPU는 여러 종류의 사건을 받아내는 만능형 제어자다. 다섯 포털은 정5각형으로 균형을 이루며 한 몸처럼 반응한다.</div>
         </div>
       </div>
     </section>
 
     <section class="cut">
       <div class="cut__frame">
-        <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="AI 업무 등장">
+        <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="AI 업무의 특징">
           <rect x="48" y="48" width="1104" height="624" rx="24" class="safe"></rect>
-          <circle cx="600" cy="368" r="214" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"></circle>
-          <circle cx="600" cy="368" r="88" fill="rgba(16,22,31,0.96)" stroke="rgba(255,255,255,0.18)" stroke-width="2"></circle>
-          <circle cx="600" cy="368" r="10" fill="#fff4c4"></circle>
-          <g opacity="0.7">
-            <circle cx="600" cy="154" r="42" fill="rgba(255,217,120,0.1)" stroke="rgba(255,217,120,0.35)"></circle>
-            <circle cx="785" cy="261" r="42" fill="rgba(79,209,255,0.1)" stroke="rgba(79,209,255,0.35)"></circle>
-            <circle cx="785" cy="475" r="42" fill="rgba(152,245,194,0.1)" stroke="rgba(152,245,194,0.35)"></circle>
-            <circle cx="600" cy="582" r="42" fill="rgba(255,107,87,0.1)" stroke="rgba(255,107,87,0.35)"></circle>
-            <circle cx="415" cy="475" r="42" fill="rgba(246,166,35,0.1)" stroke="rgba(246,166,35,0.35)"></circle>
-            <circle cx="415" cy="261" r="42" fill="rgba(212,151,255,0.1)" stroke="rgba(212,151,255,0.35)"></circle>
+          <rect x="96" y="96" width="1008" height="528" rx="34" fill="rgba(7,12,18,0.96)" stroke="rgba(255,255,255,0.05)"></rect>
+
+          <g opacity="0.18">
+            <line x1="146" y1="128" x2="1054" y2="128" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="146" y1="192" x2="1054" y2="192" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="146" y1="256" x2="1054" y2="256" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="146" y1="320" x2="1054" y2="320" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="146" y1="384" x2="1054" y2="384" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="146" y1="448" x2="1054" y2="448" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="146" y1="512" x2="1054" y2="512" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="146" y1="576" x2="1054" y2="576" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="146" y1="128" x2="146" y2="576" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="242" y1="128" x2="242" y2="576" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="338" y1="128" x2="338" y2="576" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="434" y1="128" x2="434" y2="576" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="530" y1="128" x2="530" y2="576" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="626" y1="128" x2="626" y2="576" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="722" y1="128" x2="722" y2="576" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="818" y1="128" x2="818" y2="576" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="914" y1="128" x2="914" y2="576" stroke="rgba(255,255,255,0.08)"></line>
+            <line x1="1010" y1="128" x2="1010" y2="576" stroke="rgba(255,255,255,0.08)"></line>
           </g>
-          <rect x="864" y="258" width="246" height="220" rx="28" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"></rect>
-          <text x="987" y="236" fill="#f1f4f8" font-size="22" text-anchor="middle">새 업무</text>
-          <g class="ai-tile" style="--delay:0s;"><rect x="1120" y="284" width="40" height="40" rx="10" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)"></rect><text x="1140" y="309" fill="#f2f5f8" font-size="15" text-anchor="middle">AI</text></g>
-          <g class="ai-tile" style="--delay:0.35s;"><rect x="1174" y="284" width="40" height="40" rx="10" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)"></rect><text x="1194" y="309" fill="#f2f5f8" font-size="15" text-anchor="middle">AI</text></g>
-          <g class="ai-tile" style="--delay:0.7s;"><rect x="1228" y="284" width="40" height="40" rx="10" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)"></rect><text x="1248" y="309" fill="#f2f5f8" font-size="15" text-anchor="middle">AI</text></g>
-          <g class="ai-tile" style="--delay:1.05s;"><rect x="1120" y="338" width="40" height="40" rx="10" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)"></rect><text x="1140" y="363" fill="#f2f5f8" font-size="15" text-anchor="middle">AI</text></g>
-          <g class="ai-tile" style="--delay:1.4s;"><rect x="1174" y="338" width="40" height="40" rx="10" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)"></rect><text x="1194" y="363" fill="#f2f5f8" font-size="15" text-anchor="middle">AI</text></g>
-          <g class="ai-tile" style="--delay:1.75s;"><rect x="1228" y="338" width="40" height="40" rx="10" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)"></rect><text x="1248" y="363" fill="#f2f5f8" font-size="15" text-anchor="middle">AI</text></g>
-          <g class="ai-tile" style="--delay:2.1s;"><rect x="1120" y="392" width="40" height="40" rx="10" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)"></rect><text x="1140" y="417" fill="#f2f5f8" font-size="15" text-anchor="middle">AI</text></g>
-          <g class="ai-tile" style="--delay:2.45s;"><rect x="1174" y="392" width="40" height="40" rx="10" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)"></rect><text x="1194" y="417" fill="#f2f5f8" font-size="15" text-anchor="middle">AI</text></g>
-          <g class="ai-tile" style="--delay:2.8s;"><rect x="1228" y="392" width="40" height="40" rx="10" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)"></rect><text x="1248" y="417" fill="#f2f5f8" font-size="15" text-anchor="middle">AI</text></g>
+
+          <g class="ai-wave-row" style="--delay:0s;" opacity="0.95">
+            <rect x="154" y="136" width="24" height="24" rx="5" fill="rgba(238,242,246,0.96)" stroke="rgba(255,255,255,0.28)"></rect>
+            <rect x="250" y="136" width="24" height="24" rx="5" fill="rgba(238,242,246,0.92)" stroke="rgba(255,255,255,0.24)"></rect>
+            <rect x="346" y="136" width="24" height="24" rx="5" fill="rgba(238,242,246,0.88)" stroke="rgba(255,255,255,0.22)"></rect>
+            <rect x="442" y="136" width="24" height="24" rx="5" fill="rgba(238,242,246,0.84)" stroke="rgba(255,255,255,0.2)"></rect>
+            <rect x="538" y="136" width="24" height="24" rx="5" fill="rgba(238,242,246,0.8)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="634" y="136" width="24" height="24" rx="5" fill="rgba(238,242,246,0.76)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="730" y="136" width="24" height="24" rx="5" fill="rgba(238,242,246,0.72)" stroke="rgba(255,255,255,0.16)"></rect>
+            <rect x="826" y="136" width="24" height="24" rx="5" fill="rgba(238,242,246,0.68)" stroke="rgba(255,255,255,0.16)"></rect>
+            <rect x="922" y="136" width="24" height="24" rx="5" fill="rgba(238,242,246,0.64)" stroke="rgba(255,255,255,0.14)"></rect>
+          </g>
+          <g class="ai-wave-row" style="--delay:0.32s;" opacity="0.94">
+            <rect x="154" y="200" width="24" height="24" rx="5" fill="rgba(238,242,246,0.94)" stroke="rgba(255,255,255,0.26)"></rect>
+            <rect x="250" y="200" width="24" height="24" rx="5" fill="rgba(238,242,246,0.9)" stroke="rgba(255,255,255,0.24)"></rect>
+            <rect x="346" y="200" width="24" height="24" rx="5" fill="rgba(238,242,246,0.86)" stroke="rgba(255,255,255,0.22)"></rect>
+            <rect x="442" y="200" width="24" height="24" rx="5" fill="rgba(238,242,246,0.82)" stroke="rgba(255,255,255,0.2)"></rect>
+            <rect x="538" y="200" width="24" height="24" rx="5" fill="rgba(238,242,246,0.78)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="634" y="200" width="24" height="24" rx="5" fill="rgba(238,242,246,0.74)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="730" y="200" width="24" height="24" rx="5" fill="rgba(238,242,246,0.7)" stroke="rgba(255,255,255,0.16)"></rect>
+            <rect x="826" y="200" width="24" height="24" rx="5" fill="rgba(238,242,246,0.66)" stroke="rgba(255,255,255,0.16)"></rect>
+            <rect x="922" y="200" width="24" height="24" rx="5" fill="rgba(238,242,246,0.62)" stroke="rgba(255,255,255,0.14)"></rect>
+          </g>
+          <g class="ai-wave-row" style="--delay:0.64s;" opacity="0.93">
+            <rect x="154" y="264" width="24" height="24" rx="5" fill="rgba(238,242,246,0.92)" stroke="rgba(255,255,255,0.24)"></rect>
+            <rect x="250" y="264" width="24" height="24" rx="5" fill="rgba(238,242,246,0.88)" stroke="rgba(255,255,255,0.22)"></rect>
+            <rect x="346" y="264" width="24" height="24" rx="5" fill="rgba(238,242,246,0.84)" stroke="rgba(255,255,255,0.2)"></rect>
+            <rect x="442" y="264" width="24" height="24" rx="5" fill="rgba(238,242,246,0.8)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="538" y="264" width="24" height="24" rx="5" fill="rgba(238,242,246,0.76)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="634" y="264" width="24" height="24" rx="5" fill="rgba(238,242,246,0.72)" stroke="rgba(255,255,255,0.16)"></rect>
+            <rect x="730" y="264" width="24" height="24" rx="5" fill="rgba(238,242,246,0.68)" stroke="rgba(255,255,255,0.16)"></rect>
+            <rect x="826" y="264" width="24" height="24" rx="5" fill="rgba(238,242,246,0.64)" stroke="rgba(255,255,255,0.14)"></rect>
+            <rect x="922" y="264" width="24" height="24" rx="5" fill="rgba(238,242,246,0.6)" stroke="rgba(255,255,255,0.14)"></rect>
+          </g>
+          <g class="ai-wave-row" style="--delay:0.96s;" opacity="0.92">
+            <rect x="154" y="328" width="24" height="24" rx="5" fill="rgba(238,242,246,0.9)" stroke="rgba(255,255,255,0.22)"></rect>
+            <rect x="250" y="328" width="24" height="24" rx="5" fill="rgba(238,242,246,0.86)" stroke="rgba(255,255,255,0.2)"></rect>
+            <rect x="346" y="328" width="24" height="24" rx="5" fill="rgba(238,242,246,0.82)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="442" y="328" width="24" height="24" rx="5" fill="rgba(238,242,246,0.78)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="538" y="328" width="24" height="24" rx="5" fill="rgba(238,242,246,0.74)" stroke="rgba(255,255,255,0.16)"></rect>
+            <rect x="634" y="328" width="24" height="24" rx="5" fill="rgba(238,242,246,0.7)" stroke="rgba(255,255,255,0.16)"></rect>
+            <rect x="730" y="328" width="24" height="24" rx="5" fill="rgba(238,242,246,0.66)" stroke="rgba(255,255,255,0.14)"></rect>
+            <rect x="826" y="328" width="24" height="24" rx="5" fill="rgba(238,242,246,0.62)" stroke="rgba(255,255,255,0.14)"></rect>
+            <rect x="922" y="328" width="24" height="24" rx="5" fill="rgba(238,242,246,0.58)" stroke="rgba(255,255,255,0.12)"></rect>
+          </g>
+          <g class="ai-wave-row" style="--delay:1.28s;" opacity="0.91">
+            <rect x="154" y="392" width="24" height="24" rx="5" fill="rgba(238,242,246,0.88)" stroke="rgba(255,255,255,0.2)"></rect>
+            <rect x="250" y="392" width="24" height="24" rx="5" fill="rgba(238,242,246,0.84)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="346" y="392" width="24" height="24" rx="5" fill="rgba(238,242,246,0.8)" stroke="rgba(255,255,255,0.18)"></rect>
+            <rect x="442" y="392" width="24" height="24" rx="5" fill="rgba(238,242,246,0.76)" stroke="rgba(255,255,255,0.16)"></rect>
+            <rect x="538" y="392" width="24" height="24" rx="5" fill="rgba(238,242,246,0.72)" stroke="rgba(255,255,255,0.16)"></rect>
+            <rect x="634" y="392" width="24" height="24" rx="5" fill="rgba(238,242,246,0.68)" stroke="rgba(255,255,255,0.14)"></rect>
+            <rect x="730" y="392" width="24" height="24" rx="5" fill="rgba(238,242,246,0.64)" stroke="rgba(255,255,255,0.14)"></rect>
+            <rect x="826" y="392" width="24" height="24" rx="5" fill="rgba(238,242,246,0.6)" stroke="rgba(255,255,255,0.12)"></rect>
+            <rect x="922" y="392" width="24" height="24" rx="5" fill="rgba(238,242,246,0.56)" stroke="rgba(255,255,255,0.12)"></rect>
+          </g>
+
+          <g class="ai-wave-bar" style="--delay:0s;" opacity="0.82">
+            <rect x="154" y="488" width="56" height="18" rx="6" fill="rgba(238,242,246,0.18)"></rect>
+            <rect x="250" y="488" width="56" height="18" rx="6" fill="rgba(238,242,246,0.16)"></rect>
+            <rect x="346" y="488" width="56" height="18" rx="6" fill="rgba(238,242,246,0.14)"></rect>
+            <rect x="442" y="488" width="56" height="18" rx="6" fill="rgba(238,242,246,0.12)"></rect>
+            <rect x="538" y="488" width="56" height="18" rx="6" fill="rgba(238,242,246,0.1)"></rect>
+            <rect x="634" y="488" width="56" height="18" rx="6" fill="rgba(238,242,246,0.1)"></rect>
+            <rect x="730" y="488" width="56" height="18" rx="6" fill="rgba(238,242,246,0.1)"></rect>
+            <rect x="826" y="488" width="56" height="18" rx="6" fill="rgba(238,242,246,0.1)"></rect>
+            <rect x="922" y="488" width="56" height="18" rx="6" fill="rgba(238,242,246,0.1)"></rect>
+          </g>
+        </svg>
+        <div class="cut__overlay">
+          <div class="cut__top">CUT 1.5</div>
+          <div class="cut__title">작고 반복되는 파도</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cut">
+      <div class="cut__frame">
+        <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="AI 업무의 침입">
+          <rect x="48" y="48" width="1104" height="624" rx="24" class="safe"></rect>
+          <rect x="96" y="96" width="560" height="528" rx="36" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.05)"></rect>
+          <rect x="700" y="96" width="404" height="528" rx="36" fill="rgba(6,9,14,0.96)" stroke="rgba(255,255,255,0.04)"></rect>
+          <line x1="678" y1="120" x2="678" y2="600" stroke="rgba(255,255,255,0.06)" stroke-width="2"></line>
+
+          <circle cx="600" cy="368" r="214" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"></circle>
+          <circle cx="600" cy="368" r="214" class="ring" fill="none" stroke="rgba(255,217,120,0.22)" stroke-width="2" stroke-dasharray="4 14"></circle>
+          <circle cx="600" cy="368" r="158" class="ring" fill="none" stroke="rgba(79,209,255,0.22)" stroke-width="2" stroke-dasharray="6 18"></circle>
+
+          <path class="cut2-lane" style="--delay:0s;" d="M 1019 242 C 928 214, 826 188, 704 170 C 666 164, 630 158, 600 154" fill="none" stroke="rgba(255,217,120,0.16)" stroke-width="18" stroke-linecap="round"></path>
+          <path class="cut2-lane" style="--delay:0.3s;" d="M 1019 358 C 948 346, 896 330, 850 316 C 832 310, 818 306, 804 302" fill="none" stroke="rgba(79,209,255,0.16)" stroke-width="20" stroke-linecap="round"></path>
+          <path class="cut2-lane" style="--delay:0.6s;" d="M 1019 478 C 934 500, 864 516, 800 530 C 772 536, 748 540, 726 541" fill="none" stroke="rgba(152,245,194,0.16)" stroke-width="20" stroke-linecap="round"></path>
+          <path d="M 600 154 C 660 176, 722 220, 782 286" fill="none" stroke="rgba(255,217,120,0.22)" stroke-width="7" stroke-dasharray="10 12" stroke-linecap="round"></path>
+          <path d="M 726 541 C 738 502, 752 466, 768 426 C 778 400, 790 370, 804 302" fill="none" stroke="rgba(152,245,194,0.22)" stroke-width="8" stroke-linecap="round"></path>
+          <path d="M 804 302 C 758 316, 706 332, 666 346 C 642 354, 620 362, 600 368" fill="none" stroke="rgba(79,209,255,0.22)" stroke-width="10" stroke-linecap="round"></path>
+          <path d="M 1019 310 C 922 306, 812 302, 684 302 C 574 302, 480 302, 396 302" fill="none" stroke="rgba(246,166,35,0.08)" stroke-width="10" stroke-linecap="round"></path>
+          <path d="M 1019 432 C 932 442, 836 462, 718 504 C 624 534, 548 541, 474 541" fill="none" stroke="rgba(255,107,87,0.08)" stroke-width="10" stroke-linecap="round"></path>
+
+          <g class="beam cpu-focus-branch" style="--delay:0s;"><line x1="600" y1="368" x2="600" y2="154" stroke="#ffd978" stroke-width="4" stroke-linecap="round"></line></g>
+          <g class="beam cpu-focus-vector" style="--delay:0.5s;"><line x1="600" y1="368" x2="804" y2="302" stroke="#4fd1ff" stroke-width="4" stroke-linecap="round"></line></g>
+          <g class="beam cpu-focus-memory" style="--delay:1s;"><line x1="600" y1="368" x2="726" y2="541" stroke="#98f5c2" stroke-width="4" stroke-linecap="round"></line></g>
+          <g class="beam cpu-muted"><line x1="600" y1="368" x2="474" y2="541" stroke="#ff6b57" stroke-width="4" stroke-linecap="round"></line></g>
+          <g class="beam cpu-muted"><line x1="600" y1="368" x2="396" y2="302" stroke="#f6a623" stroke-width="4" stroke-linecap="round"></line></g>
+
+          <g class="portal cpu-focus-branch" style="--delay:0s;">
+            <circle cx="600" cy="154" r="42" fill="rgba(255,217,120,0.12)" stroke="rgba(255,217,120,0.74)" stroke-width="2"></circle>
+            <path d="M 578 152 H 622 M 600 130 V 174" stroke="#ffe8ac" stroke-width="4" stroke-linecap="round"></path>
+            <text x="600" y="206" fill="#fff1c8" font-size="18" text-anchor="middle">분기 제어</text>
+          </g>
+          <g class="portal vector-portal-hot cpu-focus-vector" style="--delay:0.5s;">
+            <circle cx="804" cy="302" r="42" fill="rgba(79,209,255,0.12)" stroke="rgba(79,209,255,0.74)" stroke-width="2"></circle>
+            <path d="M 784 284 L 796 293 L 808 284 M 784 302 L 796 311 L 808 302 M 784 320 L 796 329 L 808 320" fill="none" stroke="#dff8ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <text x="804" y="354" fill="#dff8ff" font-size="18" text-anchor="middle">벡터 연산</text>
+          </g>
+          <g class="portal cpu-focus-memory" style="--delay:1s;">
+            <circle cx="726" cy="541" r="42" fill="rgba(152,245,194,0.12)" stroke="rgba(152,245,194,0.74)" stroke-width="2"></circle>
+            <rect x="706" y="521" width="40" height="40" rx="10" fill="none" stroke="#ddffec" stroke-width="4"></rect>
+            <path d="M 718 533 H 734" stroke="#ddffec" stroke-width="4" stroke-linecap="round"></path>
+            <text x="726" y="596" fill="#ddffec" font-size="18" text-anchor="middle">메모리 접근</text>
+          </g>
+          <g class="portal cpu-muted">
+            <circle cx="474" cy="541" r="42" fill="rgba(255,107,87,0.14)" stroke="rgba(255,107,87,0.74)" stroke-width="2"></circle>
+            <path d="M 474 515 L 490 551 H 458 Z" fill="none" stroke="#ffd3cb" stroke-width="4" stroke-linejoin="round"></path>
+            <circle cx="474" cy="539" r="3.5" fill="#ffd3cb"></circle>
+            <text x="474" y="596" fill="rgba(255,211,203,0.58)" font-size="18" text-anchor="middle">인터럽트 대응</text>
+          </g>
+          <g class="portal cpu-muted">
+            <circle cx="396" cy="302" r="42" fill="rgba(246,166,35,0.14)" stroke="rgba(246,166,35,0.76)" stroke-width="2"></circle>
+            <path d="M 376 284 H 416 M 376 320 H 416" stroke="#ffe0aa" stroke-width="4" stroke-linecap="round"></path>
+            <path d="M 384 277 L 376 284 L 384 291 M 408 313 L 416 320 L 408 327" fill="none" stroke="#ffe0aa" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <text x="396" y="354" fill="rgba(255,232,186,0.58)" font-size="18" text-anchor="middle">입출력 처리</text>
+          </g>
+
+          <circle cx="600" cy="368" r="104" fill="rgba(255,217,120,0.12)"></circle>
+          <circle cx="600" cy="368" r="88" fill="rgba(16,22,31,0.96)" stroke="rgba(255,255,255,0.18)" stroke-width="2"></circle>
+          <circle cx="600" cy="368" r="46" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)"></circle>
+          <circle cx="600" cy="368" r="10" fill="#fff4c4"></circle>
+          <g class="hub-rotate">
+            <rect x="592" y="244" width="16" height="42" rx="8" fill="#ffd978"></rect>
+            <g transform="rotate(60 600 368)"><rect x="592" y="244" width="16" height="42" rx="8" fill="#4fd1ff"></rect></g>
+            <g transform="rotate(120 600 368)"><rect x="592" y="244" width="16" height="42" rx="8" fill="#98f5c2"></rect></g>
+            <g transform="rotate(180 600 368)"><rect x="592" y="244" width="16" height="42" rx="8" fill="#ff6b57"></rect></g>
+            <g transform="rotate(240 600 368)"><rect x="592" y="244" width="16" height="42" rx="8" fill="#f6a623"></rect></g>
+          </g>
+
+          <g class="cut2-door">
+            <rect x="972" y="146" width="94" height="428" rx="24" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)"></rect>
+            <rect x="1002" y="182" width="34" height="356" rx="16" fill="rgba(217,223,230,0.08)" stroke="rgba(255,255,255,0.06)"></rect>
+          </g>
+
+          <g class="cut2-block" style="--delay:0s;"><rect width="28" height="10" rx="5" fill="rgba(255,232,172,0.9)" stroke="rgba(255,255,255,0.26)"><animateMotion dur="3.6s" repeatCount="indefinite" path="M 1019 242 C 928 214, 826 188, 704 170 C 666 164, 630 158, 600 154"></animateMotion></rect></g>
+          <g class="cut2-block" style="--delay:0.2s;"><rect width="22" height="22" rx="5" fill="rgba(238,242,246,0.9)" stroke="rgba(255,255,255,0.34)"><animateMotion dur="1.9s" repeatCount="indefinite" path="M 1019 358 C 948 346, 896 330, 850 316 C 832 310, 818 306, 804 302"></animateMotion></rect></g>
+          <g class="cut2-block" style="--delay:1.05s;"><rect width="22" height="22" rx="5" fill="rgba(238,242,246,0.78)" stroke="rgba(255,255,255,0.26)"><animateMotion dur="1.9s" repeatCount="indefinite" path="M 1019 358 C 948 346, 896 330, 850 316 C 832 310, 818 306, 804 302"></animateMotion></rect></g>
+          <g class="cut2-block" style="--delay:0.35s;">
+            <g>
+              <rect width="18" height="18" rx="4" fill="rgba(221,255,236,0.92)" stroke="rgba(255,255,255,0.34)"></rect>
+              <rect x="22" y="0" width="18" height="18" rx="4" fill="rgba(221,255,236,0.72)" stroke="rgba(255,255,255,0.22)"></rect>
+              <line x1="18" y1="9" x2="22" y2="9" stroke="rgba(221,255,236,0.6)" stroke-width="2"></line>
+              <animateMotion dur="2.5s" repeatCount="indefinite" path="M 1019 478 C 934 500, 864 516, 800 530 C 772 536, 748 540, 726 541"></animateMotion>
+            </g>
+          </g>
+          <g class="cut2-block" style="--delay:1.1s;">
+            <g>
+              <rect width="18" height="18" rx="4" fill="rgba(221,255,236,0.82)" stroke="rgba(255,255,255,0.26)"></rect>
+              <rect x="22" y="0" width="18" height="18" rx="4" fill="rgba(221,255,236,0.62)" stroke="rgba(255,255,255,0.18)"></rect>
+              <line x1="18" y1="9" x2="22" y2="9" stroke="rgba(221,255,236,0.52)" stroke-width="2"></line>
+              <animateMotion dur="2.5s" repeatCount="indefinite" path="M 1019 478 C 934 500, 864 516, 800 530 C 772 536, 748 540, 726 541"></animateMotion>
+            </g>
+          </g>
+          <g class="cut2-block" style="--delay:0.25s;">
+            <rect width="14" height="14" rx="4" fill="rgba(238,242,246,0.6)" stroke="rgba(255,255,255,0.18)">
+              <animateMotion dur="2.2s" repeatCount="indefinite" path="M 1019 310 C 922 306, 812 302, 684 302 C 574 302, 480 302, 396 302"></animateMotion>
+            </rect>
+          </g>
+          <g class="cut2-block" style="--delay:0.55s;">
+            <rect width="14" height="14" rx="4" fill="rgba(238,242,246,0.6)" stroke="rgba(255,255,255,0.18)">
+              <animateMotion dur="2.4s" repeatCount="indefinite" path="M 1019 432 C 932 442, 836 462, 718 504 C 624 534, 548 541, 474 541"></animateMotion>
+            </rect>
+          </g>
+
+          <g class="cut2-queue" style="--delay:0s;">
+            <rect x="636" y="168" width="26" height="10" rx="5" fill="rgba(255,232,172,0.9)" stroke="rgba(255,255,255,0.24)"></rect>
+            <rect x="666" y="172" width="26" height="10" rx="5" fill="rgba(255,232,172,0.76)" stroke="rgba(255,255,255,0.18)"></rect>
+          </g>
+          <g class="cut2-queue" style="--delay:0.3s;">
+            <rect x="846" y="286" width="20" height="20" rx="4" fill="rgba(235,239,243,0.92)" stroke="rgba(255,255,255,0.34)"></rect>
+            <rect x="870" y="290" width="20" height="20" rx="4" fill="rgba(235,239,243,0.8)" stroke="rgba(255,255,255,0.28)"></rect>
+            <rect x="894" y="294" width="20" height="20" rx="4" fill="rgba(235,239,243,0.68)" stroke="rgba(255,255,255,0.22)"></rect>
+            <rect x="918" y="298" width="20" height="20" rx="4" fill="rgba(235,239,243,0.54)" stroke="rgba(255,255,255,0.16)"></rect>
+          </g>
+          <g class="cut2-queue" style="--delay:0.45s;">
+            <rect x="760" y="526" width="18" height="18" rx="4" fill="rgba(221,255,236,0.92)" stroke="rgba(255,255,255,0.32)"></rect>
+            <rect x="782" y="526" width="18" height="18" rx="4" fill="rgba(221,255,236,0.72)" stroke="rgba(255,255,255,0.22)"></rect>
+            <line x1="778" y1="535" x2="782" y2="535" stroke="rgba(221,255,236,0.6)" stroke-width="2"></line>
+            <rect x="808" y="522" width="18" height="18" rx="4" fill="rgba(221,255,236,0.56)" stroke="rgba(255,255,255,0.18)"></rect>
+          </g>
+
         </svg>
         <div class="cut__overlay">
           <div class="cut__top">CUT 2</div>
-          <div class="cut__title">AI 업무의 등장</div>
-          <div class="cut__line">기존 사건들과 달리, AI는 같은 모양의 대량 작업으로 밀려온다.</div>
+          <div class="cut__title">AI 업무의 침입</div>
         </div>
       </div>
     </section>
 
     <section class="cut">
       <div class="cut__frame">
-        <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="CPU 난감함">
+        <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="CPU의 병목">
           <rect x="48" y="48" width="1104" height="624" rx="24" class="safe"></rect>
-          <circle cx="600" cy="368" r="214" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"></circle>
-          <g class="beam" style="--delay:0s;"><line x1="600" y1="368" x2="600" y2="154" stroke="#ffd978" stroke-width="4" stroke-linecap="round"></line></g>
-          <g class="beam" style="--delay:0.8s;"><line x1="600" y1="368" x2="785" y2="261" stroke="#4fd1ff" stroke-width="4" stroke-linecap="round"></line></g>
-          <g class="beam" style="--delay:1.6s;"><line x1="600" y1="368" x2="600" y2="582" stroke="#ff6b57" stroke-width="4" stroke-linecap="round"></line></g>
+          <rect x="96" y="96" width="560" height="528" rx="36" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.05)"></rect>
+          <rect x="700" y="96" width="404" height="528" rx="36" fill="rgba(6,9,14,0.96)" stroke="rgba(255,255,255,0.04)"></rect>
+          <line x1="678" y1="120" x2="678" y2="600" stroke="rgba(255,255,255,0.06)" stroke-width="2"></line>
 
-          <g class="jam-wheel">
-            <circle cx="600" cy="368" r="164" fill="none" stroke="rgba(255,107,87,0.16)" stroke-width="18"></circle>
-            <circle cx="600" cy="368" r="132" fill="none" stroke="rgba(255,217,120,0.18)" stroke-width="10"></circle>
-            <g fill="rgba(255,217,120,0.9)">
-              <rect x="591" y="186" width="18" height="34" rx="8"></rect>
-              <g transform="rotate(30 600 368)"><rect x="591" y="186" width="18" height="34" rx="8"></rect></g>
-              <g transform="rotate(60 600 368)"><rect x="591" y="186" width="18" height="34" rx="8"></rect></g>
-              <g transform="rotate(90 600 368)"><rect x="591" y="186" width="18" height="34" rx="8"></rect></g>
-              <g transform="rotate(120 600 368)"><rect x="591" y="186" width="18" height="34" rx="8"></rect></g>
-              <g transform="rotate(150 600 368)"><rect x="591" y="186" width="18" height="34" rx="8"></rect></g>
-              <g transform="rotate(180 600 368)"><rect x="591" y="186" width="18" height="34" rx="8"></rect></g>
-              <g transform="rotate(210 600 368)"><rect x="591" y="186" width="18" height="34" rx="8"></rect></g>
-              <g transform="rotate(240 600 368)"><rect x="591" y="186" width="18" height="34" rx="8"></rect></g>
-              <g transform="rotate(270 600 368)"><rect x="591" y="186" width="18" height="34" rx="8"></rect></g>
-              <g transform="rotate(300 600 368)"><rect x="591" y="186" width="18" height="34" rx="8"></rect></g>
-              <g transform="rotate(330 600 368)"><rect x="591" y="186" width="18" height="34" rx="8"></rect></g>
+          <circle cx="600" cy="368" r="214" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"></circle>
+          <g opacity="0.42">
+            <circle cx="600" cy="154" r="42" fill="rgba(255,217,120,0.08)" stroke="rgba(255,217,120,0.3)" stroke-width="2"></circle>
+            <circle cx="804" cy="302" r="42" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.3)" stroke-width="2"></circle>
+            <circle cx="726" cy="541" r="42" fill="rgba(152,245,194,0.08)" stroke="rgba(152,245,194,0.3)" stroke-width="2"></circle>
+            <circle cx="474" cy="541" r="42" fill="rgba(255,107,87,0.08)" stroke="rgba(255,107,87,0.26)" stroke-width="2"></circle>
+            <circle cx="396" cy="302" r="42" fill="rgba(246,166,35,0.08)" stroke="rgba(246,166,35,0.26)" stroke-width="2"></circle>
+          </g>
+
+          <path d="M 1019 246 C 934 220, 854 216, 788 242 C 764 252, 744 260, 726 266" fill="none" stroke="rgba(255,217,120,0.14)" stroke-width="12" stroke-linecap="round"></path>
+          <path d="M 1019 478 C 934 500, 864 516, 800 530 C 772 536, 748 540, 726 541 C 714 506, 718 470, 730 438 C 744 402, 762 366, 784 336 C 754 346, 716 356, 678 362 C 650 366, 624 368, 600 368" fill="none" stroke="rgba(152,245,194,0.28)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M 1019 446 C 940 468, 872 484, 814 488 C 778 490, 750 482, 738 462 C 728 446, 736 420, 754 386 C 766 364, 780 340, 796 314 L 814 326 C 798 354, 786 376, 778 396 C 768 422, 770 438, 780 444 C 794 452, 820 452, 856 446 C 902 438, 952 424, 1019 408 Z" fill="rgba(152,245,194,0.08)" stroke="rgba(221,255,236,0.14)" stroke-width="1.5"></path>
+          <path d="M 804 302 C 758 316, 706 332, 666 346 C 642 354, 620 362, 600 368" fill="none" stroke="rgba(79,209,255,0.12)" stroke-width="10" stroke-linecap="round"></path>
+          <path d="M 600 154 C 660 176, 722 220, 782 286" fill="none" stroke="rgba(255,217,120,0.18)" stroke-width="7" stroke-dasharray="10 12" stroke-linecap="round"></path>
+          <path d="M 726 541 C 738 502, 752 466, 768 426 C 778 400, 790 370, 804 302" fill="none" stroke="rgba(152,245,194,0.18)" stroke-width="8" stroke-linecap="round"></path>
+
+          <g class="cut3-flow" style="--delay:0s;"><rect width="28" height="10" rx="5" fill="rgba(255,232,172,0.82)" stroke="rgba(255,255,255,0.18)"><animateMotion dur="2.5s" repeatCount="indefinite" path="M 1019 246 C 934 220, 854 216, 788 242 C 764 252, 744 260, 726 266"></animateMotion></rect></g>
+
+          <g class="cut3-flow" style="--delay:0.1s;">
+            <g>
+              <rect width="18" height="18" rx="4" fill="rgba(221,255,236,0.94)" stroke="rgba(255,255,255,0.32)"></rect>
+              <rect x="22" y="0" width="18" height="18" rx="4" fill="rgba(221,255,236,0.78)" stroke="rgba(255,255,255,0.24)"></rect>
+              <line x1="18" y1="9" x2="22" y2="9" stroke="rgba(221,255,236,0.62)" stroke-width="2"></line>
+              <animateMotion dur="5.9s" repeatCount="indefinite" path="M 1019 478 C 934 500, 864 516, 800 530 C 772 536, 748 540, 726 541 C 714 506, 718 470, 730 438 C 744 402, 762 366, 784 336 C 754 346, 716 356, 678 362 C 650 366, 624 368, 600 368"></animateMotion>
             </g>
-            <circle cx="600" cy="368" r="96" fill="rgba(255,217,120,0.1)"></circle>
+          </g>
+          <g class="cut3-flow" style="--delay:0.58s;">
+            <g>
+              <rect width="10" height="20" rx="4" fill="rgba(221,255,236,0.88)" stroke="rgba(255,255,255,0.24)"></rect>
+              <rect x="14" y="0" width="10" height="20" rx="4" fill="rgba(221,255,236,0.72)" stroke="rgba(255,255,255,0.18)"></rect>
+              <line x1="10" y1="10" x2="14" y2="10" stroke="rgba(221,255,236,0.56)" stroke-width="2"></line>
+              <animateMotion dur="3s" repeatCount="indefinite" path="M 748 462 C 742 434, 748 406, 762 378 C 772 358, 784 338, 796 314 C 754 334, 710 350, 666 360 C 640 366, 618 368, 600 368"></animateMotion>
+            </g>
+          </g>
+          <g class="cut3-flow" style="--delay:0.35s;"><rect width="18" height="18" rx="5" fill="rgba(238,242,246,0.72)" stroke="rgba(255,255,255,0.2)"><animateMotion dur="1.8s" repeatCount="indefinite" path="M 804 302 C 758 316, 706 332, 666 346 C 642 354, 620 362, 600 368"></animateMotion></rect></g>
+
+          <g opacity="0.84">
+            <rect x="874" y="488" width="26" height="18" rx="5" fill="rgba(221,255,236,0.18)" stroke="rgba(221,255,236,0.2)"></rect>
+            <rect x="904" y="488" width="26" height="18" rx="5" fill="rgba(221,255,236,0.14)" stroke="rgba(221,255,236,0.18)"></rect>
+          </g>
+
+          <g class="beam" style="--delay:0s;"><line x1="600" y1="368" x2="600" y2="154" stroke="#ffd978" stroke-width="4" stroke-linecap="round"></line></g>
+          <g class="beam" style="--delay:0.5s;"><line x1="600" y1="368" x2="804" y2="302" stroke="#4fd1ff" stroke-width="4" stroke-linecap="round"></line></g>
+          <g class="beam" style="--delay:1s;"><line x1="600" y1="368" x2="726" y2="541" stroke="#98f5c2" stroke-width="4" stroke-linecap="round"></line></g>
+          <g class="beam cpu-muted"><line x1="600" y1="368" x2="474" y2="541" stroke="#ff6b57" stroke-width="4" stroke-linecap="round"></line></g>
+          <g class="beam cpu-muted"><line x1="600" y1="368" x2="396" y2="302" stroke="#f6a623" stroke-width="4" stroke-linecap="round"></line></g>
+
+          <g class="hub-stall">
+            <circle cx="600" cy="368" r="102" fill="rgba(255,217,120,0.08)"></circle>
             <circle cx="600" cy="368" r="88" fill="rgba(16,22,31,0.96)" stroke="rgba(255,255,255,0.18)" stroke-width="2"></circle>
             <circle cx="600" cy="368" r="28" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)"></circle>
           </g>
 
-          <g class="jam-block">
-            <rect x="708" y="312" width="54" height="54" rx="12" fill="rgba(245,248,251,0.92)" stroke="rgba(255,255,255,0.42)"></rect>
-            <text x="735" y="346" fill="#10151c" font-size="18" text-anchor="middle">AI</text>
+          <g class="cut3-stack" style="--delay:0.5s;">
+            <rect x="724" y="258" width="28" height="10" rx="5" fill="rgba(255,232,172,0.82)" stroke="rgba(255,255,255,0.2)"></rect>
+            <rect x="754" y="250" width="28" height="10" rx="5" fill="rgba(255,232,172,0.66)" stroke="rgba(255,255,255,0.16)"></rect>
           </g>
-          <path d="M 698 304 C 712 292, 722 288, 736 286" fill="none" stroke="rgba(255,107,87,0.55)" stroke-width="5" stroke-linecap="round"></path>
-          <path d="M 704 374 C 716 384, 726 388, 742 390" fill="none" stroke="rgba(255,107,87,0.55)" stroke-width="5" stroke-linecap="round"></path>
-          <rect class="overload" x="686" y="280" width="104" height="118" rx="24" fill="rgba(255,107,87,0.08)" stroke="rgba(255,107,87,0.42)" stroke-dasharray="8 10"></rect>
 
-          <g class="pressure-tile" style="--delay:0s;"><rect x="1100" y="320" width="40" height="40" rx="10" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.24)"></rect></g>
-          <g class="pressure-tile" style="--delay:0.35s;"><rect x="1150" y="320" width="40" height="40" rx="10" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.24)"></rect></g>
-          <g class="pressure-tile" style="--delay:0.7s;"><rect x="1200" y="320" width="40" height="40" rx="10" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.24)"></rect></g>
-          <g class="pressure-tile" style="--delay:1.05s;"><rect x="1100" y="372" width="40" height="40" rx="10" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.24)"></rect></g>
-          <g class="pressure-tile" style="--delay:1.4s;"><rect x="1150" y="372" width="40" height="40" rx="10" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.24)"></rect></g>
-          <g class="pressure-tile" style="--delay:1.75s;"><rect x="1200" y="372" width="40" height="40" rx="10" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.24)"></rect></g>
-          <text x="854" y="520" fill="#ffd1c8" font-size="24" text-anchor="middle">같은 일감이 톱니 사이에 끼기 시작한다</text>
+          <path d="M 748 520 C 740 482, 746 444, 762 406 C 772 382, 784 356, 798 324" fill="none" stroke="rgba(221,255,236,0.16)" stroke-width="22" stroke-linecap="round"></path>
+          <rect x="782" y="292" width="24" height="84" rx="12" fill="rgba(221,255,236,0.1)" stroke="rgba(221,255,236,0.22)"></rect>
+
         </svg>
         <div class="cut__overlay">
           <div class="cut__top">CUT 3</div>
-          <div class="cut__title">CPU의 난감함</div>
-          <div class="cut__line">CPU는 계속 돌지만, AI 업무는 물레방아 톱니 사이에 끼어들며 병목을 만든다.</div>
+          <div class="cut__title">CPU의 병목</div>
         </div>
       </div>
     </section>
@@ -618,25 +1033,38 @@
       <div class="cut__frame">
         <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="GPU로의 진화">
           <rect x="48" y="48" width="1104" height="624" rx="24" class="safe"></rect>
-          <circle cx="420" cy="360" r="122" fill="rgba(255,217,120,0.08)" stroke="rgba(255,217,120,0.18)"></circle>
-          <circle cx="420" cy="360" r="70" fill="rgba(16,22,31,0.96)" stroke="rgba(255,255,255,0.16)"></circle>
-          <rect x="220" y="186" width="760" height="42" rx="20" fill="rgba(79,209,255,0.14)" stroke="rgba(79,209,255,0.34)"></rect>
-          <rect x="220" y="256" width="760" height="42" rx="20" fill="rgba(79,209,255,0.14)" stroke="rgba(79,209,255,0.34)"></rect>
-          <rect x="220" y="326" width="760" height="42" rx="20" fill="rgba(79,209,255,0.14)" stroke="rgba(79,209,255,0.34)"></rect>
-          <rect x="220" y="396" width="760" height="42" rx="20" fill="rgba(79,209,255,0.14)" stroke="rgba(79,209,255,0.34)"></rect>
-          <rect x="220" y="466" width="760" height="42" rx="20" fill="rgba(79,209,255,0.14)" stroke="rgba(79,209,255,0.34)"></rect>
-          <rect x="220" y="536" width="760" height="42" rx="20" fill="rgba(79,209,255,0.14)" stroke="rgba(79,209,255,0.34)"></rect>
-          <g class="fan-tile" style="--delay:0s; --dx:210px; --dy:-140px;"><rect x="120" y="350" width="40" height="40" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.26)"></rect></g>
-          <g class="fan-tile" style="--delay:0.25s; --dx:250px; --dy:-70px;"><rect x="120" y="350" width="40" height="40" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.26)"></rect></g>
-          <g class="fan-tile" style="--delay:0.5s; --dx:290px; --dy:0px;"><rect x="120" y="350" width="40" height="40" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.26)"></rect></g>
-          <g class="fan-tile" style="--delay:0.75s; --dx:330px; --dy:70px;"><rect x="120" y="350" width="40" height="40" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.26)"></rect></g>
-          <g class="fan-tile" style="--delay:1s; --dx:370px; --dy:140px;"><rect x="120" y="350" width="40" height="40" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.26)"></rect></g>
-          <g class="fan-tile" style="--delay:1.25s; --dx:410px; --dy:210px;"><rect x="120" y="350" width="40" height="40" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.26)"></rect></g>
+          <circle cx="350" cy="360" r="132" fill="rgba(255,217,120,0.08)" stroke="rgba(255,217,120,0.18)"></circle>
+          <circle cx="350" cy="360" r="74" fill="rgba(16,22,31,0.96)" stroke="rgba(255,255,255,0.16)"></circle>
+          <circle cx="350" cy="360" r="16" fill="#fff2cb"></circle>
+          <g class="gpu-core" style="--delay:0s;"><circle cx="350" cy="360" r="96" fill="none" stroke="rgba(79,209,255,0.28)" stroke-width="3" stroke-dasharray="8 16"></circle></g>
+          <g class="gpu-core" style="--delay:0.4s;"><circle cx="350" cy="360" r="112" fill="none" stroke="rgba(152,245,194,0.18)" stroke-width="2" stroke-dasharray="6 14"></circle></g>
+
+          <rect x="514" y="150" width="518" height="428" rx="40" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"></rect>
+          <rect x="544" y="178" width="458" height="34" rx="17" fill="rgba(79,209,255,0.14)" stroke="rgba(79,209,255,0.3)"></rect>
+          <rect x="544" y="246" width="458" height="34" rx="17" fill="rgba(79,209,255,0.14)" stroke="rgba(79,209,255,0.3)"></rect>
+          <rect x="544" y="314" width="458" height="34" rx="17" fill="rgba(79,209,255,0.14)" stroke="rgba(79,209,255,0.3)"></rect>
+          <rect x="544" y="382" width="458" height="34" rx="17" fill="rgba(79,209,255,0.14)" stroke="rgba(79,209,255,0.3)"></rect>
+          <rect x="544" y="450" width="458" height="34" rx="17" fill="rgba(79,209,255,0.14)" stroke="rgba(79,209,255,0.3)"></rect>
+          <rect x="544" y="518" width="458" height="34" rx="17" fill="rgba(79,209,255,0.14)" stroke="rgba(79,209,255,0.3)"></rect>
+
+          <g class="gpu-ribbon" style="--delay:0s;"><rect x="372" y="186" width="78" height="18" rx="9" fill="#4fd1ff" opacity="0.9"></rect></g>
+          <g class="gpu-ribbon" style="--delay:0.32s;"><rect x="372" y="254" width="78" height="18" rx="9" fill="#98f5c2" opacity="0.9"></rect></g>
+          <g class="gpu-ribbon" style="--delay:0.64s;"><rect x="372" y="322" width="78" height="18" rx="9" fill="#ffd978" opacity="0.9"></rect></g>
+          <g class="gpu-ribbon" style="--delay:0.96s;"><rect x="372" y="390" width="78" height="18" rx="9" fill="#4fd1ff" opacity="0.9"></rect></g>
+          <g class="gpu-ribbon" style="--delay:1.28s;"><rect x="372" y="458" width="78" height="18" rx="9" fill="#98f5c2" opacity="0.9"></rect></g>
+          <g class="gpu-ribbon" style="--delay:1.6s;"><rect x="372" y="526" width="78" height="18" rx="9" fill="#ffd978" opacity="0.9"></rect></g>
+
+          <g class="gpu-shard" style="--delay:0s; --dx:200px; --dy:-138px;"><rect x="386" y="342" width="28" height="28" rx="8" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.34)"></rect></g>
+          <g class="gpu-shard" style="--delay:0.18s; --dx:230px; --dy:-68px;"><rect x="386" y="342" width="28" height="28" rx="8" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.34)"></rect></g>
+          <g class="gpu-shard" style="--delay:0.36s; --dx:260px; --dy:0px;"><rect x="386" y="342" width="28" height="28" rx="8" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.34)"></rect></g>
+          <g class="gpu-shard" style="--delay:0.54s; --dx:290px; --dy:68px;"><rect x="386" y="342" width="28" height="28" rx="8" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.34)"></rect></g>
+          <g class="gpu-shard" style="--delay:0.72s; --dx:320px; --dy:138px;"><rect x="386" y="342" width="28" height="28" rx="8" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.34)"></rect></g>
+          <g class="gpu-shard" style="--delay:0.9s; --dx:350px; --dy:206px;"><rect x="386" y="342" width="28" height="28" rx="8" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.34)"></rect></g>
         </svg>
         <div class="cut__overlay">
           <div class="cut__top">CUT 4</div>
           <div class="cut__title">GPU로 펼쳐지다</div>
-          <div class="cut__line">하나의 중심으로 버티는 대신, 같은 일을 동시에 처리하는 넓은 무대로 바뀐다.</div>
+          <div class="cut__line">하나의 축에서 버티던 일이, 한순간에 여섯 갈래의 네온 흐름으로 분산된다.</div>
         </div>
       </div>
     </section>
@@ -645,24 +1073,39 @@
       <div class="cut__frame">
         <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="GPU의 전성기">
           <rect x="48" y="48" width="1104" height="624" rx="24" class="safe"></rect>
-          <rect x="188" y="162" width="824" height="440" rx="36" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.09)"></rect>
-          <g class="gpu-lane" style="--delay:0s;"><rect x="220" y="186" width="760" height="42" rx="20" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.38)"></rect></g>
-          <g class="gpu-lane" style="--delay:0.15s;"><rect x="220" y="256" width="760" height="42" rx="20" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.38)"></rect></g>
-          <g class="gpu-lane" style="--delay:0.3s;"><rect x="220" y="326" width="760" height="42" rx="20" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.38)"></rect></g>
-          <g class="gpu-lane" style="--delay:0.45s;"><rect x="220" y="396" width="760" height="42" rx="20" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.38)"></rect></g>
-          <g class="gpu-lane" style="--delay:0.6s;"><rect x="220" y="466" width="760" height="42" rx="20" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.38)"></rect></g>
-          <g class="gpu-lane" style="--delay:0.75s;"><rect x="220" y="536" width="760" height="42" rx="20" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.38)"></rect></g>
-          <g class="fan-tile" style="--delay:0s; --dx:860px; --dy:-140px;"><rect x="120" y="350" width="40" height="40" rx="10" fill="#f3f7fb" opacity="0.86"></rect></g>
-          <g class="fan-tile" style="--delay:0.2s; --dx:860px; --dy:-70px;"><rect x="120" y="350" width="40" height="40" rx="10" fill="#f3f7fb" opacity="0.86"></rect></g>
-          <g class="fan-tile" style="--delay:0.4s; --dx:860px; --dy:0px;"><rect x="120" y="350" width="40" height="40" rx="10" fill="#f3f7fb" opacity="0.86"></rect></g>
-          <g class="fan-tile" style="--delay:0.6s; --dx:860px; --dy:70px;"><rect x="120" y="350" width="40" height="40" rx="10" fill="#f3f7fb" opacity="0.86"></rect></g>
-          <g class="fan-tile" style="--delay:0.8s; --dx:860px; --dy:140px;"><rect x="120" y="350" width="40" height="40" rx="10" fill="#f3f7fb" opacity="0.86"></rect></g>
-          <g class="fan-tile" style="--delay:1s; --dx:860px; --dy:210px;"><rect x="120" y="350" width="40" height="40" rx="10" fill="#f3f7fb" opacity="0.86"></rect></g>
+          <rect x="156" y="136" width="888" height="470" rx="42" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.09)"></rect>
+          <rect x="194" y="170" width="812" height="402" rx="34" fill="rgba(8,15,24,0.7)" stroke="rgba(79,209,255,0.12)"></rect>
+
+          <g class="gpu-city-line" style="--delay:0s;"><rect x="220" y="192" width="760" height="36" rx="18" fill="rgba(79,209,255,0.16)" stroke="rgba(79,209,255,0.34)"></rect></g>
+          <g class="gpu-city-line" style="--delay:0.14s;"><rect x="220" y="252" width="760" height="36" rx="18" fill="rgba(79,209,255,0.16)" stroke="rgba(79,209,255,0.34)"></rect></g>
+          <g class="gpu-city-line" style="--delay:0.28s;"><rect x="220" y="312" width="760" height="36" rx="18" fill="rgba(79,209,255,0.16)" stroke="rgba(79,209,255,0.34)"></rect></g>
+          <g class="gpu-city-line" style="--delay:0.42s;"><rect x="220" y="372" width="760" height="36" rx="18" fill="rgba(79,209,255,0.16)" stroke="rgba(79,209,255,0.34)"></rect></g>
+          <g class="gpu-city-line" style="--delay:0.56s;"><rect x="220" y="432" width="760" height="36" rx="18" fill="rgba(79,209,255,0.16)" stroke="rgba(79,209,255,0.34)"></rect></g>
+          <g class="gpu-city-line" style="--delay:0.7s;"><rect x="220" y="492" width="760" height="36" rx="18" fill="rgba(79,209,255,0.16)" stroke="rgba(79,209,255,0.34)"></rect></g>
+
+          <g opacity="0.95">
+            <rect x="246" y="168" width="36" height="404" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"></rect>
+            <rect x="914" y="168" width="36" height="404" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"></rect>
+          </g>
+
+          <g class="gpu-window" style="--delay:0s;"><rect x="254" y="182" width="20" height="10" rx="4" fill="#ffd978"></rect></g>
+          <g class="gpu-window" style="--delay:0.2s;"><rect x="254" y="208" width="20" height="10" rx="4" fill="#4fd1ff"></rect></g>
+          <g class="gpu-window" style="--delay:0.4s;"><rect x="254" y="234" width="20" height="10" rx="4" fill="#98f5c2"></rect></g>
+          <g class="gpu-window" style="--delay:0.1s;"><rect x="922" y="182" width="20" height="10" rx="4" fill="#ffd978"></rect></g>
+          <g class="gpu-window" style="--delay:0.3s;"><rect x="922" y="208" width="20" height="10" rx="4" fill="#4fd1ff"></rect></g>
+          <g class="gpu-window" style="--delay:0.5s;"><rect x="922" y="234" width="20" height="10" rx="4" fill="#98f5c2"></rect></g>
+
+          <g class="fan-tile" style="--delay:0s; --dx:900px; --dy:-128px;"><rect x="120" y="350" width="38" height="38" rx="10" fill="#f3f7fb" opacity="0.92"></rect></g>
+          <g class="fan-tile" style="--delay:0.16s; --dx:900px; --dy:-64px;"><rect x="120" y="350" width="38" height="38" rx="10" fill="#f3f7fb" opacity="0.92"></rect></g>
+          <g class="fan-tile" style="--delay:0.32s; --dx:900px; --dy:0px;"><rect x="120" y="350" width="38" height="38" rx="10" fill="#f3f7fb" opacity="0.92"></rect></g>
+          <g class="fan-tile" style="--delay:0.48s; --dx:900px; --dy:64px;"><rect x="120" y="350" width="38" height="38" rx="10" fill="#f3f7fb" opacity="0.92"></rect></g>
+          <g class="fan-tile" style="--delay:0.64s; --dx:900px; --dy:128px;"><rect x="120" y="350" width="38" height="38" rx="10" fill="#f3f7fb" opacity="0.92"></rect></g>
+          <g class="fan-tile" style="--delay:0.8s; --dx:900px; --dy:192px;"><rect x="120" y="350" width="38" height="38" rx="10" fill="#f3f7fb" opacity="0.92"></rect></g>
         </svg>
         <div class="cut__overlay">
           <div class="cut__top">CUT 5</div>
           <div class="cut__title">GPU의 전성기</div>
-          <div class="cut__line">같은 계산을 엄청 많이 쳐내는 순간, GPU는 압도적인 해방감을 만든다.</div>
+          <div class="cut__line">GPU는 하나의 공장이 아니라, 수많은 빛의 차선이 동시에 켜지는 병렬 도시처럼 작동한다.</div>
         </div>
       </div>
     </section>
@@ -671,25 +1114,32 @@
       <div class="cut__frame">
         <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="GPU의 메모리 병목">
           <rect x="48" y="48" width="1104" height="624" rx="24" class="safe"></rect>
-          <rect x="108" y="230" width="188" height="166" rx="26" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"></rect>
-          <text x="202" y="300" fill="#eff2f6" font-size="28" text-anchor="middle">메모리</text>
-          <text x="202" y="336" fill="#c5cdd5" font-size="18" text-anchor="middle">멀고 크다</text>
-          <rect class="bus" x="320" y="304" width="386" height="20" rx="10" fill="rgba(255,107,87,0.6)"></rect>
-          <g class="memory-packet" style="--delay:0s;"><rect x="334" y="300" width="30" height="28" rx="10" fill="#ffe0b2"></rect></g>
-          <g class="memory-packet" style="--delay:1s;"><rect x="334" y="300" width="30" height="28" rx="10" fill="#baf2ff"></rect></g>
-          <g class="memory-packet" style="--delay:2s;"><rect x="334" y="300" width="30" height="28" rx="10" fill="#d8ffd9"></rect></g>
-          <rect x="748" y="188" width="286" height="250" rx="30" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)"></rect>
-          <g class="gpu-lane" style="--delay:0s;"><rect x="780" y="220" width="222" height="28" rx="14" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.36)"></rect></g>
-          <g class="gpu-lane" style="--delay:0.2s;"><rect x="780" y="272" width="222" height="28" rx="14" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.36)"></rect></g>
-          <g class="gpu-lane" style="--delay:0.4s;"><rect x="780" y="324" width="222" height="28" rx="14" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.36)"></rect></g>
-          <g class="gpu-lane" style="--delay:0.6s;"><rect x="780" y="376" width="222" height="28" rx="14" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.36)"></rect></g>
-          <rect class="stall" x="706" y="262" width="24" height="108" rx="12" fill="rgba(255,107,87,0.7)"></rect>
-          <text x="513" y="288" fill="#ffd4cb" font-size="20" text-anchor="middle">뜨거워진 길</text>
+          <rect x="94" y="216" width="210" height="194" rx="30" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"></rect>
+          <text x="199" y="286" fill="#eff2f6" font-size="28" text-anchor="middle">메모리 창고</text>
+          <text x="199" y="322" fill="#c5cdd5" font-size="18" text-anchor="middle">멀고 크다</text>
+          <rect x="120" y="346" width="158" height="20" rx="10" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)"></rect>
+
+          <rect class="bus" x="328" y="304" width="350" height="24" rx="12" fill="rgba(255,107,87,0.62)"></rect>
+          <rect x="328" y="296" width="350" height="6" rx="3" fill="rgba(255,217,120,0.65)"></rect>
+          <g class="memory-packet" style="--delay:0s;"><rect x="342" y="300" width="30" height="32" rx="10" fill="#ffe0b2"></rect></g>
+          <g class="memory-packet" style="--delay:0.9s;"><rect x="342" y="300" width="30" height="32" rx="10" fill="#baf2ff"></rect></g>
+          <g class="memory-packet" style="--delay:1.8s;"><rect x="342" y="300" width="30" height="32" rx="10" fill="#d8ffd9"></rect></g>
+          <g class="memory-packet" style="--delay:2.7s;"><rect x="342" y="300" width="30" height="32" rx="10" fill="#ffe0b2"></rect></g>
+
+          <rect x="742" y="170" width="306" height="286" rx="34" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)"></rect>
+          <rect x="772" y="198" width="246" height="40" rx="20" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.36)"></rect>
+          <rect x="772" y="258" width="246" height="40" rx="20" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.36)"></rect>
+          <rect x="772" y="318" width="246" height="40" rx="20" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.36)"></rect>
+          <rect x="772" y="378" width="246" height="40" rx="20" fill="rgba(79,209,255,0.18)" stroke="rgba(79,209,255,0.36)"></rect>
+          <rect class="stall" x="688" y="252" width="30" height="132" rx="15" fill="rgba(255,107,87,0.72)"></rect>
+          <path d="M 688 246 C 706 228, 722 228, 742 238" fill="none" stroke="rgba(255,107,87,0.5)" stroke-width="5" stroke-linecap="round"></path>
+          <path d="M 688 392 C 706 412, 724 412, 742 400" fill="none" stroke="rgba(255,107,87,0.5)" stroke-width="5" stroke-linecap="round"></path>
+          <text x="503" y="286" fill="#ffd4cb" font-size="22" text-anchor="middle">도시의 혈관이 뜨거워진다</text>
         </svg>
         <div class="cut__overlay">
           <div class="cut__top">CUT 6</div>
           <div class="cut__title">GPU의 다음 병목</div>
-          <div class="cut__line">계산기는 빠르지만, 데이터를 데려오는 길이 다시 문제로 떠오른다.</div>
+          <div class="cut__line">GPU의 화려한 병렬 도시는 유지되지만, 멀리서 데이터를 데려오는 길이 먼저 달아오른다.</div>
         </div>
       </div>
     </section>
