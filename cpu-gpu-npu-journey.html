@@ -202,6 +202,51 @@
       left: 78%;
     }
 
+    .coord-debugger {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 50;
+      min-width: 176px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(6, 10, 16, 0.82);
+      box-shadow: 0 20px 56px rgba(0, 0, 0, 0.34);
+      color: #f3ecdc;
+      backdrop-filter: blur(10px);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .coord-debugger.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .coord-debugger__cut {
+      color: #f7d999;
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .coord-debugger__coords {
+      margin-top: 6px;
+      font-size: 1rem;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.02em;
+    }
+
+    .coord-debugger__hint {
+      margin-top: 6px;
+      color: rgba(241, 228, 195, 0.68);
+      font-size: 0.78rem;
+      line-height: 1.35;
+    }
+
     .safe {
       fill: none;
       stroke: rgba(255, 255, 255, 0.05);
@@ -1869,6 +1914,12 @@
     </section>
   </main>
 
+  <div id="coordDebugger" class="coord-debugger" aria-hidden="true">
+    <div id="coordDebuggerCut" class="coord-debugger__cut">CUT -</div>
+    <div id="coordDebuggerCoords" class="coord-debugger__coords">x -, y -</div>
+    <div class="coord-debugger__hint">SVG 좌표 기준</div>
+  </div>
+
   <script>
     const cuts = document.querySelectorAll(".cut");
     const observer = new IntersectionObserver((entries) => {
@@ -1882,6 +1933,44 @@
     }, { threshold: [0.18, 0.55] });
 
     cuts.forEach((cut) => observer.observe(cut));
+
+    const coordDebugger = document.getElementById("coordDebugger");
+    const coordDebuggerCut = document.getElementById("coordDebuggerCut");
+    const coordDebuggerCoords = document.getElementById("coordDebuggerCoords");
+
+    function getSvgPoint(svg, clientX, clientY) {
+      const point = svg.createSVGPoint();
+      point.x = clientX;
+      point.y = clientY;
+
+      const matrix = svg.getScreenCTM();
+      if (!matrix) return null;
+
+      return point.matrixTransform(matrix.inverse());
+    }
+
+    function showCoordDebugger(svg, event) {
+      if (!coordDebugger || !coordDebuggerCut || !coordDebuggerCoords) return;
+
+      const point = getSvgPoint(svg, event.clientX, event.clientY);
+      if (!point) return;
+
+      const cut = svg.closest(".cut");
+      const cutLabel = cut?.querySelector(".cut__top")?.textContent?.trim() || "CUT";
+      coordDebuggerCut.textContent = cutLabel;
+      coordDebuggerCoords.textContent = `x ${Math.round(point.x)}, y ${Math.round(point.y)}`;
+      coordDebugger.classList.add("is-visible");
+    }
+
+    function hideCoordDebugger() {
+      if (!coordDebugger) return;
+      coordDebugger.classList.remove("is-visible");
+    }
+
+    document.querySelectorAll(".cut__art").forEach((svg) => {
+      svg.addEventListener("mousemove", (event) => showCoordDebugger(svg, event));
+      svg.addEventListener("mouseleave", hideCoordDebugger);
+    });
 
     const cut8TriggerTop = document.getElementById("cut8Trigger");
     const cut8TriggerBottom = document.getElementById("cut8TriggerBottom");

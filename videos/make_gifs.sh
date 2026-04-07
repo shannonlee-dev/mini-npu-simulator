@@ -42,7 +42,7 @@ convert_one() {
   echo "Generated $output"
 }
 
-for name in cut1 cut4 cut6 cut8; do
+for name in cut1 cut4 cut4-v2 cut6 cut8; do
   input="$SCRIPT_DIR/${name}.mov"
   if [[ ! -f "$input" ]]; then
     echo "Skipping missing file: $input"
