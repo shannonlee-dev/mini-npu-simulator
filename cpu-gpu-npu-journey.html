@@ -80,26 +80,6 @@
       background: rgba(33, 13, 13, 0.82);
     }
 
-    .coord-debug {
-      position: fixed;
-      left: 12px;
-      bottom: 12px;
-      z-index: 70;
-      min-width: 238px;
-      padding: 9px 11px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: rgba(8, 15, 24, 0.86);
-      color: #d7ecff;
-      font-size: 12px;
-      line-height: 1.45;
-      letter-spacing: 0.01em;
-      backdrop-filter: blur(6px);
-      pointer-events: none;
-      user-select: none;
-      white-space: pre-line;
-    }
-
     .scroll-progress {
       position: fixed;
       top: 0;
@@ -120,7 +100,7 @@
       padding: 24px 12px 12px;
     }
 
-    .hero__intro {
+    .hero__box {
       width: min(var(--content), 100%);
       padding: clamp(28px, 5vw, 56px);
       border-radius: 34px;
@@ -217,15 +197,6 @@
       pointer-events: none;
     }
 
-    .cut2-frame-blackout {
-      position: absolute;
-      inset: 0;
-      z-index: 9;
-      background: #000;
-      border-radius: 34px;
-      pointer-events: none;
-    }
-
     .cut__top {
       position: absolute;
       left: 28px;
@@ -256,39 +227,6 @@
       font-size: clamp(0.98rem, 1.3vw, 1.15rem);
       letter-spacing: 0.01em;
       text-shadow: 0 8px 22px rgba(0, 0, 0, 0.34);
-    }
-
-    .cut8__cta {
-      position: absolute;
-      top: 16%;
-      left: 78%;
-      transform: translateX(-50%);
-      z-index: 5;
-      pointer-events: auto;
-      border: 1px solid rgba(79, 209, 255, 0.55);
-      background: rgba(8, 21, 34, 0.84);
-      color: #dff4ff;
-      border-radius: 999px;
-      padding: 10px 16px;
-      font-size: 0.92rem;
-      letter-spacing: 0.01em;
-      cursor: pointer;
-      transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease;
-    }
-
-    .cut8__cta:hover {
-      transform: translateX(-50%) translateY(-1px);
-      background: rgba(10, 32, 49, 0.92);
-      border-color: rgba(79, 209, 255, 0.82);
-    }
-
-    .cut8__cta:active {
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .cut8__cta--bottom {
-      top: 72%;
-      left: 78%;
     }
 
     .safe {
@@ -344,162 +282,8 @@
       transform-origin: 600px 368px;
     }
 
-    .cut.is-active .ai-tile {
-      animation: aiRush 4.8s linear infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .overload {
-      animation: overloadFlash 4.8s ease-in-out infinite;
-    }
-
-    .cut.is-active .jam-wheel {
-      animation: jamWheel 4.8s ease-in-out infinite;
-      transform-origin: 600px 368px;
-    }
-
-    .cut.is-active .jam-block {
-      animation: jamBlock 4.8s ease-in-out infinite;
-      transform-origin: 728px 332px;
-    }
-
-    .cut.is-active .pressure-tile {
-      animation: pressurePush 3.2s linear infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
     .cut.is-active .cut2-block {
       animation: cut2BlockRun 4.4s linear infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .cut2-queue {
-      animation: cut2QueueGrow 3.4s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .cut2-digest {
-      animation: cut2Digest 2.2s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .cut2-pulse {
-      animation: cut2PulseIn 2.6s linear infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .cut2-lane {
-      animation: cut2LaneGlow 2.8s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    
-    .cut.is-active .cut2-door {
-      animation: aiDoorPulse 4s ease-in-out infinite;
-    }
-
-    .cut.is-active .hub-stall {
-      animation: hubStall 4.8s ease-in-out infinite;
-      transform-origin: 600px 368px;
-    }
-
-    .cut.is-active .vector-portal-hot {
-      animation: vectorPortalHeat 4s ease-in-out infinite;
-    }
-
-    .cut.is-active .cpu-muted {
-      animation: none !important;
-      opacity: 0.24;
-      filter: saturate(0.55);
-    }
-
-    .cut.is-active .cpu-focus-vector {
-      animation: vectorPortalHeat 2.8s ease-in-out infinite;
-    }
-
-    .cut.is-active .cpu-focus-memory {
-      animation: portalPulse 3.1s ease-in-out infinite;
-    }
-
-    .cut.is-active .cpu-focus-branch {
-      animation: branchControlPulse 2.2s ease-in-out infinite;
-    }
-
-    .cut.is-active .ai-wave-row {
-      animation: aiWaveRow 3.8s linear infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .ai-wave-bar {
-      animation: aiWaveBar 4.2s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .gpu-lane {
-      animation: laneGlow 2.4s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .fan-tile {
-      animation: fanOut 3s linear infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .gpu-core {
-      animation: gpuCorePulse 3.2s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .gpu-ribbon {
-      animation: gpuRibbonFlow 2.8s linear infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .gpu-shard {
-      animation: gpuShardBurst 3.2s ease-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .gpu-city-line {
-      animation: cityStream 2.2s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .gpu-window {
-      animation: windowBlink 1.8s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .bus {
-      animation: busHeat 1.8s ease-in-out infinite;
-    }
-
-    .cut.is-active .memory-packet {
-      animation: packetMove 3s linear infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .stall {
-      animation: stallBlink 2.8s ease-in-out infinite;
-    }
-
-    .cut.is-active .s-cell {
-      animation: systolicWave 2.8s ease-in-out infinite;
-      animation-delay: calc(var(--diag) * 0.14s);
-    }
-
-    .cut.is-active .rail-dot-v {
-      animation: flowDown 2.8s linear infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .rail-dot-h {
-      animation: flowRight 2.8s linear infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .scratch-tile {
-      animation: scratchCycle 4s linear infinite;
       animation-delay: var(--delay, 0s);
     }
 
@@ -508,62 +292,12 @@
       animation-delay: var(--delay, 0s);
     }
 
-    .cut7-stage,
-    .cut7-link {
+    .cut7-stage {
       opacity: 0;
     }
 
-    .cut.is-active .cut7-stage,
-    .cut.is-active .cut7-link {
+    .cut.is-active .cut7-stage {
       animation: cut7Reveal 0.96s ease forwards;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .compiler-arm,
-    .assembly-rail {
-      stroke-dasharray: 640;
-      stroke-dashoffset: 640;
-    }
-
-    .assembly-block,
-    .assembly-cell,
-    .assembly-node,
-    .compiler-core-ring,
-    .compiler-core-spin {
-      transform-box: fill-box;
-      transform-origin: center;
-    }
-
-    .cut.is-active .compiler-core-ring {
-      animation: ringBreathe 3.2s ease-in-out infinite;
-    }
-
-    .cut.is-active .compiler-core-spin {
-      animation: spinHub 18s linear infinite;
-    }
-
-    .cut.is-active .compiler-arm {
-      animation: compilerArmGrow 4.6s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .assembly-rail {
-      animation: assemblyDraw 4.6s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .assembly-block {
-      animation: assemblyBloom 4.6s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .assembly-cell {
-      animation: assemblyCellBuild 4.6s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-
-    .cut.is-active .assembly-node {
-      animation: portalPulse 3.2s ease-in-out infinite;
       animation-delay: var(--delay, 0s);
     }
 
@@ -612,199 +346,12 @@
       50% { transform: scale(1.03); opacity: 1; }
     }
 
-    @keyframes aiRush {
-      0% { transform: translateX(0); opacity: 0; }
-      16% { opacity: 0.95; }
-      100% { transform: translateX(-540px); opacity: 0.95; }
-    }
-
-    @keyframes overloadFlash {
-      0%, 48%, 100% { opacity: 0.08; }
-      58%, 84% { opacity: 0.95; }
-    }
-
-    @keyframes jamWheel {
-      0% { transform: rotate(0deg); }
-      18% { transform: rotate(22deg); }
-      26% { transform: rotate(24deg); }
-      34% { transform: rotate(24deg); }
-      46% { transform: rotate(42deg); }
-      56% { transform: rotate(44deg); }
-      64% { transform: rotate(44deg); }
-      78% { transform: rotate(66deg); }
-      100% { transform: rotate(88deg); }
-    }
-
-    @keyframes jamBlock {
-      0%, 100% { transform: translateX(0) scale(1); }
-      24%, 34% { transform: translateX(-6px) scale(1.04, 0.96); }
-      56%, 64% { transform: translateX(-8px) scale(1.06, 0.94); }
-      80% { transform: translateX(-10px) scale(1.08, 0.92); }
-    }
-
-    @keyframes pressurePush {
-      0% { transform: translateX(0); opacity: 0; }
-      18% { opacity: 0.95; }
-      100% { transform: translateX(-360px); opacity: 0.95; }
-    }
-    @keyframes aiDoorPulse {
-      0%, 100% { opacity: 0.55; }
-      50% { opacity: 0.92; }
-    }
-
-    @keyframes cut2LaneGlow {
-      0%, 100% { opacity: 0.3; stroke-width: 18; }
-      50% { opacity: 0.82; stroke-width: 22; }
-    }
-
-
     @keyframes cut2BlockRun {
       0% { offset-distance: 0%; opacity: 0; }
       8% { opacity: 0.95; }
       78% { opacity: 0.95; }
       100% { offset-distance: 100%; opacity: 0; }
     }
-
-    @keyframes cut2QueueGrow {
-      0%, 100% { opacity: 0.42; transform: translate(0, 0) scale(0.96); }
-      25% { opacity: 0.78; transform: translate(-2px, 1px) scale(1); }
-      50% { opacity: 1; transform: translate(2px, -2px) scale(1.06); }
-      75% { opacity: 0.88; transform: translate(-1px, 2px) scale(1.02); }
-
-    }
-    @keyframes cut2Digest {
-      0%, 100% { opacity: 0.16; transform: scale(0.92); }
-      40% { opacity: 0.9; transform: scale(1.16); }
-      58% { opacity: 0.52; transform: scale(1.02); }
-      76% { opacity: 0.98; transform: scale(1.2); }
-    }
-
-    @keyframes cut2PulseIn {
-      0% { offset-distance: 0%; opacity: 0; }
-      12% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { offset-distance: 100%; opacity: 0; }
-    }
-
-    @keyframes hubStall {
-      0% { transform: rotate(0deg); }
-      18% { transform: rotate(20deg); }
-      28% { transform: rotate(22deg); }
-      40% { transform: rotate(22deg); }
-      56% { transform: rotate(40deg); }
-      66% { transform: rotate(42deg); }
-      78% { transform: rotate(42deg); }
-      100% { transform: rotate(62deg); }
-    }
-
-    @keyframes vectorPortalHeat {
-      0%, 100% { filter: drop-shadow(0 0 0 rgba(79, 209, 255, 0)); }
-      50% { filter: drop-shadow(0 0 12px rgba(79, 209, 255, 0.78)); }
-    }
-
-    @keyframes branchControlPulse {
-      0%, 100% { opacity: 0.44; transform: scale(1); }
-      30% { opacity: 1; transform: scale(1.08); }
-      54% { opacity: 0.62; transform: scale(0.98); }
-    }
-
-    @keyframes aiWaveRow {
-      0% { transform: translateX(84px); opacity: 0; }
-      12% { opacity: 1; }
-      100% { transform: translateX(-32px); opacity: 1; }
-    }
-
-    @keyframes aiWaveBar {
-      0%, 100% { transform: scaleX(0.92); opacity: 0.44; }
-      50% { transform: scaleX(1); opacity: 0.82; }
-    }
-
-    @keyframes laneGlow {
-      0%, 100% { transform: scaleX(1); opacity: 0.72; }
-      50% { transform: scaleX(1.02); opacity: 1; }
-    }
-
-    @keyframes gpuCorePulse {
-      0%, 100% { opacity: 0.62; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.05); }
-    }
-
-    @keyframes gpuRibbonFlow {
-      0% { transform: translateX(0); opacity: 0; }
-      16% { opacity: 1; }
-      100% { transform: translateX(660px); opacity: 0; }
-    }
-
-    @keyframes gpuShardBurst {
-      0% { transform: translate(0, 0) scale(0.8); opacity: 0; }
-      12% { opacity: 1; }
-      100% { transform: translate(var(--dx), var(--dy)) scale(1); opacity: 0; }
-    }
-
-    @keyframes fanOut {
-      0% { transform: translate(0, 0); opacity: 0; }
-      15% { opacity: 1; }
-      100% { transform: translate(var(--dx), var(--dy)); opacity: 1; }
-    }
-
-    @keyframes busHeat {
-      0%, 100% { opacity: 0.45; transform: scaleX(1); }
-      50% { opacity: 1; transform: scaleX(1.03); }
-    }
-
-    @keyframes packetMove {
-      0% { transform: translateX(0); opacity: 0; }
-      10% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { transform: translateX(360px); opacity: 0; }
-    }
-
-    @keyframes stallBlink {
-      0%, 100% { opacity: 0.22; }
-      50% { opacity: 0.95; }
-    }
-
-    @keyframes cityStream {
-      0%, 100% { opacity: 0.48; transform: scaleX(1); }
-      50% { opacity: 1; transform: scaleX(1.03); }
-    }
-
-    @keyframes windowBlink {
-      0%, 100% { opacity: 0.3; }
-      45% { opacity: 1; }
-    }
-
-    @keyframes systolicWave {
-      0%, 100% {
-        fill: rgba(79, 209, 255, 0.12);
-        stroke: rgba(79, 209, 255, 0.34);
-      }
-      50% {
-        fill: rgba(255, 217, 120, 0.42);
-        stroke: rgba(255, 217, 120, 0.95);
-      }
-    }
-
-    @keyframes flowDown {
-      0% { transform: translateY(0); opacity: 0; }
-      12% { opacity: 1; }
-      100% { transform: translateY(470px); opacity: 0; }
-    }
-
-    @keyframes flowRight {
-      0% { transform: translateX(0); opacity: 0; }
-      12% { opacity: 1; }
-      100% { transform: translateX(470px); opacity: 0; }
-    }
-
-    @keyframes scratchCycle {
-      0% { transform: translate(0, 0); opacity: 0; }
-      14% { opacity: 1; }
-      42% { transform: translate(-92px, 0); opacity: 1; }
-      74% { transform: translate(-188px, -84px); opacity: 1; }
-      100% { transform: translate(-286px, -84px); opacity: 0; }
-    }
-
     @keyframes compileStep {
       0%, 100% { opacity: 0.32; }
       20%, 68% { opacity: 1; }
@@ -813,30 +360,6 @@
     @keyframes cut7Reveal {
       0% { opacity: 0; }
       100% { opacity: 1; }
-    }
-
-    @keyframes compilerArmGrow {
-      0%, 14% { stroke-dashoffset: 640; opacity: 0; }
-      26%, 76% { stroke-dashoffset: 0; opacity: 0.96; }
-      100% { stroke-dashoffset: 0; opacity: 0.22; }
-    }
-
-    @keyframes assemblyDraw {
-      0%, 18% { stroke-dashoffset: 640; opacity: 0; }
-      30%, 80% { stroke-dashoffset: 0; opacity: 0.94; }
-      100% { stroke-dashoffset: 0; opacity: 0.22; }
-    }
-
-    @keyframes assemblyBloom {
-      0%, 18% { opacity: 0.08; transform: scale(0.76); }
-      32%, 76% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0.32; transform: scale(1); }
-    }
-
-    @keyframes assemblyCellBuild {
-      0%, 22% { opacity: 0.06; transform: scale(0.68); }
-      34%, 78% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0.24; transform: scale(1); }
     }
 
     @keyframes peCellPulse {
@@ -870,17 +393,6 @@
         bottom: 18px;
       }
 
-      .cut8__cta {
-        top: 14%;
-        left: 74%;
-        padding: 8px 12px;
-        font-size: 0.82rem;
-      }
-
-      .cut8__cta--bottom {
-        top: 66%;
-        left: 74%;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1201,7 +713,6 @@
           </g>
 
         </svg>
-        <div id="cut2FrameBlackout" class="cut2-frame-blackout"></div>
         <div class="cut__overlay">
           <div class="cut__top" style="display:none;">CUT 2</div>
         </div>
@@ -1211,14 +722,14 @@
 
     <!-- CUT 3 START: 공용 통로 병목 -->
     <section class="cut">
-      <div class="cut__frame">ßß
+      <div class="cut__frame">
         <svg id="cut3Scene" class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="CPU 4코어가 동시에 계산하지만 작업 줄이 더 빨리 쌓이는 장면">
           <rect x="48" y="48" width="1104" height="624" rx="24" class="safe"></rect>
           <rect x="712" y="118" width="350" height="484" rx="34" fill="rgba(152,245,194,0.07)" stroke="rgba(152,245,194,0.26)"></rect>
           <line x1="688" y1="138" x2="688" y2="584" stroke="rgba(255,255,255,0.06)" stroke-width="2"></line>
 
           <g transform="translate(0 -100)">
-          <g id="cut3FlowLayer" opacity="0.92" stroke-linecap="round" stroke-linejoin="round">
+          <g opacity="0.92" stroke-linecap="round" stroke-linejoin="round">
             <line x1="351" y1="329" x2="624" y2="327" stroke="#4fd1ff" stroke-width="3"></line>
             <line x1="624" y1="327" x2="624" y2="459" stroke="#4fd1ff" stroke-width="3"></line>
             <line x1="347" y1="458" x2="624" y2="459" stroke="#4fd1ff" stroke-width="3"></line>
@@ -2072,7 +1583,7 @@
             <rect x="962" y="410" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
           </g>
 
-          <g class="cut7-stage" style="--delay:0.32s; opacity:0;">
+          <g class="cut7-stage" style="--delay:3.32s; opacity:0;">
             <text x="538" y="309" fill="#bff7d6" font-size="15" text-anchor="middle">A1</text>
             <text x="538" y="397" fill="#bff7d6" font-size="15" text-anchor="middle">A2</text>
             <text x="538" y="485" fill="#bff7d6" font-size="15" text-anchor="middle">A3</text>
@@ -2082,7 +1593,7 @@
             <path d="M 412 296 C 454 296, 484 292, 509 282" fill="none" stroke="rgba(152,245,194,0.42)" stroke-width="4" stroke-linecap="round"></path>
           </g>
 
-          <g class="cut7-stage" style="--delay:3.32s; opacity:0;">
+          <g class="cut7-stage" style="--delay:6.32s; opacity:0;">
             <text x="656" y="242" fill="#f6e5b8" font-size="13" text-anchor="middle">W1</text>
             <text x="744" y="242" fill="#f6e5b8" font-size="13" text-anchor="middle">W2</text>
             <text x="832" y="242" fill="#f6e5b8" font-size="13" text-anchor="middle">W3</text>
@@ -2092,7 +1603,7 @@
             <path d="M 418 363 C 522 356, 606 258, 674 207" fill="none" stroke="rgba(255,217,120,0.42)" stroke-width="4" stroke-linecap="round"></path>
           </g>
 
-          <g class="cut7-stage" style="--delay:6.32s; opacity:0;">
+          <g class="cut7-stage" style="--delay:0.32s; opacity:0;">
             <path d="M 640 320 L 672 288" fill="none" stroke="rgba(255,107,87,0.6)" stroke-width="6" stroke-linecap="round" stroke-dasharray="6 10"></path>
             <path d="M 656 392 L 744 304" fill="none" stroke="rgba(255,107,87,0.6)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14"></path>
             <path d="M 656 480 L 744 392 L 832 304" fill="none" stroke="rgba(255,107,87,0.6)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14"></path>
@@ -2591,64 +2102,6 @@
         }
       });
 
-      const attachCoordinateDebugger = () => {
-        const scenes = Array.from(document.querySelectorAll(".cut__art"));
-        if (!scenes.length) {
-          return;
-        }
-
-        const hud = document.createElement("div");
-        hud.className = "coord-debug";
-        hud.textContent = "CUT coord\nmove: x=0, y=0\nclick: x=-, y=-";
-        document.body.appendChild(hud);
-
-        const lastClickByScene = new WeakMap();
-
-        const toScenePoint = (scene, event) => {
-          const matrix = scene.getScreenCTM();
-          if (!matrix) {
-            return null;
-          }
-          const point = scene.createSVGPoint();
-          point.x = event.clientX;
-          point.y = event.clientY;
-          return point.matrixTransform(matrix.inverse());
-        };
-
-        const getCutLabel = (scene) => {
-          const cut = scene.closest(".cut");
-          return cut?.querySelector(".cut__top")?.textContent?.trim() || "CUT";
-        };
-
-        scenes.forEach((scene) => {
-          scene.addEventListener("mousemove", (event) => {
-            const p = toScenePoint(scene, event);
-            if (!p) {
-              return;
-            }
-            const move = `x=${Math.round(p.x)}, y=${Math.round(p.y)}`;
-            const lastClick = lastClickByScene.get(scene) || "x=-, y=-";
-            hud.textContent = `${getCutLabel(scene)} coord\nmove: ${move}\nclick: ${lastClick}`;
-          });
-
-          scene.addEventListener("click", (event) => {
-            const p = toScenePoint(scene, event);
-            if (!p) {
-              return;
-            }
-            const clickText = `x=${Math.round(p.x)}, y=${Math.round(p.y)}`;
-            lastClickByScene.set(scene, clickText);
-            hud.textContent = `${getCutLabel(scene)} coord\nmove: ${clickText}\nclick: ${clickText}`;
-            const copyText = `${Math.round(p.x)}, ${Math.round(p.y)}`;
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-              navigator.clipboard.writeText(copyText).catch(() => {});
-            }
-          });
-        });
-      };
-
-      attachCoordinateDebugger();
-
       // CUT 2 runtime: 행렬곱 누적 타임라인
       const cut2 = cuts[1];
       if (cut2) {
@@ -2691,6 +2144,131 @@
           cut2Scene.appendChild(layer);
           return layer;
         })();
+        const createCut2SvgEl = (tag, attrs = {}, textContent = "") => {
+          const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+          Object.entries(attrs).forEach(([name, value]) => {
+            el.setAttribute(name, String(value));
+          });
+          if (textContent) {
+            el.textContent = textContent;
+          }
+          return el;
+        };
+        const cut2EasterLayer = (() => {
+          if (!cut2Scene) {
+            return null;
+          }
+          const existing = cut2Scene.querySelector("#cut2EasterLayer");
+          if (existing) {
+            return existing;
+          }
+          const layer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+          layer.setAttribute("id", "cut2EasterLayer");
+          cut2Scene.appendChild(layer);
+          return layer;
+        })();
+        const cut2EasterCenter = { x: 600, y: 324 };
+        const cut2EasterRingA = cut2EasterLayer ? createCut2SvgEl("circle", {
+          cx: cut2EasterCenter.x,
+          cy: cut2EasterCenter.y,
+          r: 12,
+          fill: "none",
+          stroke: "rgba(121,226,255,0.78)",
+          "stroke-width": 2.5,
+          "stroke-dasharray": "10 14"
+        }) : null;
+        const cut2EasterRingB = cut2EasterLayer ? createCut2SvgEl("circle", {
+          cx: cut2EasterCenter.x,
+          cy: cut2EasterCenter.y,
+          r: 8,
+          fill: "none",
+          stroke: "rgba(255,217,120,0.7)",
+          "stroke-width": 2,
+          "stroke-dasharray": "4 10"
+        }) : null;
+        const cut2EasterCoreGlow = cut2EasterLayer ? createCut2SvgEl("circle", {
+          cx: cut2EasterCenter.x,
+          cy: cut2EasterCenter.y,
+          r: 14,
+          fill: "rgba(121,226,255,0.2)",
+          stroke: "rgba(223,247,255,0.8)",
+          "stroke-width": 1.5
+        }) : null;
+        const cut2EasterCoreText = cut2EasterLayer ? createCut2SvgEl("text", {
+          x: cut2EasterCenter.x,
+          y: cut2EasterCenter.y + 12,
+          fill: "#eefbff",
+          "font-size": 66,
+          "font-weight": 900,
+          "text-anchor": "middle"
+        }, "∞") : null;
+        const cut2EasterBadgeRect = cut2EasterLayer ? createCut2SvgEl("rect", {
+          x: 420,
+          y: 540,
+          width: 360,
+          height: 72,
+          rx: 22,
+          fill: "rgba(8,14,24,0.78)",
+          stroke: "rgba(255,255,255,0.16)"
+        }) : null;
+        const cut2EasterBadgeTitle = cut2EasterLayer ? createCut2SvgEl("text", {
+          x: 600,
+          y: 576,
+          fill: "#eefbff",
+          "font-size": 24,
+          "font-weight": 800,
+          "text-anchor": "middle"
+        }, "N×N COMPLETE") : null;
+        const cut2EasterBadgeSub = cut2EasterLayer ? createCut2SvgEl("text", {
+          x: 600,
+          y: 600,
+          fill: "rgba(223,247,255,0.78)",
+          "font-size": 13,
+          "font-weight": 600,
+          "text-anchor": "middle"
+        }, "끝까지 본 사람만 보이는 장면") : null;
+        if (cut2EasterLayer) {
+          [cut2EasterRingA, cut2EasterRingB, cut2EasterCoreGlow].forEach((el) => {
+            if (el) {
+              cut2EasterLayer.appendChild(el);
+            }
+          });
+        }
+        const cut2EasterGlyphCount = 28;
+        const cut2EasterHeartScale = 6.8;
+        const cut2EasterHeartPoints = Array.from({ length: cut2EasterGlyphCount }, (_, index) => {
+          const t = -Math.PI + ((Math.PI * 2 * index) / cut2EasterGlyphCount);
+          return {
+            x: cut2EasterCenter.x + (16 * Math.pow(Math.sin(t), 3) * cut2EasterHeartScale),
+            y: cut2EasterCenter.y - ((13 * Math.cos(t)) - (5 * Math.cos(2 * t)) - (2 * Math.cos(3 * t)) - Math.cos(4 * t)) * cut2EasterHeartScale
+          };
+        });
+        const cut2EasterInfinityPoints = Array.from({ length: cut2EasterGlyphCount }, (_, index) => {
+          const t = (Math.PI * 2 * index) / cut2EasterGlyphCount;
+          return {
+            x: cut2EasterCenter.x + (136 * Math.sin(t)),
+            y: cut2EasterCenter.y + (62 * Math.sin(2 * t))
+          };
+        });
+        const cut2EasterGlyphs = cut2EasterLayer ? Array.from({ length: cut2EasterGlyphCount }, (_, index) => {
+          const glyph = createCut2SvgEl("text", {
+            x: cut2EasterCenter.x,
+            y: cut2EasterCenter.y,
+            fill: index % 2 === 0 ? "#dff8ff" : "#fff2ce",
+            "font-size": 28,
+            "font-weight": 900,
+            "text-anchor": "middle"
+          }, index % 3 === 0 ? "+" : "×");
+          cut2EasterLayer.appendChild(glyph);
+          return glyph;
+        }) : [];
+        if (cut2EasterLayer) {
+          [cut2EasterCoreText, cut2EasterBadgeRect, cut2EasterBadgeTitle, cut2EasterBadgeSub].forEach((el) => {
+            if (el) {
+              cut2EasterLayer.appendChild(el);
+            }
+          });
+        }
         const burstSymbolSpecs = [
           { text: "×", fill: "#ebfff3" }, { text: "×", fill: "#ebfff3" },
           { text: "×", fill: "#ebfff3" }, { text: "×", fill: "#ebfff3" },
@@ -2775,8 +2353,6 @@
           el,
           final: opStackSlots[index]
         }));
-        const frameBlackout = cut2.querySelector("#cut2FrameBlackout");
-
         const cut2Tl = gsap.timeline({ paused: true });
         const cut2TimeScale = 0.62;
         const cut2BlackHold = 0;
@@ -2785,7 +2361,6 @@
         gsap.set([matrixA, matrixB], { autoAlpha: 0, scale: 1 });
         gsap.set(matrixA, { attr: { transform: "translate(96 124)" } });
         gsap.set(matrixB, { attr: { transform: "translate(720 124)" } });
-        gsap.set(frameBlackout, { autoAlpha: 0 });
         gsap.set(centerMul, { autoAlpha: 0, scale: 0.3, rotate: -24, y: 0, filter: "blur(6px)", transformOrigin: "center center" });
         gsap.set(centerMul, { attr: { transform: "translate(0 180)" } });
         gsap.set(rowFocus, {
@@ -2829,6 +2404,16 @@
           scale: 0.2,
           rotation: 0,
           attr: { x: 612, y: 625 },
+          transformOrigin: "center center"
+        });
+        gsap.set([cut2EasterRingA, cut2EasterRingB, cut2EasterCoreGlow], { autoAlpha: 0 });
+        gsap.set(cut2EasterCoreText, { autoAlpha: 0, scale: 0.24, transformOrigin: "center center" });
+        gsap.set([cut2EasterBadgeRect, cut2EasterBadgeTitle, cut2EasterBadgeSub], { autoAlpha: 0 });
+        gsap.set(cut2EasterGlyphs, {
+          autoAlpha: 0,
+          scale: 0.16,
+          rotation: 0,
+          attr: { x: cut2EasterCenter.x, y: cut2EasterCenter.y },
           transformOrigin: "center center"
         });
         opStackItems.forEach((item) => {
@@ -3350,6 +2935,121 @@
 
           focusCue = burstCue + postC11FocusGap;
         });
+
+        const cut2EasterStartCue = focusCue + 0.14;
+        const cut2EasterHeartCue = cut2EasterStartCue + 0.18;
+        const cut2EasterInfinityCue = cut2EasterHeartCue + 1.42;
+        const cut2EasterBadgeCue = cut2EasterInfinityCue + 0.4;
+
+        cut2Tl.to(allBurstSymbols, {
+          autoAlpha: 0,
+          duration: 0.38,
+          ease: "power1.out"
+        }, cut2EasterStartCue);
+        cut2Tl.to([rowFocus, colFocus, centerMul], {
+          autoAlpha: 0,
+          duration: 0.28,
+          ease: "power1.out"
+        }, cut2EasterStartCue);
+        cut2Tl.to([matrixA, matrixB], {
+          autoAlpha: 0.18,
+          scale: 0.94,
+          duration: 0.5,
+          ease: "power2.inOut"
+        }, cut2EasterStartCue);
+        cut2Tl.fromTo(cut2EasterRingA,
+          { autoAlpha: 0, attr: { r: 12 } },
+          { autoAlpha: 0.96, attr: { r: 126 }, duration: 0.72, ease: "expo.out" },
+          cut2EasterHeartCue - 0.04
+        );
+        cut2Tl.fromTo(cut2EasterRingB,
+          { autoAlpha: 0, attr: { r: 8 } },
+          { autoAlpha: 0.82, attr: { r: 92 }, duration: 0.64, ease: "expo.out" },
+          cut2EasterHeartCue + 0.04
+        );
+
+        cut2EasterGlyphs.forEach((glyph, index) => {
+          const heartPoint = cut2EasterHeartPoints[index];
+          cut2Tl.fromTo(glyph,
+            {
+              autoAlpha: 0,
+              scale: 0.16,
+              rotation: index % 2 === 0 ? -160 : 160,
+              attr: { x: cut2EasterCenter.x, y: cut2EasterCenter.y }
+            },
+            {
+              autoAlpha: 1,
+              scale: 1,
+              rotation: index * 12,
+              attr: { x: heartPoint.x, y: heartPoint.y },
+              duration: 0.58,
+              ease: "back.out(1.8)"
+            },
+            cut2EasterHeartCue + (index * 0.016)
+          );
+        });
+        cut2Tl.to(cut2EasterGlyphs, {
+          scale: 1.14,
+          duration: 0.2,
+          stagger: { each: 0.004, from: "center" },
+          repeat: 1,
+          yoyo: true,
+          ease: "sine.inOut"
+        }, cut2EasterHeartCue + 0.74);
+
+        cut2EasterGlyphs.forEach((glyph, index) => {
+          const infinityPoint = cut2EasterInfinityPoints[index];
+          cut2Tl.to(glyph, {
+            scale: 0.8 + ((index % 5) * 0.06),
+            rotation: 360 + (index * 10),
+            attr: { x: infinityPoint.x, y: infinityPoint.y },
+            duration: 0.82,
+            ease: "power2.inOut"
+          }, cut2EasterInfinityCue + (index * 0.008));
+        });
+        cut2Tl.fromTo(cut2EasterCoreGlow,
+          { autoAlpha: 0, attr: { r: 12 } },
+          { autoAlpha: 0.94, attr: { r: 66 }, duration: 0.54, ease: "expo.out" },
+          cut2EasterInfinityCue + 0.16
+        );
+        cut2Tl.to(cut2EasterCoreGlow, {
+          autoAlpha: 0.22,
+          duration: 0.44,
+          ease: "power1.out"
+        }, cut2EasterInfinityCue + 0.72);
+        cut2Tl.fromTo(cut2EasterCoreText,
+          { autoAlpha: 0, scale: 0.24, rotation: -18 },
+          { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.48, ease: "back.out(2)" },
+          cut2EasterInfinityCue + 0.24
+        );
+        cut2Tl.to(cut2EasterGlyphs, {
+          scale: 1.08,
+          duration: 0.2,
+          stagger: { each: 0.004, from: "edges" },
+          repeat: 1,
+          yoyo: true,
+          ease: "sine.inOut"
+        }, cut2EasterInfinityCue + 0.66);
+        cut2Tl.to([cut2EasterRingA, cut2EasterRingB], {
+          autoAlpha: 0.2,
+          duration: 0.42,
+          ease: "power1.out"
+        }, cut2EasterInfinityCue + 0.76);
+        cut2Tl.fromTo(cut2EasterBadgeRect,
+          { autoAlpha: 0, attr: { y: 554 } },
+          { autoAlpha: 1, attr: { y: 540 }, duration: 0.42, ease: "power3.out" },
+          cut2EasterBadgeCue
+        );
+        cut2Tl.fromTo(cut2EasterBadgeTitle,
+          { autoAlpha: 0, attr: { y: 590 } },
+          { autoAlpha: 1, attr: { y: 576 }, duration: 0.42, ease: "power3.out" },
+          cut2EasterBadgeCue + 0.04
+        );
+        cut2Tl.fromTo(cut2EasterBadgeSub,
+          { autoAlpha: 0, attr: { y: 614 } },
+          { autoAlpha: 0.92, attr: { y: 600 }, duration: 0.42, ease: "power3.out" },
+          cut2EasterBadgeCue + 0.08
+        );
 
         cut2Tl.timeScale(cut2TimeScale);
 
