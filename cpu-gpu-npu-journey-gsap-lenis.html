@@ -324,6 +324,21 @@
       opacity: 1;
     }
 
+    .cut.is-active .cut3-mini-hub {
+      opacity: 0.94 !important;
+    }
+
+    .cut.is-active .cut3-mini-hub .beam,
+    .cut.is-active .cut3-mini-hub .portal {
+      animation: none;
+      opacity: 1;
+    }
+
+    .cut3-mini-hub animate,
+    .cut3-mini-hub animateTransform {
+      display: none;
+    }
+
     .cut.is-active .ring {
       animation: ringBreathe 3.8s ease-in-out infinite;
       transform-origin: 600px 368px;
@@ -1429,7 +1444,7 @@
           </g>
           </g>
 
-          <g opacity="0.42" transform="translate(11 321)">
+          <g class="cut3-mini-hub" opacity="0.42" transform="translate(11 321)">
             <g class="beam" style="--delay:0s;"><line x1="600" y1="368" x2="415" y2="261" stroke="#ffd978" stroke-width="4" stroke-linecap="round"></line></g>
             <g class="beam" style="--delay:0.5s;"><line x1="600" y1="368" x2="471" y2="145" stroke="#4fd1ff" stroke-width="4" stroke-linecap="round"></line></g>
             <g class="beam" style="--delay:1s;"><line x1="600" y1="368" x2="707" y2="183" stroke="#98f5c2" stroke-width="4" stroke-linecap="round"></line></g>
