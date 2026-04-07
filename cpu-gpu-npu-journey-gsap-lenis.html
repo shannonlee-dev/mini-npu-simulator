@@ -120,7 +120,7 @@
       padding: 24px 12px 12px;
     }
 
-    .hero__box {
+    .hero__intro {
       width: min(var(--content), 100%);
       padding: clamp(28px, 5vw, 56px);
       border-radius: 34px;
@@ -214,6 +214,15 @@
     .cut__overlay {
       position: absolute;
       inset: 0;
+      pointer-events: none;
+    }
+
+    .cut2-frame-blackout {
+      position: absolute;
+      inset: 0;
+      z-index: 9;
+      background: #000;
+      border-radius: 34px;
       pointer-events: none;
     }
 
@@ -337,8 +346,32 @@
       animation-delay: var(--delay, 0s);
     }
 
+    .cut.is-active .cut2-door {
+      animation: aiDoorPulse 4s ease-in-out infinite;
+    }
+
+    .cut.is-active .cut2-lane {
+      animation: cut2LaneGlow 2.8s ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
     .cut.is-active .cut2-block {
       animation: cut2BlockRun 4.4s linear infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .cut2-queue {
+      animation: cut2QueueGrow 3.4s ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .cut2-digest {
+      animation: cut2Digest 2.2s ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    .cut.is-active .cut2-pulse {
+      animation: cut2PulseIn 2.6s linear infinite;
       animation-delay: var(--delay, 0s);
     }
 
@@ -530,10 +563,41 @@
       100% { transform: translateX(-360px); opacity: 0.95; }
     }
 
+    @keyframes aiDoorPulse {
+      0%, 100% { opacity: 0.55; }
+      50% { opacity: 0.92; }
+    }
+
+    @keyframes cut2LaneGlow {
+      0%, 100% { opacity: 0.3; stroke-width: 18; }
+      50% { opacity: 0.82; stroke-width: 22; }
+    }
+
     @keyframes cut2BlockRun {
       0% { offset-distance: 0%; opacity: 0; }
       8% { opacity: 0.95; }
       78% { opacity: 0.95; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+
+    @keyframes cut2QueueGrow {
+      0%, 100% { opacity: 0.42; transform: translate(0, 0) scale(0.96); }
+      25% { opacity: 0.78; transform: translate(-2px, 1px) scale(1); }
+      50% { opacity: 1; transform: translate(2px, -2px) scale(1.06); }
+      75% { opacity: 0.88; transform: translate(-1px, 2px) scale(1.02); }
+    }
+
+    @keyframes cut2Digest {
+      0%, 100% { opacity: 0.16; transform: scale(0.92); }
+      40% { opacity: 0.9; transform: scale(1.16); }
+      58% { opacity: 0.52; transform: scale(1.02); }
+      76% { opacity: 0.98; transform: scale(1.2); }
+    }
+
+    @keyframes cut2PulseIn {
+      0% { offset-distance: 0%; opacity: 0; }
+      12% { opacity: 1; }
+      80% { opacity: 1; }
       100% { offset-distance: 100%; opacity: 0; }
     }
 
@@ -725,7 +789,6 @@
   </header>
 
   <main class="timeline">
-    <!-- CUT 1 START: CPU 중앙 지휘실 -->
     <section class="cut is-active">
       <div class="cut__frame">
         <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="CPU 중앙 지휘실">
@@ -799,9 +862,8 @@
         </div>
       </div>
     </section>
-    <!-- CUT 1 END -->
 
-    <!-- CUT 2 START: 행렬곱 누적 시네마틱 -->
+    <!-- CUT 2 START -->
     <section class="cut">
       <div class="cut__frame">
         <svg id="cut2Scene" class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="행렬곱 시네마틱">
@@ -1023,14 +1085,17 @@
           </g>
 
         </svg>
+        <div id="cut2FrameBlackout" class="cut2-frame-blackout"></div>
+        <div class="cut__overlay">
+          <div class="cut__top" style="display:none;">CUT 2</div>
+        </div>
       </div>
     </section>
     <!-- CUT 2 END -->
 
-    <!-- CUT 3 START: 공용 통로 병목 -->
     <section class="cut">
       <div class="cut__frame">
-        <svg id="cut3Scene" class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="CPU 4코어가 동시에 계산하지만 작업 줄이 더 빨리 쌓이는 장면">
+        <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="CPU 4코어가 동시에 계산하지만 작업 줄이 더 빨리 쌓이는 장면">
           <rect x="48" y="48" width="1104" height="624" rx="24" class="safe"></rect>
           <rect x="96" y="96" width="1008" height="528" rx="36" fill="rgba(255,255,255,0.018)" stroke="rgba(255,255,255,0.05)"></rect>
 
@@ -1038,26 +1103,42 @@
           <rect x="712" y="118" width="350" height="484" rx="34" fill="rgba(8,12,19,0.94)" stroke="rgba(255,255,255,0.05)"></rect>
           <line x1="688" y1="138" x2="688" y2="584" stroke="rgba(255,255,255,0.06)" stroke-width="2"></line>
 
-          <g id="cut3FlowLayer" opacity="0.92" stroke-linecap="round" stroke-linejoin="round">
+          <g opacity="0.92" stroke-linecap="round" stroke-linejoin="round">
             <line x1="351" y1="329" x2="624" y2="327" stroke="#4fd1ff" stroke-width="3"></line>
             <line x1="624" y1="327" x2="624" y2="459" stroke="#4fd1ff" stroke-width="3"></line>
             <line x1="347" y1="458" x2="624" y2="459" stroke="#4fd1ff" stroke-width="3"></line>
-            <line id="cut3Bridge" x1="625" y1="340" x2="709" y2="340" stroke="#ff6b57" stroke-width="3"></line>
+            <line x1="625" y1="340" x2="709" y2="340" stroke="#ff6b57" stroke-width="3"></line>
             <line x1="709" y1="244" x2="710" y2="439" stroke="#4fd1ff" stroke-width="3"></line>
             <line x1="709" y1="244" x2="746" y2="244" stroke="#4fd1ff" stroke-width="3"></line>
             <line x1="710" y1="439" x2="746" y2="439" stroke="#4fd1ff" stroke-width="3"></line>
             <line x1="710" y1="305" x2="746" y2="309" stroke="#4fd1ff" stroke-width="3"></line>
             <line x1="710" y1="373" x2="748" y2="374" stroke="#4fd1ff" stroke-width="3"></line>
 
-            <circle id="cut3BeadCyan1" cx="746" cy="244" r="5" fill="rgba(121,226,255,0.95)"></circle>
-            <circle id="cut3BeadCyan2" cx="746" cy="309" r="5" fill="rgba(121,226,255,0.9)"></circle>
-            <circle id="cut3BeadCyan3" cx="748" cy="374" r="5" fill="rgba(121,226,255,0.85)"></circle>
-            <circle id="cut3BeadCyan4" cx="746" cy="439" r="5" fill="rgba(121,226,255,0.8)"></circle>
+            <circle r="5" fill="rgba(121,226,255,0.95)">
+              <animateMotion id="cut3Flow1" dur="1.7s" begin="0s; cut3Flow8.end+0.42s" repeatCount="indefinite" path="M 746 244 L 709 244 L 709 340 L 625 340 L 624 327 L 351 329"></animateMotion>
+            </circle>
+            <circle r="5" fill="rgba(121,226,255,0.9)">
+              <animateMotion id="cut3Flow3" dur="1.28s" begin="cut3Flow2.end+0.12s" repeatCount="indefinite" path="M 746 309 L 710 305 L 710 340 L 625 340 L 624 327 L 558 328"></animateMotion>
+            </circle>
+            <circle r="5" fill="rgba(121,226,255,0.85)">
+              <animateMotion id="cut3Flow5" dur="1.82s" begin="cut3Flow4.end+0.12s" repeatCount="indefinite" path="M 748 374 L 710 373 L 710 340 L 625 340 L 624 459 L 347 458"></animateMotion>
+            </circle>
+            <circle r="5" fill="rgba(121,226,255,0.8)">
+              <animateMotion id="cut3Flow7" dur="1.46s" begin="cut3Flow6.end+0.12s" repeatCount="indefinite" path="M 746 439 L 710 439 L 710 340 L 625 340 L 624 459 L 560 459"></animateMotion>
+            </circle>
 
-            <circle id="cut3BeadGold1" cx="351" cy="329" r="5" fill="rgba(255,217,120,0.95)"></circle>
-            <circle id="cut3BeadGold2" cx="558" cy="328" r="5" fill="rgba(255,217,120,0.9)"></circle>
-            <circle id="cut3BeadGold3" cx="347" cy="458" r="5" fill="rgba(255,217,120,0.86)"></circle>
-            <circle id="cut3BeadGold4" cx="560" cy="459" r="5" fill="rgba(255,217,120,0.82)"></circle>
+            <circle r="5" fill="rgba(255,217,120,0.95)">
+              <animateMotion id="cut3Flow2" dur="1.7s" begin="cut3Flow1.end+0.12s" repeatCount="indefinite" path="M 351 329 L 624 327 L 625 340 L 709 340 L 709 244 L 746 244"></animateMotion>
+            </circle>
+            <circle r="5" fill="rgba(255,217,120,0.9)">
+              <animateMotion id="cut3Flow4" dur="1.28s" begin="cut3Flow3.end+0.12s" repeatCount="indefinite" path="M 558 328 L 624 327 L 625 340 L 710 340 L 710 305 L 746 309"></animateMotion>
+            </circle>
+            <circle r="5" fill="rgba(255,217,120,0.86)">
+              <animateMotion id="cut3Flow6" dur="1.82s" begin="cut3Flow5.end+0.12s" repeatCount="indefinite" path="M 347 458 L 624 459 L 625 340 L 710 340 L 710 373 L 748 374"></animateMotion>
+            </circle>
+            <circle r="5" fill="rgba(255,217,120,0.82)">
+              <animateMotion id="cut3Flow8" dur="1.46s" begin="cut3Flow7.end+0.12s" repeatCount="indefinite" path="M 560 459 L 624 459 L 625 340 L 710 340 L 710 439 L 746 439"></animateMotion>
+            </circle>
           </g>
 
           <text x="396" y="166" fill="#eef6ff" font-size="24" text-anchor="middle">CPU: 4칸 동시 처리</text>
@@ -1179,7 +1260,8 @@
           </g>
 
           <g opacity="0.84">
-            <text x="667" y="326" fill="rgba(255,107,87,0.94)" font-size="12" text-anchor="middle">공용 통로</text>
+            <text x="692" y="606" fill="rgba(255,107,87,0.94)" font-size="12" text-anchor="middle">공용 통로</text>
+            <text x="692" y="624" fill="rgba(255,214,207,0.82)" font-size="11" text-anchor="middle">FIFO · 구슬 1개씩만 통과</text>
           </g>
 
         </svg>
@@ -1189,9 +1271,7 @@
         </div>
       </div>
     </section>
-    <!-- CUT 3 END -->
 
-    <!-- CUT 4 START: 원래 방식 vs GPU 블록 행렬곱 -->
     <section class="cut">
       <div class="cut__frame">
         <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="원래 행렬곱과 GPU 블록 행렬곱 비교">
@@ -1334,7 +1414,6 @@
         </div>
       </div>
     </section>
-    <!-- CUT 4 END -->
 
     <section class="cut">
       <div class="cut__frame">
@@ -1346,16 +1425,19 @@
           <circle cx="196" cy="375" r="54" fill="rgba(16,22,31,0.94)" stroke="rgba(255,255,255,0.12)" stroke-width="2"></circle>
           <circle cx="196" cy="375" r="12" fill="#fff2cb"></circle>
           <text x="196" y="130" fill="#eef6ff" font-size="22" text-anchor="middle">CPU 제어</text>
-          <text x="196" y="154" fill="#9dc2da" font-size="14" text-anchor="middle">큰 행렬곱 문제를 작은 계산 묶음 단위로 넘긴다</text>
+          <text x="196" y="154" fill="#9dc2da" font-size="14" text-anchor="middle">큰 행렬곱 문제를 타일 단위로 넘긴다</text>
           <rect x="166" y="328" width="60" height="60" rx="14" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.18)"></rect>
           <line x1="196" y1="328" x2="196" y2="388" stroke="rgba(255,255,255,0.14)"></line>
           <line x1="166" y1="358" x2="226" y2="358" stroke="rgba(255,255,255,0.14)"></line>
           <text x="196" y="353" fill="#eef6ff" font-size="11" text-anchor="middle">A</text>
           <text x="196" y="371" fill="#eef6ff" font-size="11" text-anchor="middle">W</text>
 
+          <rect x="318" y="162" width="28" height="426" rx="14" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.18)"></rect>
+          <text x="332" y="142" fill="#9dc2da" font-size="14" text-anchor="middle">디스패치</text>
+
           <rect x="404" y="164" width="240" height="398" rx="30" fill="rgba(79,209,255,0.07)" stroke="rgba(79,209,255,0.28)"></rect>
-          <text x="524" y="136" fill="#dff8ff" font-size="22" text-anchor="middle">작은 계산 묶음 준비 구역</text>
-          <text x="524" y="156" fill="#9dc2da" font-size="13" text-anchor="middle">작은 입력 조각과 작은 가중치 조각을 여러 작업 묶음에 나눠 보낸다</text>
+          <text x="524" y="136" fill="#dff8ff" font-size="22" text-anchor="middle">작업 타일 정리대</text>
+          <text x="524" y="156" fill="#9dc2da" font-size="13" text-anchor="middle">A_tile x W_tile을 여러 워프로 복제한다</text>
 
           <rect x="432" y="210" width="66" height="66" rx="16" fill="rgba(152,245,194,0.1)" stroke="rgba(152,245,194,0.46)"></rect>
           <line x1="465" y1="210" x2="465" y2="276" stroke="rgba(152,245,194,0.28)"></line>
@@ -1412,21 +1494,21 @@
 
           <rect x="724" y="148" width="166" height="428" rx="28" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.08)"></rect>
           <rect x="752" y="184" width="110" height="332" rx="20" fill="rgba(217,223,230,0.08)" stroke="rgba(255,255,255,0.08)"></rect>
-          <text x="807" y="126" fill="#eef6ff" font-size="22" text-anchor="middle">4개 작업 묶음</text>
+          <text x="807" y="126" fill="#eef6ff" font-size="22" text-anchor="middle">4개 워프</text>
           <text x="807" y="148" fill="#9dc2da" font-size="13" text-anchor="middle">블록 계산 4개를 동시에 맡는다</text>
           <rect x="768" y="225" width="78" height="16" rx="8" fill="rgba(255,255,255,0.06)"></rect>
           <rect x="768" y="309" width="78" height="16" rx="8" fill="rgba(255,255,255,0.06)"></rect>
           <rect x="768" y="393" width="78" height="16" rx="8" fill="rgba(255,255,255,0.06)"></rect>
           <rect x="768" y="477" width="78" height="16" rx="8" fill="rgba(255,255,255,0.06)"></rect>
-          <text x="856" y="237" fill="#d8e6f2" font-size="10">작업 0</text>
-          <text x="856" y="321" fill="#d8e6f2" font-size="10">작업 1</text>
-          <text x="856" y="405" fill="#d8e6f2" font-size="10">작업 2</text>
-          <text x="856" y="489" fill="#d8e6f2" font-size="10">작업 3</text>
+          <text x="856" y="237" fill="#d8e6f2" font-size="10">warp 0</text>
+          <text x="856" y="321" fill="#d8e6f2" font-size="10">warp 1</text>
+          <text x="856" y="405" fill="#d8e6f2" font-size="10">warp 2</text>
+          <text x="856" y="489" fill="#d8e6f2" font-size="10">warp 3</text>
 
           <rect x="926" y="154" width="90" height="412" rx="26" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)"></rect>
           <rect x="952" y="188" width="38" height="344" rx="14" fill="rgba(217,223,230,0.08)" stroke="rgba(255,255,255,0.06)"></rect>
           <text x="971" y="130" fill="#eef6ff" font-size="18" text-anchor="middle">출력 축</text>
-          <text x="971" y="148" fill="#9dc2da" font-size="12" text-anchor="middle">중간 계산 결과를 모은다</text>
+          <text x="971" y="148" fill="#9dc2da" font-size="12" text-anchor="middle">부분합을 회수</text>
 
           <path d="M 644 375 C 690 332, 716 256, 752 234" fill="none" stroke="rgba(79,209,255,0.2)" stroke-width="10" stroke-linecap="round"></path>
           <path d="M 644 375 C 706 350, 726 324, 752 318" fill="none" stroke="rgba(79,209,255,0.2)" stroke-width="10" stroke-linecap="round"></path>
@@ -1452,67 +1534,68 @@
         </svg>
         <div class="cut__overlay">
           <div class="cut__top">CUT 5</div>
-          <div class="cut__line">이 2x2 블록 행렬곱에서는 C00, C01, C10, C11처럼 네 개의 블록 계산이 나온다. GPU는 그 네 일을 네 개 작업 묶음에 나눠 동시에 처리하고, 각 작업에서 나온 중간 계산 결과만 빠르게 모은다.</div>
+          <div class="cut__title">GPU로 펼쳐지다</div>
+          <div class="cut__line">이 2x2 블록 행렬곱에서는 C00, C01, C10, C11 네 개의 블록 계산이 나온다. GPU는 그 네 작업을 네 개 워프에 나눠 동시에 실행한 뒤 부분합만 빠르게 회수한다.</div>
         </div>
       </div>
     </section>
 
     <section class="cut">
       <div class="cut__frame">
-        <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="GPU의 데이터 이동 병목">
+        <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="GPU의 메모리 병목">
           <rect x="48" y="48" width="1104" height="624" rx="24" class="safe"></rect>
           <rect x="96" y="96" width="1008" height="528" rx="36" fill="rgba(255,255,255,0.018)" stroke="rgba(255,255,255,0.05)"></rect>
 
           <circle cx="196" cy="375" r="92" fill="rgba(255,255,255,0.018)" stroke="rgba(255,255,255,0.08)"></circle>
           <circle cx="196" cy="375" r="54" fill="rgba(16,22,31,0.94)" stroke="rgba(255,255,255,0.12)" stroke-width="2"></circle>
           <circle cx="196" cy="375" r="12" fill="#fff2cb"></circle>
-          <text x="196" y="130" fill="#eef6ff" font-size="22" text-anchor="middle">멀리 있는 데이터 저장공간</text>
-          <text x="196" y="154" fill="#9dc2da" font-size="14" text-anchor="middle">큰 외부 저장공간</text>
+          <text x="196" y="130" fill="#eef6ff" font-size="22" text-anchor="middle">멀리 있는 메모리</text>
+          <text x="196" y="154" fill="#9dc2da" font-size="14" text-anchor="middle">HBM</text>
           <rect x="168" y="332" width="56" height="56" rx="14" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)"></rect>
           <rect x="176" y="340" width="40" height="12" rx="6" fill="rgba(255,255,255,0.12)"></rect>
           <rect x="176" y="358" width="40" height="12" rx="6" fill="rgba(255,255,255,0.12)"></rect>
           <rect x="176" y="376" width="40" height="12" rx="6" fill="rgba(255,255,255,0.12)"></rect>
 
           <rect x="318" y="162" width="28" height="426" rx="14" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.18)"></rect>
-          <text x="332" y="142" fill="#9dc2da" font-size="14" text-anchor="middle">긴 데이터 이동 통로</text>
+          <text x="332" y="142" fill="#9dc2da" font-size="14" text-anchor="middle">긴 버스</text>
 
           <rect x="404" y="164" width="240" height="398" rx="30" fill="rgba(79,209,255,0.07)" stroke="rgba(79,209,255,0.28)"></rect>
-          <text x="524" y="136" fill="#dff8ff" font-size="22" text-anchor="middle">칩 안 임시 저장공간</text>
-          <text x="524" y="156" fill="#9dc2da" font-size="13" text-anchor="middle">데이터가 잠깐 머물렀다가 바로 계산에 들어간다</text>
+          <text x="524" y="136" fill="#dff8ff" font-size="22" text-anchor="middle">온칩 버퍼</text>
+          <text x="524" y="156" fill="#9dc2da" font-size="13" text-anchor="middle">도착하자마자 바로 소비된다</text>
           <rect x="430" y="210" width="188" height="34" rx="17" fill="rgba(79,209,255,0.12)" stroke="rgba(79,209,255,0.24)"></rect>
           <rect x="430" y="276" width="188" height="34" rx="17" fill="rgba(79,209,255,0.12)" stroke="rgba(79,209,255,0.24)"></rect>
           <rect x="430" y="342" width="188" height="34" rx="17" fill="rgba(79,209,255,0.12)" stroke="rgba(79,209,255,0.24)"></rect>
           <rect x="430" y="408" width="188" height="34" rx="17" fill="rgba(79,209,255,0.12)" stroke="rgba(79,209,255,0.24)"></rect>
           <rect x="430" y="474" width="188" height="34" rx="17" fill="rgba(79,209,255,0.12)" stroke="rgba(79,209,255,0.24)"></rect>
           <rect x="430" y="540" width="188" height="34" rx="17" fill="rgba(79,209,255,0.12)" stroke="rgba(79,209,255,0.24)"></rect>
-          <text x="454" y="232" fill="#dff8ff" font-size="12">계산 묶음 0</text>
-          <text x="454" y="298" fill="#dff8ff" font-size="12">계산 묶음 1</text>
-          <text x="454" y="364" fill="#dff8ff" font-size="12">계산 묶음 2</text>
-          <text x="454" y="430" fill="#dff8ff" font-size="12">계산 묶음 3</text>
-          <text x="454" y="496" fill="#dff8ff" font-size="12">계산 묶음 4</text>
-          <text x="454" y="562" fill="#dff8ff" font-size="12">계산 묶음 5</text>
+          <text x="454" y="232" fill="#dff8ff" font-size="12">tile 0</text>
+          <text x="454" y="298" fill="#dff8ff" font-size="12">tile 1</text>
+          <text x="454" y="364" fill="#dff8ff" font-size="12">tile 2</text>
+          <text x="454" y="430" fill="#dff8ff" font-size="12">tile 3</text>
+          <text x="454" y="496" fill="#dff8ff" font-size="12">tile 4</text>
+          <text x="454" y="562" fill="#dff8ff" font-size="12">tile 5</text>
 
           <rect x="724" y="148" width="166" height="428" rx="28" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.08)"></rect>
           <rect x="752" y="184" width="110" height="356" rx="20" fill="rgba(217,223,230,0.08)" stroke="rgba(255,255,255,0.08)"></rect>
-          <text x="807" y="126" fill="#eef6ff" font-size="22" text-anchor="middle">동시에 계산하는 곳</text>
-          <text x="807" y="148" fill="#9dc2da" font-size="13" text-anchor="middle">계산 자체는 아주 빨리 끝난다</text>
+          <text x="807" y="126" fill="#eef6ff" font-size="22" text-anchor="middle">병렬 연산기</text>
+          <text x="807" y="148" fill="#9dc2da" font-size="13" text-anchor="middle">계산은 순식간에 끝난다</text>
           <rect x="768" y="201" width="78" height="16" rx="8" fill="rgba(255,255,255,0.06)"></rect>
           <rect x="768" y="267" width="78" height="16" rx="8" fill="rgba(255,255,255,0.06)"></rect>
           <rect x="768" y="333" width="78" height="16" rx="8" fill="rgba(255,255,255,0.06)"></rect>
           <rect x="768" y="399" width="78" height="16" rx="8" fill="rgba(255,255,255,0.06)"></rect>
           <rect x="768" y="465" width="78" height="16" rx="8" fill="rgba(255,255,255,0.06)"></rect>
           <rect x="768" y="531" width="78" height="16" rx="8" fill="rgba(255,255,255,0.06)"></rect>
-          <text x="856" y="213" fill="#d8e6f2" font-size="10">계산 줄 0</text>
-          <text x="856" y="279" fill="#d8e6f2" font-size="10">계산 줄 1</text>
-          <text x="856" y="345" fill="#d8e6f2" font-size="10">계산 줄 2</text>
-          <text x="856" y="411" fill="#d8e6f2" font-size="10">계산 줄 3</text>
-          <text x="856" y="477" fill="#d8e6f2" font-size="10">계산 줄 4</text>
-          <text x="856" y="543" fill="#d8e6f2" font-size="10">계산 줄 5</text>
+          <text x="856" y="213" fill="#d8e6f2" font-size="10">lane 0</text>
+          <text x="856" y="279" fill="#d8e6f2" font-size="10">lane 1</text>
+          <text x="856" y="345" fill="#d8e6f2" font-size="10">lane 2</text>
+          <text x="856" y="411" fill="#d8e6f2" font-size="10">lane 3</text>
+          <text x="856" y="477" fill="#d8e6f2" font-size="10">lane 4</text>
+          <text x="856" y="543" fill="#d8e6f2" font-size="10">lane 5</text>
 
           <rect x="926" y="154" width="90" height="412" rx="26" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)"></rect>
           <rect x="952" y="188" width="38" height="344" rx="14" fill="rgba(217,223,230,0.08)" stroke="rgba(255,255,255,0.06)"></rect>
-          <text x="971" y="130" fill="#eef6ff" font-size="18" text-anchor="middle">결과가 나가는 길</text>
-          <text x="971" y="148" fill="#9dc2da" font-size="12" text-anchor="middle">중간 계산 결과가 바로 빠져나간다</text>
+          <text x="971" y="130" fill="#eef6ff" font-size="18" text-anchor="middle">출력 축</text>
+          <text x="971" y="148" fill="#9dc2da" font-size="12" text-anchor="middle">부분합은 즉시 빠져나간다</text>
 
           <path d="M 214 342 C 266 316, 326 286, 430 226" fill="none" stroke="rgba(79,209,255,0.12)" stroke-width="8" stroke-linecap="round"></path>
           <path d="M 214 375 C 270 370, 332 364, 430 360" fill="none" stroke="rgba(79,209,255,0.16)" stroke-width="10" stroke-linecap="round"></path>
@@ -1541,7 +1624,7 @@
 
           <rect x="670" y="320" width="110" height="110" rx="24" fill="rgba(255,107,87,0.1)" stroke="rgba(255,107,87,0.46)"></rect>
           <rect x="694" y="358" width="62" height="36" rx="18" fill="rgba(255,107,87,0.58)"></rect>
-          <text x="725" y="314" fill="#ffd3cb" font-size="15" text-anchor="middle">데이터 공급 길목 정체</text>
+          <text x="725" y="314" fill="#ffd3cb" font-size="15" text-anchor="middle">공급 버스 병목</text>
 
           <g class="cut2-block" style="--delay:0s;"><rect width="18" height="18" rx="5" fill="#ffd978" opacity="0.9"><animateMotion dur="4.4s" repeatCount="indefinite" path="M 214 342 C 266 316, 326 286, 430 226"></animateMotion></rect></g>
           <g class="cut2-block" style="--delay:0.28s;"><rect width="18" height="18" rx="5" fill="#ffd978" opacity="0.9"><animateMotion dur="4.2s" repeatCount="indefinite" path="M 214 375 C 270 370, 332 364, 430 360"></animateMotion></rect></g>
@@ -1563,7 +1646,8 @@
         </svg>
         <div class="cut__overlay">
           <div class="cut__top">CUT 6</div>
-          <div class="cut__line">GPU는 계산 묶음을 여러 계산 줄에서 아주 빨리 처리한다. 하지만 멀리 있는 데이터 저장공간에서 칩 안 임시 저장공간을 거쳐 계산하는 곳 앞까지 다음 데이터를 가져오는 길이 먼저 막히기 쉬워진다.</div>
+          <div class="cut__title">GPU의 다음 병목</div>
+          <div class="cut__line">GPU는 행렬곱 타일을 여러 레인에서 아주 빨리 처리하지만, HBM에서 온칩 버퍼를 거쳐 연산기 앞까지 다음 타일을 밀어 넣는 공급 길목이 먼저 뜨거워진다.</div>
         </div>
       </div>
     </section>
@@ -2264,7 +2348,7 @@
 
       attachCoordinateDebugger();
 
-      // CUT 2 runtime: 행렬곱 누적 타임라인
+      // CUT 2 script start
       const cut2 = cuts[1];
       if (cut2) {
         const cut2Scene = cut2.querySelector("#cut2Scene");
@@ -2390,14 +2474,17 @@
           el,
           final: opStackSlots[index]
         }));
+        const frameBlackout = cut2.querySelector("#cut2FrameBlackout");
 
         const cut2Tl = gsap.timeline({ paused: true });
         const cut2TimeScale = 0.62;
+        const cut2BlackHold = 0;
         const originGhostInterval = 0.9;
 
         gsap.set([matrixA, matrixB], { autoAlpha: 0, scale: 1 });
         gsap.set(matrixA, { attr: { transform: "translate(96 124)" } });
         gsap.set(matrixB, { attr: { transform: "translate(720 124)" } });
+        gsap.set(frameBlackout, { autoAlpha: 0 });
         gsap.set(centerMul, { autoAlpha: 0, scale: 0.3, rotate: -24, y: 0, filter: "blur(6px)", transformOrigin: "center center" });
         gsap.set(centerMul, { attr: { transform: "translate(0 180)" } });
         gsap.set(rowFocus, {
@@ -2451,14 +2538,14 @@
         });
 
         cut2Tl
-          .fromTo(matrixA, { attr: { transform: "translate(520 330)" }, scale: 0.82 }, { autoAlpha: 1, attr: { transform: "translate(96 124)" }, scale: 1, duration: 0.88, ease: "power3.out" }, 0)
-          .fromTo(matrixB, { attr: { transform: "translate(520 330)" }, scale: 0.82 }, { autoAlpha: 1, attr: { transform: "translate(720 124)" }, scale: 1, duration: 0.88, ease: "power3.out" }, 0)
+          .fromTo(matrixA, { attr: { transform: "translate(520 330)" }, scale: 0.82 }, { autoAlpha: 1, attr: { transform: "translate(96 124)" }, scale: 1, duration: 0.88, ease: "power3.out" }, cut2BlackHold)
+          .fromTo(matrixB, { attr: { transform: "translate(520 330)" }, scale: 0.82 }, { autoAlpha: 1, attr: { transform: "translate(720 124)" }, scale: 1, duration: 0.88, ease: "power3.out" }, cut2BlackHold)
           .fromTo(centerMul,
             { attr: { transform: "translate(0 180)" }, autoAlpha: 0, scale: 0.46, rotate: -10, filter: "blur(6px)" },
             { attr: { transform: "translate(0 0)" }, autoAlpha: 1, scale: 1.06, rotate: 0, filter: "blur(0px)", duration: 0.62, ease: "power3.out" },
-            0.95
+            cut2BlackHold + 0.95
           )
-          .to(centerMul, { scale: 1, duration: 0.24, ease: "power1.out" }, 1.57)
+          .to(centerMul, { scale: 1, duration: 0.24, ease: "power1.out" }, cut2BlackHold + 1.57)
           .fromTo(rowFocus,
             { autoAlpha: 0, attr: { fill: "rgba(79,209,255,0.28)", stroke: "rgba(79,209,255,0.78)", "stroke-width": 2 } },
             {
@@ -2469,7 +2556,7 @@
               repeat: 1,
               yoyo: true
             },
-            1.62
+            cut2BlackHold + 1.62
           )
           .fromTo(colFocus,
             { autoAlpha: 0, attr: { fill: "rgba(255,107,87,0.24)", stroke: "rgba(255,107,87,0.8)", "stroke-width": 2 } },
@@ -2481,16 +2568,16 @@
               repeat: 1,
               yoyo: true
             },
-            1.62
+            cut2BlackHold + 1.62
           )
-          .to([rowFocus, colFocus], { autoAlpha: 0.82, duration: 0.2, ease: "power1.out" }, 2.1)
-          .to(opStackPanel, { autoAlpha: 1, duration: 0.24, ease: "power1.out" }, 2.15)
-          .to(sumStackPanel, { autoAlpha: 1, duration: 0.24, ease: "power1.out" }, 2.15)
-          .to([opStackTitle, sumStackTitle], { autoAlpha: 1, duration: 0.2, ease: "power1.out" }, 2.22)
-          .to([matrixA, matrixB], { scale: 1.02, duration: 0.38, ease: "power2.out" }, 1.15)
-          .to([matrixA, matrixB], { scale: 1, duration: 0.22, ease: "power1.out" }, 1.53);
+          .to([rowFocus, colFocus], { autoAlpha: 0.82, duration: 0.2, ease: "power1.out" }, cut2BlackHold + 2.1)
+          .to(opStackPanel, { autoAlpha: 1, duration: 0.24, ease: "power1.out" }, cut2BlackHold + 2.15)
+          .to(sumStackPanel, { autoAlpha: 1, duration: 0.24, ease: "power1.out" }, cut2BlackHold + 2.15)
+          .to([opStackTitle, sumStackTitle], { autoAlpha: 1, duration: 0.2, ease: "power1.out" }, cut2BlackHold + 2.22)
+          .to([matrixA, matrixB], { scale: 1.02, duration: 0.38, ease: "power2.out" }, cut2BlackHold + 1.15)
+          .to([matrixA, matrixB], { scale: 1, duration: 0.22, ease: "power1.out" }, cut2BlackHold + 1.53);
 
-        const collideCue = 2.36;
+        const collideCue = cut2BlackHold + 2.36;
         const meetDuration = 1.58;
         const multiplicationPairs = [
           { aStart: "translate(98 126)", bStart: "translate(722 126)" },
@@ -2976,296 +3063,7 @@
         });
       }
 
-      // CUT 2 runtime end
-
-      // CUT 3 runtime: 공용 통로 FIFO 제어
-      const cut3 = cuts[2];
-      if (cut3) {
-        const cut3Scene = cut3.querySelector("#cut3Scene");
-        const cut3Bridge = cut3Scene ? cut3Scene.querySelector("#cut3Bridge") : null;
-        const point = (x, y) => ({ x, y });
-        const beadSpecs = cut3Scene ? [
-          {
-            el: cut3Scene.querySelector("#cut3BeadCyan1"),
-            start: point(746, 244),
-            approach: [point(746, 244), point(709, 244), point(709, 286)],
-            hold: point(709, 286),
-            preBridge: [point(709, 286), point(709, 340)],
-            bridge: [point(709, 340), point(625, 340)],
-            exit: [point(625, 340), point(624, 327), point(351, 329)],
-            speed: 250,
-            bridgeSpeed: 180,
-            startDelay: 0,
-            respawnDelay: 1.08
-          },
-          {
-            el: cut3Scene.querySelector("#cut3BeadCyan2"),
-            start: point(746, 309),
-            approach: [point(746, 309), point(710, 305), point(710, 318)],
-            hold: point(710, 318),
-            preBridge: [point(710, 318), point(710, 340), point(709, 340)],
-            bridge: [point(709, 340), point(625, 340)],
-            exit: [point(625, 340), point(624, 327), point(558, 328)],
-            speed: 250,
-            bridgeSpeed: 180,
-            startDelay: 0.26,
-            respawnDelay: 1.22
-          },
-          {
-            el: cut3Scene.querySelector("#cut3BeadCyan3"),
-            start: point(748, 374),
-            approach: [point(748, 374), point(710, 373), point(710, 362)],
-            hold: point(710, 362),
-            preBridge: [point(710, 362), point(710, 340), point(709, 340)],
-            bridge: [point(709, 340), point(625, 340)],
-            exit: [point(625, 340), point(624, 459), point(347, 458)],
-            speed: 250,
-            bridgeSpeed: 180,
-            startDelay: 0.62,
-            respawnDelay: 1.16
-          },
-          {
-            el: cut3Scene.querySelector("#cut3BeadCyan4"),
-            start: point(746, 439),
-            approach: [point(746, 439), point(710, 439), point(710, 394)],
-            hold: point(710, 394),
-            preBridge: [point(710, 394), point(710, 340), point(709, 340)],
-            bridge: [point(709, 340), point(625, 340)],
-            exit: [point(625, 340), point(624, 459), point(560, 459)],
-            speed: 250,
-            bridgeSpeed: 180,
-            startDelay: 0.9,
-            respawnDelay: 1.28
-          },
-          {
-            el: cut3Scene.querySelector("#cut3BeadGold1"),
-            start: point(351, 329),
-            approach: [point(351, 329), point(590, 329)],
-            hold: point(590, 329),
-            preBridge: [point(590, 329), point(624, 327), point(625, 340)],
-            bridge: [point(625, 340), point(709, 340)],
-            exit: [point(709, 340), point(709, 244), point(746, 244)],
-            speed: 250,
-            bridgeSpeed: 180,
-            startDelay: 0.18,
-            respawnDelay: 1.1
-          },
-          {
-            el: cut3Scene.querySelector("#cut3BeadGold2"),
-            start: point(558, 328),
-            approach: [point(558, 328), point(608, 328)],
-            hold: point(608, 328),
-            preBridge: [point(608, 328), point(624, 327), point(625, 340)],
-            bridge: [point(625, 340), point(709, 340)],
-            exit: [point(709, 340), point(710, 305), point(746, 309)],
-            speed: 250,
-            bridgeSpeed: 180,
-            startDelay: 0.44,
-            respawnDelay: 1.2
-          },
-          {
-            el: cut3Scene.querySelector("#cut3BeadGold3"),
-            start: point(347, 458),
-            approach: [point(347, 458), point(590, 458)],
-            hold: point(590, 458),
-            preBridge: [point(590, 458), point(624, 459), point(625, 340)],
-            bridge: [point(625, 340), point(709, 340)],
-            exit: [point(709, 340), point(710, 373), point(748, 374)],
-            speed: 250,
-            bridgeSpeed: 180,
-            startDelay: 0.78,
-            respawnDelay: 1.18
-          },
-          {
-            el: cut3Scene.querySelector("#cut3BeadGold4"),
-            start: point(560, 459),
-            approach: [point(560, 459), point(608, 459)],
-            hold: point(608, 459),
-            preBridge: [point(608, 459), point(624, 459), point(625, 340)],
-            bridge: [point(625, 340), point(709, 340)],
-            exit: [point(709, 340), point(710, 439), point(746, 439)],
-            speed: 250,
-            bridgeSpeed: 180,
-            startDelay: 1.08,
-            respawnDelay: 1.3
-          }
-        ].filter((bead) => bead.el) : [];
-
-        const cut3State = {
-          session: 0,
-          queue: [],
-          bridgeBusy: false
-        };
-
-        const segmentLength = (from, to) => Math.hypot(to.x - from.x, to.y - from.y);
-        const setBeadPoint = (bead, p) => {
-          gsap.set(bead.el, { attr: { cx: p.x, cy: p.y } });
-        };
-        const resetBridgeVisual = () => {
-          if (!cut3Bridge) {
-            return;
-          }
-          gsap.killTweensOf(cut3Bridge);
-          gsap.set(cut3Bridge, { attr: { stroke: "#ff6b57", "stroke-width": 3 }, opacity: 1 });
-        };
-        const setBridgeBusyVisual = () => {
-          if (!cut3Bridge) {
-            return;
-          }
-          gsap.killTweensOf(cut3Bridge);
-          gsap.to(cut3Bridge, {
-            attr: { stroke: "#ff6b57", "stroke-width": 3 },
-            opacity: 1,
-            duration: 0.16,
-            ease: "power1.out",
-            overwrite: "auto"
-          });
-        };
-        const runPath = ({ bead, points, speed, session, onComplete }) => {
-          const tl = gsap.timeline({
-            onComplete: () => {
-              if (cut3State.session !== session) {
-                return;
-              }
-              onComplete();
-            }
-          });
-
-          for (let i = 1; i < points.length; i += 1) {
-            const prev = points[i - 1];
-            const next = points[i];
-            tl.to(bead.el, {
-              attr: { cx: next.x, cy: next.y },
-              duration: Math.max(0.01, segmentLength(prev, next) / speed),
-              ease: "none"
-            });
-          }
-
-          return tl;
-        };
-        const removeQueuedBead = (bead) => {
-          const index = cut3State.queue.indexOf(bead);
-          if (index >= 0) {
-            cut3State.queue.splice(index, 1);
-          }
-        };
-        const scheduleBeadLaunch = (bead, delay = bead.startDelay) => {
-          const session = cut3State.session;
-          setBeadPoint(bead, bead.start);
-          gsap.set(bead.el, { autoAlpha: 1 });
-          gsap.delayedCall(delay, () => {
-            if (cut3State.session !== session) {
-              return;
-            }
-            runPath({
-              bead,
-              points: bead.approach,
-              speed: bead.speed,
-              session,
-              onComplete: () => {
-                setBeadPoint(bead, bead.hold);
-                if (!cut3State.queue.includes(bead)) {
-                  cut3State.queue.push(bead);
-                }
-                tryDispatchCut3Bridge();
-              }
-            });
-          });
-        };
-        const recycleBead = (bead) => {
-          const session = cut3State.session;
-          gsap.to(bead.el, {
-            autoAlpha: 0,
-            duration: 0.14,
-            ease: "power1.in",
-            overwrite: "auto",
-            onComplete: () => {
-              if (cut3State.session !== session) {
-                return;
-              }
-              setBeadPoint(bead, bead.start);
-              gsap.set(bead.el, { autoAlpha: 1 });
-              scheduleBeadLaunch(bead, bead.respawnDelay);
-            }
-          });
-        };
-        function tryDispatchCut3Bridge() {
-          if (cut3State.bridgeBusy) {
-            return;
-          }
-
-          const nextBead = cut3State.queue.shift();
-          if (!nextBead) {
-            resetBridgeVisual();
-            return;
-          }
-
-          cut3State.bridgeBusy = true;
-          setBridgeBusyVisual();
-
-          const session = cut3State.session;
-          runPath({
-            bead: nextBead,
-            points: nextBead.preBridge,
-            speed: nextBead.speed,
-            session,
-            onComplete: () => {
-              runPath({
-                bead: nextBead,
-                points: nextBead.bridge,
-                speed: nextBead.bridgeSpeed,
-                session,
-                onComplete: () => {
-                  cut3State.bridgeBusy = false;
-                  resetBridgeVisual();
-                  runPath({
-                    bead: nextBead,
-                    points: nextBead.exit,
-                    speed: nextBead.speed,
-                    session,
-                    onComplete: () => {
-                      recycleBead(nextBead);
-                    }
-                  });
-                  tryDispatchCut3Bridge();
-                }
-              });
-            }
-          });
-        }
-        const stopCut3 = () => {
-          cut3State.session += 1;
-          cut3State.bridgeBusy = false;
-          cut3State.queue.length = 0;
-          resetBridgeVisual();
-          beadSpecs.forEach((bead) => {
-            gsap.killTweensOf(bead.el);
-            removeQueuedBead(bead);
-            setBeadPoint(bead, bead.start);
-            gsap.set(bead.el, { autoAlpha: 1 });
-          });
-        };
-        const startCut3 = () => {
-          stopCut3();
-          beadSpecs.forEach((bead) => {
-            scheduleBeadLaunch(bead);
-          });
-        };
-
-        stopCut3();
-
-        ScrollTrigger.create({
-          trigger: cut3,
-          start: "top 72%",
-          end: "bottom 28%",
-          onEnter: () => startCut3(),
-          onEnterBack: () => startCut3(),
-          onLeave: () => stopCut3(),
-          onLeaveBack: () => stopCut3()
-        });
-      }
-
-      // CUT 3 runtime end
+      // CUT 2 script end
 
       const cut5 = cuts[4];
       if (cut5) {
