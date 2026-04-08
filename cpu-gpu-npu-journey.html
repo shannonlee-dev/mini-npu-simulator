@@ -1511,131 +1511,6 @@
 
     <section class="cut">
       <div class="cut__frame">
-        <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="컴파일러와 NPU">
-          <rect x="48" y="48" width="1104" height="624" rx="24" class="safe"></rect>
-          <rect x="96" y="96" width="1008" height="528" rx="36" fill="rgba(255,255,255,0.018)" stroke="rgba(255,255,255,0.05)"></rect>
-
-          <rect x="112" y="152" width="288" height="416" rx="32" fill="rgba(79,209,255,0.06)" stroke="rgba(79,209,255,0.26)"></rect>
-          <text x="256" y="202" fill="#effbff" font-size="32" text-anchor="middle">컴파일러</text>
-          <text x="256" y="232" fill="#9dc2da" font-size="15" text-anchor="middle">데이터플로우를 사전 배치한다</text>
-
-          <g class="compile-card" style="--delay:0s;">
-            <rect x="128" y="268" width="256" height="48" rx="18" fill="rgba(152,245,194,0.9)"></rect>
-            <text x="256" y="298" fill="#06311e" font-size="14" text-anchor="middle">A 타일을 나누어 NPU 저장공간에 배치</text>
-          </g>
-          <g class="compile-card" style="--delay:0.6s;">
-            <rect x="128" y="336" width="256" height="48" rx="18" fill="rgba(255,217,120,0.92)"></rect>
-            <text x="256" y="366" fill="#493100" font-size="15" text-anchor="middle">W 타일을 일반 저장공간에 배치</text>
-          </g>
-          <g class="compile-card" style="--delay:1.2s;">
-            <rect x="128" y="400" width="256" height="64" rx="18" fill="rgba(255,107,87,0.9)"></rect>
-            <text x="256" y="429" fill="#43110c" font-size="16" text-anchor="middle">
-              <tspan x="256" dy="0">PE 위치를 고려해 대각선 </tspan>
-              <tspan x="256" dy="20">실행 순서를 스케줄링</tspan>
-            </text>
-          </g>
-          <g class="compile-card" style="--delay:1.8s;">
-            <rect x="128" y="480" width="256" height="48" rx="18" fill="rgba(79,209,255,0.9)"></rect>
-            <text x="256" y="510" fill="#062433" font-size="17" text-anchor="middle">출력 C의 저장 목적지를 지정</text>
-          </g>
-
-          <g opacity="0.56">
-            <rect x="440" y="136" width="600" height="432" rx="34" fill="rgba(8,13,19,0.76)" stroke="rgba(255,255,255,0.06)"></rect>
-            <text x="740" y="180" fill="#eef6ff" font-size="28" text-anchor="middle">컴파일된 NPU 설계도</text>
-
-            <rect x="476" y="272" width="124" height="240" rx="28" fill="rgba(152,245,194,0.04)" stroke="rgba(152,245,194,0.18)"></rect>
-            <text x="538" y="248" fill="rgba(225,255,237,0.72)" font-size="19" text-anchor="middle">NPU 전용 저장공간</text>
-
-            <rect x="624" y="188" width="240" height="56" rx="24" fill="rgba(255,217,120,0.04)" stroke="rgba(255,217,120,0.18)"></rect>
-            <text x="744" y="222" fill="rgba(246,229,184,0.72)" font-size="22" text-anchor="middle">일반 저장공간</text>
-
-            <g transform="translate(624 272)" opacity="0.44">
-              <rect width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
-              <rect x="88" y="0" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
-              <rect x="176" y="0" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
-              <rect x="0" y="88" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
-              <rect x="88" y="88" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
-              <rect x="176" y="88" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
-              <rect x="0" y="176" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
-              <rect x="88" y="176" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
-              <rect x="176" y="176" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
-              <text x="32" y="38" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
-              <text x="120" y="38" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
-              <text x="208" y="38" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
-              <text x="32" y="126" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
-              <text x="120" y="126" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
-              <text x="208" y="126" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
-              <text x="32" y="214" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
-              <text x="120" y="214" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
-              <text x="208" y="214" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
-            </g>
-
-            <rect x="888" y="272" width="116" height="240" rx="26" fill="rgba(79,209,255,0.04)" stroke="rgba(79,209,255,0.18)"></rect>
-            <text x="946" y="248" fill="rgba(234,246,255,0.72)" font-size="22" text-anchor="middle">출력 C</text>
-            <rect x="906" y="290" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
-            <rect x="934" y="290" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
-            <rect x="962" y="290" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
-            <rect x="906" y="350" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
-            <rect x="934" y="350" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
-            <rect x="962" y="350" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
-            <rect x="906" y="410" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
-            <rect x="934" y="410" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
-            <rect x="962" y="410" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
-          </g>
-
-          <g class="cut7-stage" style="--delay:3.32s; opacity:0;">
-            <text x="538" y="309" fill="#bff7d6" font-size="15" text-anchor="middle">A1</text>
-            <text x="538" y="397" fill="#bff7d6" font-size="15" text-anchor="middle">A2</text>
-            <text x="538" y="485" fill="#bff7d6" font-size="15" text-anchor="middle">A3</text>
-            <path d="M 536 304 H 864" fill="none" stroke="rgba(152,245,194,0.24)" stroke-width="6" stroke-linecap="round"></path>
-            <path d="M 536 392 H 864" fill="none" stroke="rgba(152,245,194,0.24)" stroke-width="6" stroke-linecap="round"></path>
-            <path d="M 536 480 H 864" fill="none" stroke="rgba(152,245,194,0.24)" stroke-width="6" stroke-linecap="round"></path>
-            <path d="M 412 296 C 454 296, 484 292, 509 282" fill="none" stroke="rgba(152,245,194,0.42)" stroke-width="4" stroke-linecap="round"></path>
-          </g>
-
-          <g class="cut7-stage" style="--delay:6.32s; opacity:0;">
-            <text x="656" y="242" fill="#f6e5b8" font-size="13" text-anchor="middle">W1</text>
-            <text x="744" y="242" fill="#f6e5b8" font-size="13" text-anchor="middle">W2</text>
-            <text x="832" y="242" fill="#f6e5b8" font-size="13" text-anchor="middle">W3</text>
-            <path d="M 656 216 V 512" fill="none" stroke="rgba(255,217,120,0.24)" stroke-width="6" stroke-linecap="round"></path>
-            <path d="M 744 216 V 512" fill="none" stroke="rgba(255,217,120,0.24)" stroke-width="6" stroke-linecap="round"></path>
-            <path d="M 832 216 V 512" fill="none" stroke="rgba(255,217,120,0.24)" stroke-width="6" stroke-linecap="round"></path>
-            <path d="M 418 363 C 522 356, 606 258, 674 207" fill="none" stroke="rgba(255,217,120,0.42)" stroke-width="4" stroke-linecap="round"></path>
-          </g>
-
-          <g class="cut7-stage" style="--delay:0.32s; opacity:0;">
-            <path d="M 640 320 L 672 288" fill="none" stroke="rgba(255,107,87,0.6)" stroke-width="6" stroke-linecap="round" stroke-dasharray="6 10"></path>
-            <path d="M 656 392 L 744 304" fill="none" stroke="rgba(255,107,87,0.6)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14"></path>
-            <path d="M 656 480 L 744 392 L 832 304" fill="none" stroke="rgba(255,107,87,0.6)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14"></path>
-            <path d="M 744 480 L 832 392" fill="none" stroke="rgba(255,107,87,0.6)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14"></path>
-            <path d="M 816 496 L 848 464" fill="none" stroke="rgba(255,107,87,0.6)" stroke-width="6" stroke-linecap="round" stroke-dasharray="6 10"></path>
-            <path d="M 418 436 C 546 428, 646 410, 744 392" fill="none" stroke="rgba(255,107,87,0.4)" stroke-width="4" stroke-linecap="round"></path>
-          </g>
-
-          <g class="cut7-stage" style="--delay:9.32s; opacity:0;">
-            <text x="918" y="306" fill="#dff4ff" font-size="8" text-anchor="middle">C11</text>
-            <text x="946" y="306" fill="#dff4ff" font-size="8" text-anchor="middle">C12</text>
-            <text x="974" y="306" fill="#dff4ff" font-size="8" text-anchor="middle">C13</text>
-            <text x="918" y="366" fill="#dff4ff" font-size="8" text-anchor="middle">C21</text>
-            <text x="946" y="366" fill="#dff4ff" font-size="8" text-anchor="middle">C22</text>
-            <text x="974" y="366" fill="#dff4ff" font-size="8" text-anchor="middle">C23</text>
-            <text x="918" y="426" fill="#dff4ff" font-size="8" text-anchor="middle">C31</text>
-            <text x="946" y="426" fill="#dff4ff" font-size="8" text-anchor="middle">C32</text>
-            <text x="974" y="426" fill="#dff4ff" font-size="8" text-anchor="middle">C33</text>
-            <path d="M 413 505 C 602 500, 764 430, 903 319" fill="none" stroke="rgba(79,209,255,0.42)" stroke-width="4" stroke-linecap="round"></path>
-          </g>
-
-        </svg>
-        <div class="cut__overlay">
-          <div class="cut__top">CUT 7</div>
-          <div class="cut__title">컴파일러가 흐름을 미리 짠다</div>
-          <div class="cut__line">이 도식은 이미 존재하는 PE, NPU 저장공간, 일반 저장공간, 출력 C 위에 NPU 컴파일러가 A와 W의 배치, PE 실행 순서, 출력 저장 목적지를 순서대로 덧입혀 가는 모습을 핵심만 추려 보여준다.</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cut">
-      <div class="cut__frame">
         <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="GPU 병목 뒤의 NPU">
           <rect x="48" y="48" width="1104" height="624" rx="24" class="safe"></rect>
           <rect x="96" y="96" width="1008" height="528" rx="36" fill="rgba(255,255,255,0.018)" stroke="rgba(255,255,255,0.05)"></rect>
@@ -1820,6 +1695,131 @@
           <div class="cut__top">CUT 8</div>
           <div class="cut__title">NPU는 파동처럼 계산한다</div>
           <div class="cut__line">이 장면은 시스톨릭 어레이에서 입력 활성값 A와 가중치 W가 서로 다른 축으로 주입되어 각 PE에서 곱셈-누산을 수행하고, 누적 결과가 대응하는 출력 C 원소로 정착하는 데이터플로우를 3x3 예시로 축약한 것이다.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cut">
+      <div class="cut__frame">
+        <svg class="cut__art" viewBox="0 0 1200 720" role="img" aria-label="컴파일러와 NPU">
+          <rect x="48" y="48" width="1104" height="624" rx="24" class="safe"></rect>
+          <rect x="96" y="96" width="1008" height="528" rx="36" fill="rgba(255,255,255,0.018)" stroke="rgba(255,255,255,0.05)"></rect>
+
+          <rect x="112" y="152" width="288" height="416" rx="32" fill="rgba(79,209,255,0.06)" stroke="rgba(79,209,255,0.26)"></rect>
+          <text x="256" y="202" fill="#effbff" font-size="32" text-anchor="middle">컴파일러</text>
+          <text x="256" y="232" fill="#9dc2da" font-size="15" text-anchor="middle">데이터플로우를 사전 배치한다</text>
+
+          <g class="compile-card" style="--delay:0s;">
+            <rect x="128" y="268" width="256" height="48" rx="18" fill="rgba(152,245,194,0.9)"></rect>
+            <text x="256" y="298" fill="#06311e" font-size="14" text-anchor="middle">A 타일을 나누어 NPU 저장공간에 배치</text>
+          </g>
+          <g class="compile-card" style="--delay:0.6s;">
+            <rect x="128" y="336" width="256" height="48" rx="18" fill="rgba(255,217,120,0.92)"></rect>
+            <text x="256" y="366" fill="#493100" font-size="15" text-anchor="middle">W 타일을 일반 저장공간에 배치</text>
+          </g>
+          <g class="compile-card" style="--delay:1.2s;">
+            <rect x="128" y="400" width="256" height="64" rx="18" fill="rgba(255,107,87,0.9)"></rect>
+            <text x="256" y="429" fill="#43110c" font-size="16" text-anchor="middle">
+              <tspan x="256" dy="0">PE 위치를 고려해 대각선 </tspan>
+              <tspan x="256" dy="20">실행 순서를 스케줄링</tspan>
+            </text>
+          </g>
+          <g class="compile-card" style="--delay:1.8s;">
+            <rect x="128" y="480" width="256" height="48" rx="18" fill="rgba(79,209,255,0.9)"></rect>
+            <text x="256" y="510" fill="#062433" font-size="17" text-anchor="middle">출력 C의 저장 목적지를 지정</text>
+          </g>
+
+          <g opacity="0.56">
+            <rect x="440" y="136" width="600" height="432" rx="34" fill="rgba(8,13,19,0.76)" stroke="rgba(255,255,255,0.06)"></rect>
+            <text x="740" y="180" fill="#eef6ff" font-size="28" text-anchor="middle">컴파일된 NPU 설계도</text>
+
+            <rect x="476" y="272" width="124" height="240" rx="28" fill="rgba(152,245,194,0.04)" stroke="rgba(152,245,194,0.18)"></rect>
+            <text x="538" y="248" fill="rgba(225,255,237,0.72)" font-size="19" text-anchor="middle">NPU 전용 저장공간</text>
+
+            <rect x="624" y="188" width="240" height="56" rx="24" fill="rgba(255,217,120,0.04)" stroke="rgba(255,217,120,0.18)"></rect>
+            <text x="744" y="222" fill="rgba(246,229,184,0.72)" font-size="22" text-anchor="middle">일반 저장공간</text>
+
+            <g transform="translate(624 272)" opacity="0.44">
+              <rect width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
+              <rect x="88" y="0" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
+              <rect x="176" y="0" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
+              <rect x="0" y="88" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
+              <rect x="88" y="88" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
+              <rect x="176" y="88" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
+              <rect x="0" y="176" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
+              <rect x="88" y="176" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
+              <rect x="176" y="176" width="64" height="64" rx="16" fill="rgba(79,209,255,0.08)" stroke="rgba(79,209,255,0.2)"></rect>
+              <text x="32" y="38" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
+              <text x="120" y="38" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
+              <text x="208" y="38" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
+              <text x="32" y="126" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
+              <text x="120" y="126" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
+              <text x="208" y="126" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
+              <text x="32" y="214" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
+              <text x="120" y="214" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
+              <text x="208" y="214" fill="rgba(234,246,255,0.72)" font-size="13" text-anchor="middle">PE</text>
+            </g>
+
+            <rect x="888" y="272" width="116" height="240" rx="26" fill="rgba(79,209,255,0.04)" stroke="rgba(79,209,255,0.18)"></rect>
+            <text x="946" y="248" fill="rgba(234,246,255,0.72)" font-size="22" text-anchor="middle">출력 C</text>
+            <rect x="906" y="290" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
+            <rect x="934" y="290" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
+            <rect x="962" y="290" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
+            <rect x="906" y="350" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
+            <rect x="934" y="350" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
+            <rect x="962" y="350" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
+            <rect x="906" y="410" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
+            <rect x="934" y="410" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
+            <rect x="962" y="410" width="24" height="24" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"></rect>
+          </g>
+
+          <g class="cut7-stage" style="--delay:3.32s; opacity:0;">
+            <text x="538" y="309" fill="#bff7d6" font-size="15" text-anchor="middle">A1</text>
+            <text x="538" y="397" fill="#bff7d6" font-size="15" text-anchor="middle">A2</text>
+            <text x="538" y="485" fill="#bff7d6" font-size="15" text-anchor="middle">A3</text>
+            <path d="M 536 304 H 864" fill="none" stroke="rgba(152,245,194,0.24)" stroke-width="6" stroke-linecap="round"></path>
+            <path d="M 536 392 H 864" fill="none" stroke="rgba(152,245,194,0.24)" stroke-width="6" stroke-linecap="round"></path>
+            <path d="M 536 480 H 864" fill="none" stroke="rgba(152,245,194,0.24)" stroke-width="6" stroke-linecap="round"></path>
+            <path d="M 412 296 C 454 296, 484 292, 509 282" fill="none" stroke="rgba(152,245,194,0.42)" stroke-width="4" stroke-linecap="round"></path>
+          </g>
+
+          <g class="cut7-stage" style="--delay:6.32s; opacity:0;">
+            <text x="656" y="242" fill="#f6e5b8" font-size="13" text-anchor="middle">W1</text>
+            <text x="744" y="242" fill="#f6e5b8" font-size="13" text-anchor="middle">W2</text>
+            <text x="832" y="242" fill="#f6e5b8" font-size="13" text-anchor="middle">W3</text>
+            <path d="M 656 216 V 512" fill="none" stroke="rgba(255,217,120,0.24)" stroke-width="6" stroke-linecap="round"></path>
+            <path d="M 744 216 V 512" fill="none" stroke="rgba(255,217,120,0.24)" stroke-width="6" stroke-linecap="round"></path>
+            <path d="M 832 216 V 512" fill="none" stroke="rgba(255,217,120,0.24)" stroke-width="6" stroke-linecap="round"></path>
+            <path d="M 418 363 C 522 356, 606 258, 674 207" fill="none" stroke="rgba(255,217,120,0.42)" stroke-width="4" stroke-linecap="round"></path>
+          </g>
+
+          <g class="cut7-stage" style="--delay:0.32s; opacity:0;">
+            <path d="M 640 320 L 672 288" fill="none" stroke="rgba(255,107,87,0.6)" stroke-width="6" stroke-linecap="round" stroke-dasharray="6 10"></path>
+            <path d="M 656 392 L 744 304" fill="none" stroke="rgba(255,107,87,0.6)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14"></path>
+            <path d="M 656 480 L 744 392 L 832 304" fill="none" stroke="rgba(255,107,87,0.6)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14"></path>
+            <path d="M 744 480 L 832 392" fill="none" stroke="rgba(255,107,87,0.6)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14"></path>
+            <path d="M 816 496 L 848 464" fill="none" stroke="rgba(255,107,87,0.6)" stroke-width="6" stroke-linecap="round" stroke-dasharray="6 10"></path>
+            <path d="M 418 436 C 546 428, 646 410, 744 392" fill="none" stroke="rgba(255,107,87,0.4)" stroke-width="4" stroke-linecap="round"></path>
+          </g>
+
+          <g class="cut7-stage" style="--delay:9.32s; opacity:0;">
+            <text x="918" y="306" fill="#dff4ff" font-size="8" text-anchor="middle">C11</text>
+            <text x="946" y="306" fill="#dff4ff" font-size="8" text-anchor="middle">C12</text>
+            <text x="974" y="306" fill="#dff4ff" font-size="8" text-anchor="middle">C13</text>
+            <text x="918" y="366" fill="#dff4ff" font-size="8" text-anchor="middle">C21</text>
+            <text x="946" y="366" fill="#dff4ff" font-size="8" text-anchor="middle">C22</text>
+            <text x="974" y="366" fill="#dff4ff" font-size="8" text-anchor="middle">C23</text>
+            <text x="918" y="426" fill="#dff4ff" font-size="8" text-anchor="middle">C31</text>
+            <text x="946" y="426" fill="#dff4ff" font-size="8" text-anchor="middle">C32</text>
+            <text x="974" y="426" fill="#dff4ff" font-size="8" text-anchor="middle">C33</text>
+            <path d="M 413 505 C 602 500, 764 430, 903 319" fill="none" stroke="rgba(79,209,255,0.42)" stroke-width="4" stroke-linecap="round"></path>
+          </g>
+
+        </svg>
+        <div class="cut__overlay">
+          <div class="cut__top">CUT 7</div>
+          <div class="cut__title">컴파일러가 흐름을 미리 짠다</div>
+          <div class="cut__line">이 도식은 이미 존재하는 PE, NPU 저장공간, 일반 저장공간, 출력 C 위에 NPU 컴파일러가 A와 W의 배치, PE 실행 순서, 출력 저장 목적지를 순서대로 덧입혀 가는 모습을 핵심만 추려 보여준다.</div>
         </div>
       </div>
     </section>

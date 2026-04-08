@@ -1,9 +1,18 @@
 import json
+import sys
 import time
 
 EPSILON = 1e-9
 MEASURE_REPEAT = 10
 STANDARD_LABELS = ("Cross", "X")
+ANSI_RESET = "\033[0m"
+ANSI_BOLD = "\033[1m"
+ANSI_CYAN = "\033[96m"
+ANSI_GOLD = "\033[93m"
+ANSI_MAGENTA = "\033[95m"
+ANSI_GREEN = "\033[92m"
+ANSI_RED = "\033[91m"
+ANSI_BLUE = "\033[94m"
 
 
 # 출력 영역
@@ -14,6 +23,36 @@ def print_title():
     print("[모드 선택]")
     print("1. 사용자 입력 (3x3)")
     print("2. data.json 분석")
+
+
+# 문자열에 ANSI 색상을 입힌다.
+def colorize(text, *styles):
+    return "".join(styles) + str(text) + ANSI_RESET
+
+
+# 숨겨진 3번 모드 진입 시 화려한 연출을 출력한다.
+def print_secret_mode_banner():
+    fireworks = [
+        colorize("        *         .        +        *", ANSI_MAGENTA, ANSI_BOLD),
+        colorize("   .        *   SECRET MODE   *      .", ANSI_CYAN, ANSI_BOLD),
+        colorize("        +       BOOM! BOOM!       +   ", ANSI_GOLD, ANSI_BOLD),
+    ]
+    title = colorize(">>> 2D vs 1D FLATTEN BENCHMARK UNLOCKED <<<", ANSI_GREEN, ANSI_BOLD)
+
+    print()
+    for line in fireworks:
+        print(line)
+        sys.stdout.flush()
+        time.sleep(0.08)
+
+    print(title)
+    print(colorize("    숨겨진 성능 비교 모드가 열렸습니다.", ANSI_MAGENTA))
+    print()
+
+
+# 3번 모드 전용 컬러 프롬프트로 양의 정수를 입력받는다.
+def read_secret_positive_int(prompt, color):
+    return read_positive_int(colorize(prompt, color, ANSI_BOLD))
 
 
 # 공통 처리 영역
@@ -70,6 +109,24 @@ def read_matrix_from_console(name, size):
     return matrix
 
 
+# 양의 정수를 입력받는다.
+def read_positive_int(prompt):
+    while True:
+        raw = input(prompt).strip()
+
+        try:
+            value = int(raw)
+        except ValueError:
+            print("정수만 입력하세요.")
+            continue
+
+        if value <= 0:
+            print("1 이상의 정수를 입력하세요.")
+            continue
+
+        return value
+
+
 # 행렬 크기와 구조가 올바른지 검사한다.
 def validate_square_matrix(matrix, size):
     if not isinstance(matrix, list):
@@ -98,6 +155,29 @@ def mac(pattern, filt):
     return total
 
 
+# 2차원 행렬을 1차원 리스트로 펼친다.
+def flatten_matrix(matrix):
+    flat = []
+
+    for row in matrix:
+        flat.extend(row)
+
+    return flat
+
+
+# 1차원 리스트 두 개를 N x N 행렬처럼 해석해 MAC를 계산한다.
+def mac_flat(pattern_flat, filt_flat, size):
+    total = 0.0
+
+    for row in range(size):
+        row_start = row * size
+        for col in range(size):
+            index = row_start + col
+            total += pattern_flat[index] * filt_flat[index]
+
+    return total
+
+
 # 두 점수를 비교해 최종 라벨을 결정한다.
 def judge_scores(score_cross, score_x, epsilon=EPSILON):
     if abs(score_cross - score_x) < epsilon:
@@ -120,6 +200,25 @@ def measure_average_ms(func, *args, repeat=MEASURE_REPEAT):
         total += (end - start) * 1000.0
 
     return total / repeat
+
+
+# 성능 비교용 NxN 예제 행렬 두 개를 만든다.
+def build_benchmark_matrices(size):
+    pattern = []
+    filt = []
+
+    for row in range(size):
+        pattern_row = []
+        filt_row = []
+
+        for col in range(size):
+            pattern_row.append(float(((row * size) + col) % 7))
+            filt_row.append(float(((row + 1) * (col + 3)) % 5))
+
+        pattern.append(pattern_row)
+        filt.append(filt_row)
+
+    return pattern, filt
 
 
 # JSON 처리 영역
@@ -368,6 +467,65 @@ def run_json_mode():
             print(f"- {failure}")
 
 
+# 2차원 접근과 1차원 flatten 접근의 성능을 비교한다.
+def run_flatten_benchmark_mode():
+    print_secret_mode_banner()
+    print()
+    print(colorize("#---------------------------------------", ANSI_CYAN))
+    print(colorize("# [3] 2D vs 1D flatten 성능 비교", ANSI_CYAN, ANSI_BOLD))
+    print(colorize("#---------------------------------------", ANSI_CYAN))
+
+    size = read_secret_positive_int("행렬 크기 N 입력: ", ANSI_MAGENTA)
+    repeat = read_secret_positive_int("반복 측정 횟수 입력: ", ANSI_GOLD)
+
+    pattern, filt = build_benchmark_matrices(size)
+    pattern_flat = flatten_matrix(pattern)
+    filt_flat = flatten_matrix(filt)
+
+    score_2d = mac(pattern, filt)
+    score_1d = mac_flat(pattern_flat, filt_flat, size)
+    avg_2d_ms = measure_average_ms(mac, pattern, filt, repeat=repeat)
+    avg_1d_ms = measure_average_ms(mac_flat, pattern_flat, filt_flat, size, repeat=repeat)
+
+    if abs(score_2d - score_1d) < EPSILON:
+        same_result = "YES"
+    else:
+        same_result = "NO"
+
+    print()
+    print(colorize("#---------------------------------------", ANSI_MAGENTA))
+    print(colorize("# [비교 결과]", ANSI_MAGENTA, ANSI_BOLD))
+    print(colorize("#---------------------------------------", ANSI_MAGENTA))
+    print(colorize("입력 크기:", ANSI_BLUE, ANSI_BOLD), colorize(f"{size}x{size}", ANSI_GOLD, ANSI_BOLD))
+    print(colorize("동일 반복 횟수:", ANSI_BLUE, ANSI_BOLD), colorize(repeat, ANSI_GOLD, ANSI_BOLD))
+    print(colorize("2D 결과:", ANSI_CYAN, ANSI_BOLD), colorize(f"{score_2d:.6f}", ANSI_CYAN, ANSI_BOLD))
+    print(colorize("1D 결과:", ANSI_GREEN, ANSI_BOLD), colorize(f"{score_1d:.6f}", ANSI_GREEN, ANSI_BOLD))
+    if same_result == "YES":
+        same_result_text = colorize("YES", ANSI_GREEN, ANSI_BOLD)
+    else:
+        same_result_text = colorize("NO", ANSI_RED, ANSI_BOLD)
+    print(colorize("결과 일치 여부:", ANSI_MAGENTA, ANSI_BOLD), same_result_text)
+    print()
+    print(colorize(f"{'방식':<18}{'평균 시간(ms)':<20}{'접근 수(N^2)':<15}", ANSI_BOLD))
+    print(colorize("-" * 53, ANSI_GOLD))
+    print(f"{colorize('2차원 배열', ANSI_CYAN):<27}{avg_2d_ms:<20.6f}{size * size:<15}")
+    print(f"{colorize('1차원 flatten', ANSI_GREEN):<27}{avg_1d_ms:<20.6f}{size * size:<15}")
+
+    delta_ms = avg_1d_ms - avg_2d_ms
+    if abs(delta_ms) < EPSILON:
+        summary = "체감 차이가 거의 없습니다."
+        summary_style = (ANSI_GOLD, ANSI_BOLD)
+    elif delta_ms < 0:
+        summary = f"flatten 방식이 {-delta_ms:.6f} ms 더 빨랐습니다."
+        summary_style = (ANSI_GREEN, ANSI_BOLD)
+    else:
+        summary = f"2차원 방식이 {delta_ms:.6f} ms 더 빨랐습니다."
+        summary_style = (ANSI_CYAN, ANSI_BOLD)
+
+    print()
+    print(colorize("요약:", ANSI_MAGENTA, ANSI_BOLD), colorize(summary, *summary_style))
+
+
 # 프로그램 시작 영역
 # 모드를 선택해 알맞은 실행 흐름으로 보낸다.
 def main():
@@ -378,6 +536,8 @@ def main():
         run_user_mode()
     elif choice == "2":
         run_json_mode()
+    elif choice == "3":
+        run_flatten_benchmark_mode()
     else:
         print("잘못된 입력입니다. 1 또는 2를 입력하세요.")
 
