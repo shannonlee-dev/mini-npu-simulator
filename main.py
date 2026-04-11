@@ -150,6 +150,7 @@ def mac(pattern, filt):
 
     for i in range(size):
         for j in range(size):
+            
             total += pattern[i][j] * filt[i][j]
 
     return total
@@ -172,7 +173,7 @@ def mac_flat(pattern_flat, filt_flat, size):
     for row in range(size):
         row_start = row * size
         for col in range(size):
-            index = row_start + col
+            index = row_start + col  # i * N + j
             total += pattern_flat[index] * filt_flat[index]
 
     return total
@@ -243,27 +244,31 @@ def extract_size_from_pattern_key(pattern_key):
 
 # JSON의 필터 정보를 크기별 표준 라벨 구조로 정리한다.
 def load_filters_from_json(data):
-    filters = data.get("filters", {})
-    filters_by_size = {}
+    filters = data.get("filters", {}) #예: "size_5": {"Cross": [[...]], "X": [[...]]}
+    filters_by_size = {} 
 
     for size_key, filter_info in filters.items():
-        size = int(size_key.split("_")[1])
+        '''
+        size_key = "size_5"
+        filter_info = {"cross": [...], "x": [...]}
+        ''' 
+        size = int(size_key.split("_")[1]) 
 
-        cross_filter = None
+        cross_filter = None 
         x_filter = None
 
-        for raw_label, matrix in filter_info.items():
-            label = normalize_label(raw_label)
+        for raw_label, matrix in filter_info.items(): 
+            label = normalize_label(raw_label) 
 
-            if label == "Cross":
+            if label == "Cross": 
                 cross_filter = matrix
             elif label == "X":
                 x_filter = matrix
 
-        if cross_filter is None or x_filter is None:
+        if cross_filter is None or x_filter is None: 
             raise ValueError(f"{size_key} 필터에 Cross 또는 X가 없습니다.")
 
-        validate_square_matrix(cross_filter, size)
+        validate_square_matrix(cross_filter, size) 
         validate_square_matrix(x_filter, size)
 
         filters_by_size[size] = {
@@ -276,19 +281,19 @@ def load_filters_from_json(data):
 
 # 패턴 1개를 분석해 점수와 PASS/FAIL 결과를 만든다.
 def analyze_single_pattern(pattern_key, pattern_info, filters_by_size):
-    size = extract_size_from_pattern_key(pattern_key)
-    pattern = pattern_info.get("input")
-    expected = normalize_label(pattern_info.get("expected"))
+    size = extract_size_from_pattern_key(pattern_key) # 예: "size_5_pattern_1" -> 5
+    pattern = pattern_info.get("input") #예: [[0,1,0], [1,1,1], [0,1,0]]
+    expected = normalize_label(pattern_info.get("expected")) #예: "Cross" -> "Cross"
 
     if size not in filters_by_size:
         raise ValueError(f"해당 크기의 필터가 없습니다: size_{size}")
 
-    validate_square_matrix(pattern, size)
+    validate_square_matrix(pattern, size) 
 
-    cross_filter = filters_by_size[size]["Cross"]
-    x_filter = filters_by_size[size]["X"]
+    cross_filter = filters_by_size[size]["Cross"] #예: size_5 필터의 Cross 행렬
+    x_filter = filters_by_size[size]["X"] #예: size_5 필터의 X 행렬
 
-    score_cross = mac(pattern, cross_filter)
+    score_cross = mac(pattern, cross_filter) 
     score_x = mac(pattern, x_filter)
     predicted = judge_scores(score_cross, score_x)
     result = "PASS" if predicted == expected else "FAIL"
