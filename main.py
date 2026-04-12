@@ -183,7 +183,7 @@ def flatten_matrix(matrix):
 
     for row in matrix:
         flat.extend(row)
-
+#flat = [i*N + j for i in range(N) for j in range(N)] 이런 식으로도 가능하지만, extend가 더 빠릅니다.
     return flat
 
 
@@ -198,6 +198,24 @@ def mac_flat(pattern_flat, filt_flat, size):
             total += pattern_flat[index] * filt_flat[index]
 
     return total
+
+
+# 1차원으로 평탄화된 리스트를 그대로 순회하며 MAC를 계산한다.
+def mac_flat_true(pattern_flat, filt_flat):
+    total = 0.0
+
+    for pattern_value, filt_value in zip(pattern_flat, filt_flat):
+        total += pattern_value * filt_value
+
+    return total
+
+
+# 2차원 행렬을 1차원으로 변환한 뒤 그대로 순회하며 MAC를 계산한다.
+def mac_flat_with_flatten(pattern, filt):
+    pattern_flat = flatten_matrix(pattern)
+    filt_flat = flatten_matrix(filt)
+
+    return mac_flat_true(pattern_flat, filt_flat)
 
 
 def mac_zip(pattern, filt):
@@ -582,25 +600,26 @@ def run_json_mode():
             print(f"- {failure}")
 
 
-# 2차원 접근과 1차원 flatten 접근의 성능을 비교한다.
+# =======================================
+# [옵션 3] 숨겨진 flatten 벤치
+# =======================================
+# 2차원 접근과 2차원->1차원 변환+순회의 성능을 비교한다.
 def run_flatten_benchmark_mode():
     print_secret_mode_banner()
     print()
     print(colorize("#---------------------------------------", ANSI_CYAN))
-    print(colorize("# [3] 2D vs 1D flatten 성능 비교", ANSI_CYAN, ANSI_BOLD))
+    print(colorize("# [3] 2D vs flatten+1D 성능 비교", ANSI_CYAN, ANSI_BOLD))
     print(colorize("#---------------------------------------", ANSI_CYAN))
 
     size = read_secret_positive_int("행렬 크기 N 입력: ", ANSI_MAGENTA)
     repeat = read_secret_positive_int("반복 측정 횟수 입력: ", ANSI_GOLD)
 
     pattern, filt = build_benchmark_matrices(size)
-    pattern_flat = flatten_matrix(pattern)
-    filt_flat = flatten_matrix(filt)
 
     score_2d = mac(pattern, filt)
-    score_1d = mac_flat(pattern_flat, filt_flat, size)
+    score_1d = mac_flat_with_flatten(pattern, filt)
     avg_2d_ms = measure_average_ms(mac, pattern, filt, repeat=repeat)
-    avg_1d_ms = measure_average_ms(mac_flat, pattern_flat, filt_flat, size, repeat=repeat)
+    avg_1d_ms = measure_average_ms(mac_flat_with_flatten, pattern, filt, repeat=repeat)
 
     if abs(score_2d - score_1d) < EPSILON:
         same_result = "YES"
@@ -624,14 +643,14 @@ def run_flatten_benchmark_mode():
     print(colorize(f"{'방식':<18}{'평균 시간(ms)':<20}{'접근 수(N^2)':<15}", ANSI_BOLD))
     print(colorize("-" * 53, ANSI_GOLD))
     print(f"{colorize('2차원 배열', ANSI_CYAN):<27}{avg_2d_ms:<20.6f}{size * size:<15}")
-    print(f"{colorize('1차원 flatten', ANSI_GREEN):<27}{avg_1d_ms:<20.6f}{size * size:<15}")
+    print(f"{colorize('flatten+1차원', ANSI_GREEN):<27}{avg_1d_ms:<20.6f}{size * size:<15}")
 
     delta_ms = avg_1d_ms - avg_2d_ms
     if abs(delta_ms) < EPSILON:
         summary = "체감 차이가 거의 없습니다."
         summary_style = (ANSI_GOLD, ANSI_BOLD)
     elif delta_ms < 0:
-        summary = f"flatten 방식이 {-delta_ms:.6f} ms 더 빨랐습니다."
+        summary = f"flatten+1차원 방식이 {-delta_ms:.6f} ms 더 빨랐습니다."
         summary_style = (ANSI_GREEN, ANSI_BOLD)
     else:
         summary = f"2차원 방식이 {delta_ms:.6f} ms 더 빨랐습니다."
@@ -640,7 +659,9 @@ def run_flatten_benchmark_mode():
     print()
     print(colorize("요약:", ANSI_MAGENTA, ANSI_BOLD), colorize(summary, *summary_style))
 
-
+# =======================================
+# [옵션 4] 숨겨진 전체 최적화 벤치
+# =======================================
 def collect_full_benchmark_results(case, repeat, size):
     entries = [
         ("1. dense index", mac, (case["pattern"], case["filter"])),
