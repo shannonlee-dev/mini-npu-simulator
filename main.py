@@ -54,7 +54,7 @@ def print_secret_mode_banner():
 def print_secret_benchmark_banner():
     parade = [
         colorize(" .  *   .   *   .  RAINBOW BENCH  .   *  . ", ANSI_RED, ANSI_BOLD),
-        colorize("   +   *   1 to 7 MAC SPEED SHOWDOWN   *   +", ANSI_GOLD, ANSI_BOLD),
+        colorize("   +   *   1 to 6 MAC SPEED SHOWDOWN   *   +", ANSI_GOLD, ANSI_BOLD),
         colorize(" *   .   ZIP! FLAT! SPARSE!   .   *   .    ", ANSI_CYAN, ANSI_BOLD),
         colorize("   *   .   CONFETTI! FIREWORKS!   .   *    ", ANSI_MAGENTA, ANSI_BOLD),
     ]
@@ -67,7 +67,7 @@ def print_secret_benchmark_banner():
         time.sleep(0.08)
 
     print(title)
-    print(colorize("    1번부터 7번까지 전부 비교합니다.", ANSI_BLUE, ANSI_BOLD))
+    print(colorize("    1번부터 6번까지 전부 비교합니다.", ANSI_BLUE, ANSI_BOLD))
     print()
 
 
@@ -256,39 +256,11 @@ def compile_sparse_filter(filt):
     return active
 
 
-def compile_sparse_rows(filt):
-    compiled = []
-
-    for row_index, row in enumerate(filt):
-        active_cols = []
-
-        for col_index, value in enumerate(row):
-            if value != 0:
-                active_cols.append((col_index, value))
-
-        if active_cols:
-            compiled.append((row_index, active_cols))
-
-    return compiled
-
-
 def mac_sparse_coords(pattern, active_filter):
     total = 0.0
 
     for row_index, col_index, value in active_filter:
         total += pattern[row_index][col_index] * value
-
-    return total
-
-
-def mac_sparse_rows(pattern, compiled_rows):
-    total = 0.0
-
-    for row_index, active_cols in compiled_rows:
-        pattern_row = pattern[row_index]
-
-        for col_index, value in active_cols:
-            total += pattern_row[col_index] * value
 
     return total
 
@@ -350,7 +322,7 @@ def build_sparse_benchmark_matrices(size):
     return pattern, filt
 
 
-# JSON 처리 영역
+# [옵션 2] data.json 분석 모드 준비 영역
 # JSON 파일을 읽어 파이썬 객체로 변환한다.
 def load_json_file(path):
     with open(path, "r", encoding="utf-8") as file:
@@ -437,7 +409,7 @@ def analyze_single_pattern(pattern_key, pattern_info, filters_by_size):
     }
 
 
-# 성능 분석 영역
+# [옵션 1] 사용자 입력 모드 공통 출력 영역
 # 기본 예제로 3x3 MAC 성능 표를 출력한다.
 def print_performance_table():
     size_3_cross = [
@@ -467,7 +439,9 @@ def print_performance_table():
         print(f"{size}x{size:<7}{avg_ms:<20.6f}{size * size:<15}")
 
 
-# 모드 실행 영역
+# =======================================
+# [옵션 1] 사용자 입력 (3x3)
+# =======================================
 # 사용자 입력 모드에서 3x3 필터와 패턴을 비교한다.
 def run_user_mode():
     print()
@@ -506,6 +480,9 @@ def run_user_mode():
     print_performance_table()
 
 
+# =======================================
+# [옵션 2] data.json 분석
+# =======================================
 # JSON 분석 모드에서 전체 패턴을 일괄 판정한다.
 def run_json_mode():
     print()
@@ -670,7 +647,6 @@ def collect_full_benchmark_results(case, repeat, size):
         ("4. flat index", mac_flat, (case["pattern_flat"], case["filter_flat"], size)),
         ("5. flat zip", mac_flat_zip, (case["pattern_flat"], case["filter_flat"])),
         ("6. sparse coords", mac_sparse_coords, (case["pattern"], case["sparse_coords"])),
-        ("7. sparse rows", mac_sparse_rows, (case["pattern"], case["sparse_rows"])),
     ]
     results = []
 
@@ -736,7 +712,6 @@ def run_full_benchmark_mode():
         "pattern_flat": flatten_matrix(dense_pattern),
         "filter_flat": flatten_matrix(dense_filter),
         "sparse_coords": compile_sparse_filter(dense_filter),
-        "sparse_rows": compile_sparse_rows(dense_filter),
     }
     sparse_case = {
         "pattern": sparse_pattern,
@@ -744,7 +719,6 @@ def run_full_benchmark_mode():
         "pattern_flat": flatten_matrix(sparse_pattern),
         "filter_flat": flatten_matrix(sparse_filter),
         "sparse_coords": compile_sparse_filter(sparse_filter),
-        "sparse_rows": compile_sparse_rows(sparse_filter),
     }
 
     print()
@@ -766,8 +740,6 @@ def run_full_benchmark_mode():
     print("   -> flatten 이점은 살리고 index 계산은 줄이면 더 나아지는지 보기 위한 후보입니다.")
     print(colorize("6. sparse coords", ANSI_CYAN, ANSI_BOLD), ": 0이 아닌 좌표만 전처리")
     print("   -> 희소 필터에서는 0인 위치 계산을 아예 빼는 것이 핵심이라 넣은 후보입니다.")
-    print(colorize("7. sparse rows", ANSI_CYAN, ANSI_BOLD), ": 행별 활성 열만 전처리")
-    print("   -> 희소 좌표 접근에 행 캐시까지 더하면 더 빨라지는지 보기 위한 후보입니다.")
 
     dense_results = collect_full_benchmark_results(dense_case, repeat, size)
     sparse_results = collect_full_benchmark_results(sparse_case, repeat, size)
@@ -777,8 +749,9 @@ def run_full_benchmark_mode():
     print_full_benchmark_table("[Sparse Case] + 모양처럼 0이 많은 희소 필터", sparse_results)
     print_full_benchmark_rankings("[Sparse Ranking] 빠른 순위", sparse_results)
 
-
-# 프로그램 시작 영역
+# =======================================
+# 프로그램 시작
+# =======================================
 # 모드를 선택해 알맞은 실행 흐름으로 보낸다.
 def main():
     print_title()

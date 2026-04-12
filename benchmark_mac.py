@@ -59,22 +59,6 @@ def compile_sparse_filter(filt):
     return active
 
 
-def compile_sparse_rows(filt):
-    compiled = []
-
-    for row_index, row in enumerate(filt):
-        active_cols = []
-
-        for col_index, value in enumerate(row):
-            if value != 0:
-                active_cols.append((col_index, value))
-
-        if active_cols:
-            compiled.append((row_index, active_cols))
-
-    return compiled
-
-
 def mac_1_dense_index(pattern, filt):
     size = len(pattern)
     total = 0.0
@@ -131,18 +115,6 @@ def mac_6_sparse_coords(pattern, active_filter):
     return total
 
 
-def mac_7_sparse_rows(pattern, compiled_rows):
-    total = 0.0
-
-    for row_index, active_cols in compiled_rows:
-        pattern_row = pattern[row_index]
-
-        for col_index, value in active_cols:
-            total += pattern_row[col_index] * value
-
-    return total
-
-
 def measure_average_ms(func, *args, repeat):
     total_ms = 0.0
     last_result = None
@@ -166,8 +138,6 @@ def build_benchmark_cases(size):
     sparse_filter_flat = flatten_matrix(sparse_filter)
 
     sparse_coords = compile_sparse_filter(sparse_filter)
-    sparse_rows = compile_sparse_rows(sparse_filter)
-
     return {
         "dense": {
             "pattern": dense_pattern,
@@ -175,7 +145,6 @@ def build_benchmark_cases(size):
             "pattern_flat": dense_pattern_flat,
             "filter_flat": dense_filter_flat,
             "sparse_coords": compile_sparse_filter(dense_filter),
-            "sparse_rows": compile_sparse_rows(dense_filter),
             "active_count": sum(1 for value in dense_filter_flat if value != 0),
         },
         "sparse": {
@@ -183,8 +152,7 @@ def build_benchmark_cases(size):
             "filter": sparse_filter,
             "pattern_flat": sparse_pattern_flat,
             "filter_flat": sparse_filter_flat,
-            "sparse_coords": sparse_coords,
-            "sparse_rows": sparse_rows,
+            "sparse_coords": compile_sparse_filter(sparse_filter),
             "active_count": len(sparse_coords),
         },
     }
@@ -198,7 +166,6 @@ def run_suite(title, case, repeat):
         ("4. flat index", mac_4_flat_index, (case["pattern_flat"], case["filter_flat"])),
         ("5. flat zip", mac_5_flat_zip, (case["pattern_flat"], case["filter_flat"])),
         ("6. sparse coords", mac_6_sparse_coords, (case["pattern"], case["sparse_coords"])),
-        ("7. sparse rows", mac_7_sparse_rows, (case["pattern"], case["sparse_rows"])),
     ]
 
     baseline_result = None
@@ -225,7 +192,6 @@ def print_optimization_notes():
     print("4. flat index: 1차원 flatten 후 인덱스 순회")
     print("5. flat zip: 1차원 flatten 후 zip 순회")
     print("6. sparse coords: 필터의 0이 아닌 좌표만 전처리")
-    print("7. sparse rows: 필터의 행별 활성 열만 전처리")
 
 
 def main():
